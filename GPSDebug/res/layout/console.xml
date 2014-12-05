@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="520dp"
+    android:background="@drawable/bg_gps" >
+
+    <TextView
+        android:id="@+id/gps_sw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="20dp"
+        android:layout_y="25dp"
+        android:text="off"
+        android:textColor="@color/red"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/sattalte_nums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="20dp"
+        android:layout_y="405dp"
+        android:text="0/13"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/gps_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="102dp"
+        android:layout_y="405dp"
+        android:text="10.0"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/gps_attitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="264dp"
+        android:layout_y="406dp"
+        android:text="200"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/gps_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="186dp"
+        android:layout_y="408dp"
+        android:text="100"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <EditText 
+        android:id="@+id/gps_serial_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="10dp"
+        android:layout_y="438dp"
+        android:textSize="10px"
+        android:background="#00000000"
+        android:editable="false"
+        android:textColor="@color/blue"
+        /> 
+
+    <TextView
+        android:id="@+id/gps_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="199dp"
+        android:layout_y="354dp"
+        android:text="no data"
+         android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/gps_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="14dp"
+        android:layout_y="354dp"
+        android:text="no time"
+         android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</AbsoluteLayout>

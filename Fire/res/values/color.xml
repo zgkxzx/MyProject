@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gray2">#CCCCCC</color>
+    <color name="black">#000000</color><!--黑色 --> 
+    <color name="transparent">#00000000</color>
+    <color name="common_title_bar_pressed_color">#38000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#0000FF</color>
+    <color name="titlecolor">#669999</color>
+    <color name="autumn">#EBC79E</color>
+    <color name="cacheColorHint">#00000000</color>
+    <color name="listDivider">#ffdadada</color>
+    <color name="theme_color_0_default">#ff249ef6</color>
+    <color name="theme_color_0_pressed">#99249ef6</color>
+    <color name ="groupclick">#9fdeeb</color>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical" 
+    android:background="@drawable/bkg_img_default">
+    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="200px"
+	    android:orientation="vertical" 
+	    android:layout_marginTop="100px"
+	    android:gravity="center_horizontal">
+    
+        <Button
+	        android:id="@+id/Button_call"
+	        android:layout_width="250dip"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:text="电话" />
+        <Button
+	        android:id="@+id/Button_console"
+	        android:layout_width="250dip"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:text="控制台" />
+	    <Button
+	        android:id="@+id/Button_setup"
+	        android:layout_width="250dip"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:text="设置" />
+	    <Button
+	        android:id="@+id/Button_about"
+	        android:layout_width="250dip"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:text="关于" />
+	    <Button
+	        android:id="@+id/Button_quit"
+	        android:layout_width="250dip"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:text="退出" />
+    </LinearLayout>
+
+</LinearLayout>

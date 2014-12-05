@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#000048">
+
+	
+	<!--GridView 
+		a) 配置id为:gv_apps 
+		b) 高、宽：fill_parent 
+		c) 列数：3 
+		d) Item之间的水平间隔和垂直间隔都是10px 
+		e) 当item选中时显示的图片为choose_gridview 
+		f) 距离父窗体的上下左右距离分别为28px、58px、5px、5px -->
+	<GridView
+		android:id="@+id/gridView"
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:numColumns="7"
+		android:horizontalSpacing="10px"
+		android:verticalSpacing="10px"
+		android:layout_marginTop="2px"
+		android:layout_marginBottom="2px"
+		android:layout_marginLeft="5px"
+		android:layout_marginRight="5px"/>
+
+
+
+	
+</RelativeLayout>

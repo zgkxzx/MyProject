@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:orientation="horizontal" 
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:background="@drawable/bg_text"
+	>
+
+<LinearLayout
+    android:layout_width="500px" 
+	android:layout_height="wrap_content"
+	android:layout_marginLeft="250px"
+	android:layout_marginTop="50px"
+	android:orientation="vertical" 
+	>
+    
+    <TableRow 
+		android:id="@+id/TableRow01" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical">
+		
+		<TextView 
+			android:id="@+id/settingsText01" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textSize="30px" 
+			android:text="  卷帘门" />
+		
+		<ImageView 
+			android:id="@+id/settings01" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow02" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical">
+		
+		<TextView 
+			android:id="@+id/settingsText02" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textSize="30px" 
+			android:text="  电动门" />
+		
+		<ImageView 
+			android:id="@+id/settings02" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	
+	<TableRow 
+		android:id="@+id/TableRow03" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical">
+		
+		<TextView 
+			android:id="@+id/settingsText03" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:textColor="@color/white" 
+			android:textSize="30px" 
+			android:text="  消防栓" />
+		
+		<ImageView 
+			android:id="@+id/settings03" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow04" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical">
+		
+		<TextView 
+			android:id="@+id/settingsText04" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textSize="30px" 
+			android:text="  电    梯" />
+		
+		<ImageView 
+			android:id="@+id/settings04" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow05" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical"
+	    >
+		
+		<TextView 
+			android:id="@+id/settingsText05" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textSize="30px" 
+			android:text="  断    电" />
+		
+		<ImageView 
+			android:id="@+id/settings05" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow06" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/settingsText06" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textSize="30px" 
+			android:text="  排烟扇" />
+		
+		<ImageView 
+			android:id="@+id/settings06" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow07" 
+		android:layout_width="fill_parent" 
+		android:layout_height="60px"
+		android:layout_marginLeft="10px"
+		android:background="@drawable/bg_recipient_sms_normal"
+		android:gravity="center_horizontal|center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/settingsText07" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textSize="30px" 
+			android:text="  广    播" />
+		
+		<ImageView 
+			android:id="@+id/settings07" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_marginLeft="300px"
+			android:src="@drawable/switch_on_normal" />
+	</TableRow>
+	<ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="350px"
+        android:layout_marginTop="10px"
+        android:maxHeight="60px"
+        android:src="@drawable/logo2" /> 
+</LinearLayout>	
+   
+   
+    <!--  
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="500px"
+        android:adjustViewBounds="true"
+        android:maxHeight="60px"
+        android:src="@drawable/logo2" /> 
+     -->
+</LinearLayout>

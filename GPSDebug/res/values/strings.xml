@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GPSDebug</string>
+    <string name="author_info">Author:zgkxzx  QQ:514011021</string>
+    <string name="about_msg">
+\t\t简易电话功能APP v1.1\n
+\n
+ 公司：武汉发博科技有限公司\n
+作者：zgkxzx \n
+Tel ：  027-67849893\n
+网址:  www.fbkj001.com\n
+QQ： 514011021\n
+\n
+简介：感谢使用本公司产品。该APP能通过外置华为MG323/MC323实现GSM/CDMA打电话功能！\n
+	</string>
+	
+     <string name="company_info">\r\n\r\n\t\t公司：武汉发博科技有限公司
+                                 \r\n\t\t作者：zgkxzx
+                                 \r\n\t\tQ Q： 514011021
+                                 \r\n\t\tTel：   027-67849893
+                                 \r\n\t\t网址:   www.fbkj001.com
+                              
+        
+        
+        
+        
+        
+        </string>
+    <string name="error_configuration">Please configure your serial port first.</string>
+    <string name="error_security">You do not have read/write permission to the serial
+		port.</string>
+    <string name="error_unknown">The serial port can not be opened for an unknown
+		reason.</string>
+
+</resources>
