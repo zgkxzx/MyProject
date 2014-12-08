@@ -71,11 +71,11 @@ public class LayerListView extends Activity {
 				// TODO Auto-generated method stub
 				
 				Intent intent = new Intent();
-				intent.setClass(LayerListView.this, GirdViewDemo.class);
+				intent.setClass(LayerListView.this, DeviceView.class);
 				intent.putExtra("Layer", new Integer(position+1).toString());
 				startActivity(intent);
-				//overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);
 				
+				overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
 			}
 		
 	   });

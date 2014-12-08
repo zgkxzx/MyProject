@@ -3,8 +3,7 @@ package com.zgkxzx.activity;
 import java.util.List;
 
 import com.zgkxzx.activity.R;
-
-
+import com.zgkxzx.sth.SensorDevice;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -15,41 +14,39 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MyGirdView extends BaseAdapter {
+public class NodeGirdView extends BaseAdapter {
 	
-	private List<PackageInfo> packageInfos = null;
+	private List<SensorDevice> sensorDevice = null;
 	private LayoutInflater inflater = null; //inflater的作用是将xml文件转换成视图
 	private  Context context = null;
 	private ImageView iv;
 	
-	public MyGirdView(List<PackageInfo>  packageInfos , Context context){
-		this.packageInfos = packageInfos; 
+	public NodeGirdView(List<SensorDevice>  sensorDevice , Context context){
+		this.sensorDevice = sensorDevice; 
 		this.context = context ; 
 		inflater = LayoutInflater.from(context);
 		
 	}
-	
-	
+		
      //packageInfos.size()返回集合里元素的数量
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return packageInfos.size();
-		
+		return sensorDevice.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		
-		return packageInfos.get(position);
+		return sensorDevice.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		
-		return 0;
+		return position;
 	}
 
 	@Override
@@ -60,14 +57,22 @@ public class MyGirdView extends BaseAdapter {
 		TextView tv = (TextView) view.findViewById(R.id.gv_item_appname);
 		ImageView iv = (ImageView) view.findViewById(R.id.gv_item_icon);
 		//tv.setText(packageInfos.get(position).applicationInfo.loadLabel(context.getPackageManager()));
-		tv.setText("探头"+new Integer(position).toString());
+		tv.setText("探头"+sensorDevice.get(position).getName());
 		//iv.setImageDrawable(packageInfos.get(position).applicationInfo.loadIcon(context.getPackageManager()));
+		
+		if(sensorDevice.get(position).getPower().equals("90%"))
+		{
+			iv.setImageResource(R.drawable.node_red);
+			
+		}else 
+			iv.setImageResource(R.drawable.node_green);
+		/*
 		if(position<2)
 		{
 			iv.setImageResource(R.drawable.node_red);
 		}else
 			iv.setImageResource(R.drawable.node_icon);
-		
+		*/
 		return view;
 	}
 

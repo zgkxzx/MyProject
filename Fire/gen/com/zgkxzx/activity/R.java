@@ -99,18 +99,20 @@ public final class R {
         public static final int multi_recipients_fail_msg_bkg=0x7f020022;
         public static final int multi_recipients_msg_bkg=0x7f020023;
         public static final int node_a=0x7f020024;
-        public static final int node_box=0x7f020025;
-        public static final int node_icon=0x7f020026;
-        public static final int node_icon_black=0x7f020027;
-        public static final int node_main=0x7f020028;
-        public static final int node_online=0x7f020029;
-        public static final int node_red=0x7f02002a;
-        public static final int password_edit_confirm_icon_bg_normal=0x7f02002b;
-        public static final int rs_achievement_mid_btn_bg_press=0x7f02002c;
-        public static final int switch_off_normal=0x7f02002d;
-        public static final int switch_on_normal=0x7f02002e;
-        public static final int textview_bg=0x7f02002f;
-        public static final int title_bg=0x7f020030;
+        public static final int node_black=0x7f020025;
+        public static final int node_box=0x7f020026;
+        public static final int node_green=0x7f020027;
+        public static final int node_icon=0x7f020028;
+        public static final int node_icon_black=0x7f020029;
+        public static final int node_main=0x7f02002a;
+        public static final int node_online=0x7f02002b;
+        public static final int node_red=0x7f02002c;
+        public static final int password_edit_confirm_icon_bg_normal=0x7f02002d;
+        public static final int rs_achievement_mid_btn_bg_press=0x7f02002e;
+        public static final int switch_off_normal=0x7f02002f;
+        public static final int switch_on_normal=0x7f020030;
+        public static final int textview_bg=0x7f020031;
+        public static final int title_bg=0x7f020032;
     }
     public static final class id {
         public static final int TableRow01=0x7f080000;

@@ -40,11 +40,13 @@ public class DevSqlSevice {
 		values.put("power", dev.getPower());
 		values.put("sensorType", dev.getSensorType());
 		db.update("sensor", values, "name=?", new String[]{dev.getName()});
+		db.close();
 	}
 	
 	public void delete(Integer id){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		db.delete("sensor", "sensorid=?", new String[]{id.toString()});
+		db.close();
 	}
 	
 	public SensorDevice find(Integer id){
@@ -58,6 +60,7 @@ public class DevSqlSevice {
 			String power = cursor.getString(cursor.getColumnIndex("power"));
 			String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
 			cursor.close();
+			db.close();
 			return new SensorDevice(String.valueOf(sensorid), name, mainPowerStatus, power,sensorType);
 		}
 		return null;
@@ -84,6 +87,7 @@ public class DevSqlSevice {
 			String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
 			persons.add(new SensorDevice(new Integer(sensorid).toString(), name, mainPowerStatus, power,sensorType));
 		}
+		db.close();
 		return persons;
 	}
 	
@@ -91,7 +95,9 @@ public class DevSqlSevice {
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 		Cursor cursor = db.query("sensor", new String[]{"count(*)"} , null, null, null, null, null);
 		cursor.moveToFirst();
-		return cursor.getLong(0);
+		long count = cursor.getLong(0);
+		db.close();
+		return count;
 	}
 	
 	

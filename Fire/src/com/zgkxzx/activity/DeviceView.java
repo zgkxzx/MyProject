@@ -3,6 +3,8 @@ package com.zgkxzx.activity;
 import java.util.List;
 
 import com.zgkxzx.activity.R;
+import com.zgkxzx.sth.DevSqlSevice;
+import com.zgkxzx.sth.SensorDevice;
 
 
 
@@ -12,26 +14,23 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ContextMenu;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.Toast;
 
-public class GirdViewDemo extends Activity {
+public class DeviceView extends Activity {
 	
 
-	private List<PackageInfo> packageInfos = null; 
+	private List<SensorDevice> sensorDeviceList = null; 
+	
 	private GridView gridView = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +47,26 @@ public class GirdViewDemo extends Activity {
 		Bundle extras = getIntent().getExtras();
 		this.setTitle("第"+extras.getString("Layer")+"层");
 		
-		packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_ACTIVITIES);
+		//packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_ACTIVITIES);
+		//public List<SensorDevice> getScrollData(int offset, int maxResult){
 		
+		DevSqlSevice devSqlSevice = new DevSqlSevice(DeviceView.this);
+		sensorDeviceList = devSqlSevice.getScrollData(0, 50);
 		
+		gridView = (GridView)this.findViewById(R.id.gridView);
 		
+		this.registerForContextMenu(gridView);	//添加 长按 按键事件
 		
-	
-		gridView = (GridView) findViewById(R.id.gridView);
-		
-		
-		this.registerForContextMenu(gridView);	//添加 长按时间
-		gridView.setAdapter(new MyGirdView(packageInfos,GirdViewDemo.this));
-		
-		
-		
+		//将数据库数据载入到适配器
+		gridView.setAdapter(new NodeGirdView(sensorDeviceList,DeviceView.this));
+				
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 		@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				showNodeDetail(new Integer(position).toString());
+			
+				showNodeDetail(position);
 				//Toast.makeText(GirdViewDemo.this, new Integer(position).toString(), 1000).show();
 				
 			}
@@ -80,21 +79,24 @@ public class GirdViewDemo extends Activity {
 		
 	}
 	//详细信息显示菜单
-		private void showNodeDetail(String no) {	
+    private void showNodeDetail(int position) {	
+    	   //创建 AlertDialog.Builder 实例
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("节点详细信息");
+			
 			StringBuffer message = new StringBuffer();
-			message.append("\t编号: " + "第"+no+"号");
-			message.append("\n\t名称: " + "hello");//包名
-			message.append("\n\t电量: " + "100");//包名
-			message.append("\n\t供电: " + "主电");//包名
-			message.append("\n\t探头: " + "感光");//包名
-			message.append("\n\t电量: " + "100");//包名
+			message.append("\n\t编号: " + sensorDeviceList.get(position).getId());
+			message.append("\n\t名称: " + sensorDeviceList.get(position).getName());
+			message.append("\n\t电量: " + sensorDeviceList.get(position).getPower());
+			message.append("\n\t供电: " + sensorDeviceList.get(position).getMainPowerStatus());
+			message.append("\n\t探头: " + sensorDeviceList.get(position).getSensorType());
 			builder.setMessage(message.toString());
-			builder.setIcon(R.drawable.node_icon);
+			builder.setIcon(R.drawable.node_green);
+			
 			builder.setPositiveButton("确定", null);//仅仅是让Dialog消失
-			builder.create().show();
+			builder.show();
 		}
+    
 		@Override
 		public void onCreateContextMenu(ContextMenu menu, View v,
 				ContextMenuInfo menuInfo) {
@@ -117,8 +119,8 @@ public class GirdViewDemo extends Activity {
 				
 				case Menu.FIRST+2:
 					
-					this.startActivity(new Intent(GirdViewDemo.this,DeviceControl.class));
-					//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out); 
+					this.startActivity(new Intent(DeviceView.this,DeviceControl.class));
+					overridePendingTransition(R.anim.fade, R.anim.hold); 
 					
 					break;
 			

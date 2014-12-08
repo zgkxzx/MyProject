@@ -26,7 +26,7 @@
         <activity
             android:name="com.zgkxzx.activity.LayerListView"/>
         <activity
-            android:name="com.zgkxzx.activity.GirdViewDemo"/>
+            android:name="com.zgkxzx.activity.DeviceView"/>
         <activity
             android:name="com.zgkxzx.activity.DeviceControl"/>
         <activity
