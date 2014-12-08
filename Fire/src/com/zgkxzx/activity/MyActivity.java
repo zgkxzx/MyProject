@@ -39,6 +39,7 @@ public class MyActivity extends Activity {
 
 	private List<MyMenuIcon> myMenuItem = null;
 	private GridView gridView = null;
+	private DevSqlSevice devSql;
 	
 	
 	//主菜单标题
@@ -76,19 +77,6 @@ public class MyActivity extends Activity {
 	    for(int i=0;i<menuTitle.length;i++)
 	       myMenuItem.add(new MyMenuIcon(menuTitle[i],iconTilte[i]));
 	    
-	    
-	   // DBOpenHelper dbOpenHelper =new DBOpenHelper(MyActivity.this);
-	    DevSqlSevice devSql = new DevSqlSevice(MyActivity.this);
-	    //public SensorDevice(String name,String mainPowerStatus,String power,String sensorType)
-	    SensorDevice dev = new SensorDevice("1","101","main","90%","smoke");
-	    devSql.save(dev);
-	    
-	    dev = new SensorDevice("2","103","other","90%","sss");
-	    devSql.save(dev);
-	    
-	    SensorDevice findDevice = devSql.find(1);
-	    
-	    Toast.makeText(MyActivity.this, String.valueOf(devSql.getCount()), 1000).show();
 	     
 	    gridView = (GridView) findViewById(R.id.menuGridView);
 	    
@@ -131,10 +119,21 @@ public class MyActivity extends Activity {
 					case 3:
 						Toast.makeText(MyActivity.this,"无线打印", 1000).show();
 						
+						devSql = new DevSqlSevice(MyActivity.this);
+					    SensorDevice dev = new SensorDevice("1","101","main","90%","smoke");
+					    devSql.save(dev);
+					    
+					    dev = new SensorDevice("2","103","other","40%","sss");
+					    devSql.save(dev);
 						
 						break;
 					case 4:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
+						devSql = new DevSqlSevice(MyActivity.this);
+						
+					    dev = new SensorDevice("3","201","main","90%","smoke");
+					    devSql.save(dev);
+					    
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("添加功能");
 						builder.setMessage("功能尚未开通，保留");

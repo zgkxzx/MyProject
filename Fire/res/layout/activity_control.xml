@@ -34,6 +34,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	<TableRow 
@@ -57,6 +58,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	
@@ -81,6 +83,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	<TableRow 
@@ -103,6 +106,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	<TableRow 
@@ -126,6 +130,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	<TableRow 
@@ -149,6 +154,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	<TableRow 
@@ -172,6 +178,7 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
+			android:layout_marginRight="10px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
 	<ImageView

@@ -75,11 +75,7 @@ public class DevSqlSevice {
 	public List<SensorDevice> getScrollData(int offset, int maxResult){
 		List<SensorDevice> persons = new ArrayList<SensorDevice>();
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-		/*public  Cursor   query  (String table, String[] columns, String selection, 
-									String[] selectionArgs,String groupBy, 
-									String having, String orderBy, String limit)    
-		*/
-		//Cursor cursor = db.query("sensor", null, null, null, null, null, null, offset+ ","+ maxResult);
+	
 		Cursor cursor = db.rawQuery("select * from sensor limit ?,?", 
 				new String[]{String.valueOf(offset), String.valueOf(maxResult)});
 		while(cursor.moveToNext()){
@@ -95,16 +91,16 @@ public class DevSqlSevice {
 		return persons;
 	}
 	//相同名的放在一个集合里面
-	public List<SensorDevice> getCommonAttrNode(String sensorName)
+	public List<SensorDevice> getCommonAttrNode(String layerName)
 	{
 		List<SensorDevice> sensorDev = new ArrayList<SensorDevice>();
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-		Cursor cursor = db.query("sensor", new String[]{"sensorid","layer","name","mainPowerStatus","power","sensorType"}, 
-				"name=?", new String[]{sensorName}, null, null, null, null);
-		sensorDev = null;
-		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext())
+		
+		Cursor cursor = db.rawQuery("select * from sensor limit ?,?", 
+				new String[]{String.valueOf(0), String.valueOf(100)});
+		while(cursor.moveToNext())
 		{
-			if((cursor.getString(cursor.getColumnIndex("name")).equals(sensorName)))
+			if((cursor.getString(cursor.getColumnIndex("layer")).equals(layerName)))
 			{
 				int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
 				String layer = cursor.getString(cursor.getColumnIndex("layer"));
@@ -112,11 +108,35 @@ public class DevSqlSevice {
 				String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
 				String power = cursor.getString(cursor.getColumnIndex("power"));
 				String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
-				sensorDev.add(new SensorDevice(String.valueOf(sensorid), layer,name, mainPowerStatus, power,sensorType));
+				sensorDev.add(new SensorDevice(String.valueOf(sensorid),layer, name, mainPowerStatus, power,sensorType));
 			}
+			
 		}
+		
+		/*
+		Cursor cursor = db.query("sensor", new String[]{"sensorid","layer","name","mainPowerStatus","power","sensorType"}, 
+				"layer=?", new String[]{layerName}, null, null, null, null);
+		
+		sensorDev = null;
+		
+		
+		
+		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext())
+		{
+			if((cursor.getString(cursor.getColumnIndex("layer")).equals(layerName)))
+			{
+				int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
+				String layer = cursor.getString(cursor.getColumnIndex("layer"));
+				String name = cursor.getString(cursor.getColumnIndex("name"));
+				String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
+				String power = cursor.getString(cursor.getColumnIndex("power"));
+				String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
+				//sensorDev.add(new SensorDevice(String.valueOf(sensorid), layer,name, mainPowerStatus, power,sensorType));
+			}
+		}*/
 		cursor.close();
 		db.close();
+		
 		return sensorDev;
 	}
 	public long getCount(){

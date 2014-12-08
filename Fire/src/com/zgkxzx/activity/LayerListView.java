@@ -72,7 +72,7 @@ public class LayerListView extends Activity {
 				
 				Intent intent = new Intent();
 				intent.setClass(LayerListView.this, DeviceView.class);
-				intent.putExtra("Layer", new Integer(position+1).toString());
+				intent.putExtra("Layer", String.valueOf(position+1));
 				startActivity(intent);
 				
 				overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);

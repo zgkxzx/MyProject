@@ -32,6 +32,7 @@ public class DeviceView extends Activity {
 	private List<SensorDevice> sensorDeviceList = null; 
 	
 	private GridView gridView = null;
+	private String bLayer=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -45,13 +46,13 @@ public class DeviceView extends Activity {
 		
 		
 		Bundle extras = getIntent().getExtras();
-		this.setTitle("µÚ"+extras.getString("Layer")+"²ã");
-		
-		//packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES | PackageManager.GET_ACTIVITIES);
-		//public List<SensorDevice> getScrollData(int offset, int maxResult){
+		bLayer = extras.getString("Layer");
+		this.setTitle("µÚ"+bLayer+"²ã");
 		
 		DevSqlSevice devSqlSevice = new DevSqlSevice(DeviceView.this);
-		sensorDeviceList = devSqlSevice.getScrollData(0, 50);
+		
+		//sensorDeviceList = devSqlSevice.getScrollData(0, 50);
+		sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
 		
 		gridView = (GridView)this.findViewById(R.id.gridView);
 		
@@ -120,8 +121,8 @@ public class DeviceView extends Activity {
 				case Menu.FIRST+2:
 					
 					this.startActivity(new Intent(DeviceView.this,DeviceControl.class));
-					overridePendingTransition(R.anim.fade, R.anim.hold); 
-					
+					//overridePendingTransition(R.anim.fade, R.anim.hold); 
+				   // overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 					break;
 			
 				default:break;

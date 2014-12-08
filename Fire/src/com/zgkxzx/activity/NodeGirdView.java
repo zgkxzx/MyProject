@@ -66,13 +66,7 @@ public class NodeGirdView extends BaseAdapter {
 			
 		}else 
 			iv.setImageResource(R.drawable.node_green);
-		/*
-		if(position<2)
-		{
-			iv.setImageResource(R.drawable.node_red);
-		}else
-			iv.setImageResource(R.drawable.node_icon);
-		*/
+		
 		return view;
 	}
 
