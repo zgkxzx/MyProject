@@ -118,7 +118,7 @@ public class GirdViewDemo extends Activity {
 				case Menu.FIRST+2:
 					
 					this.startActivity(new Intent(GirdViewDemo.this,DeviceControl.class));
-					overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out); 
+					//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out); 
 					
 					break;
 			

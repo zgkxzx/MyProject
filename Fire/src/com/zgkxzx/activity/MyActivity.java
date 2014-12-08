@@ -69,7 +69,7 @@ public class MyActivity extends Activity {
 		setContentView(R.layout.activity_my);
 				 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
-	    overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);//由下到上
+	   // overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);//由下到上
 	    myMenuItem = new ArrayList <MyMenuIcon>();
 	    
 	    //将菜单条目加入到 集合

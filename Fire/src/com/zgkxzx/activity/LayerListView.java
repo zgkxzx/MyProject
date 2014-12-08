@@ -73,7 +73,7 @@ public class LayerListView extends Activity {
 				intent.setClass(LayerListView.this, GirdViewDemo.class);
 				intent.putExtra("Layer", new Integer(position+1).toString());
 				startActivity(intent);
-				overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);
+				//overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);
 				
 			}
 		
