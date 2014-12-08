@@ -90,7 +90,30 @@ public class DevSqlSevice {
 		db.close();
 		return persons;
 	}
-	
+	//相同名的放在一个集合里面
+	public List<SensorDevice> getCommonAttrNode(String sensorName)
+	{
+		List<SensorDevice> sensorDev = new ArrayList<SensorDevice>();
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+		Cursor cursor = db.query("sensor", new String[]{"sensorid","name","mainPowerStatus","power","sensorType"}, 
+				"name=?", new String[]{sensorName}, null, null, null, null);
+		sensorDev = null;
+		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext())
+		{
+			if((cursor.getString(cursor.getColumnIndex("name")).equals(sensorName)))
+			{
+				int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
+				String name = cursor.getString(cursor.getColumnIndex("name"));
+				String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
+				String power = cursor.getString(cursor.getColumnIndex("power"));
+				String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
+				sensorDev.add(new SensorDevice(String.valueOf(sensorid), name, mainPowerStatus, power,sensorType));
+			}
+		}
+		cursor.close();
+		db.close();
+		return sensorDev;
+	}
 	public long getCount(){
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 		Cursor cursor = db.query("sensor", new String[]{"count(*)"} , null, null, null, null, null);
