@@ -22,6 +22,7 @@ public class DevSqlSevice {
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		//values.put("id", dev.getId());
+		values.put("layer", dev.getLayer());
 		values.put("name", dev.getName());
 		values.put("mainPowerStatus", dev.getMainPowerStatus());
 		values.put("power", dev.getPower());
@@ -35,6 +36,7 @@ public class DevSqlSevice {
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		//values.put("sensorid", dev.getId());
+		values.put("layer", dev.getLayer());
 		values.put("name", dev.getName());
 		values.put("mainPowerStatus", dev.getMainPowerStatus());
 		values.put("power", dev.getPower());
@@ -51,17 +53,18 @@ public class DevSqlSevice {
 	
 	public SensorDevice find(Integer id){
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-		Cursor cursor = db.query("sensor", new String[]{"sensorid","name","mainPowerStatus","power","sensorType"}, 
+		Cursor cursor = db.query("sensor", new String[]{"sensorid","layer","name","mainPowerStatus","power","sensorType"}, 
 				"sensorid=?", new String[]{id.toString()}, null, null, null, null);
 		if(cursor.moveToFirst()){
 			int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
+			String layer = cursor.getString(cursor.getColumnIndex("layer"));
 			String name = cursor.getString(cursor.getColumnIndex("name"));
 			String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
 			String power = cursor.getString(cursor.getColumnIndex("power"));
 			String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
 			cursor.close();
 			db.close();
-			return new SensorDevice(String.valueOf(sensorid), name, mainPowerStatus, power,sensorType);
+			return new SensorDevice(String.valueOf(sensorid),layer, name, mainPowerStatus, power,sensorType);
 		}
 		return null;
 	}
@@ -81,11 +84,12 @@ public class DevSqlSevice {
 				new String[]{String.valueOf(offset), String.valueOf(maxResult)});
 		while(cursor.moveToNext()){
 			int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
+			String layer = cursor.getString(cursor.getColumnIndex("layer"));
 			String name = cursor.getString(cursor.getColumnIndex("name"));
 			String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
 			String power = cursor.getString(cursor.getColumnIndex("power"));
 			String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
-			persons.add(new SensorDevice(new Integer(sensorid).toString(), name, mainPowerStatus, power,sensorType));
+			persons.add(new SensorDevice(String.valueOf(sensorid),layer, name, mainPowerStatus, power,sensorType));
 		}
 		db.close();
 		return persons;
@@ -95,7 +99,7 @@ public class DevSqlSevice {
 	{
 		List<SensorDevice> sensorDev = new ArrayList<SensorDevice>();
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-		Cursor cursor = db.query("sensor", new String[]{"sensorid","name","mainPowerStatus","power","sensorType"}, 
+		Cursor cursor = db.query("sensor", new String[]{"sensorid","layer","name","mainPowerStatus","power","sensorType"}, 
 				"name=?", new String[]{sensorName}, null, null, null, null);
 		sensorDev = null;
 		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext())
@@ -103,11 +107,12 @@ public class DevSqlSevice {
 			if((cursor.getString(cursor.getColumnIndex("name")).equals(sensorName)))
 			{
 				int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
+				String layer = cursor.getString(cursor.getColumnIndex("layer"));
 				String name = cursor.getString(cursor.getColumnIndex("name"));
 				String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
 				String power = cursor.getString(cursor.getColumnIndex("power"));
 				String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
-				sensorDev.add(new SensorDevice(String.valueOf(sensorid), name, mainPowerStatus, power,sensorType));
+				sensorDev.add(new SensorDevice(String.valueOf(sensorid), layer,name, mainPowerStatus, power,sensorType));
 			}
 		}
 		cursor.close();

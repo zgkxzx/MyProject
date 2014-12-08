@@ -17,6 +17,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		//建立一张 传感节点的数据表
 		db.execSQL("CREATE TABLE sensor (sensorid integer primary key autoincrement," +
+				"layer varchar(20),"+
 				"name varchar(20)," +
 				"mainPowerStatus varchar(20),"+
 				"power varchar(20),"+
@@ -25,8 +26,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		//建立一张 报警日志 表
 		db.execSQL("CREATE TABLE log (id integer primary key autoincrement," +
 				"time varchar(20)," +
-				"name varchar(20))" +
-				"detail varchar(20),"
+				"name varchar(20)," +
+				"detail varchar(20))"
 		);
 
 	}

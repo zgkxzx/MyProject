@@ -80,10 +80,10 @@ public class MyActivity extends Activity {
 	   // DBOpenHelper dbOpenHelper =new DBOpenHelper(MyActivity.this);
 	    DevSqlSevice devSql = new DevSqlSevice(MyActivity.this);
 	    //public SensorDevice(String name,String mainPowerStatus,String power,String sensorType)
-	    SensorDevice dev = new SensorDevice("1-101","main","90%","smoke");
+	    SensorDevice dev = new SensorDevice("1","101","main","90%","smoke");
 	    devSql.save(dev);
 	    
-	    dev = new SensorDevice("1-103","other","90%","sss");
+	    dev = new SensorDevice("2","103","other","90%","sss");
 	    devSql.save(dev);
 	    
 	    SensorDevice findDevice = devSql.find(1);

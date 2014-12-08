@@ -1,7 +1,8 @@
 package com.zgkxzx.sth;
 
 public class SensorDevice {
-	private String id; //节点ID
+	private String id; //ID
+	private String layer; //楼层
 	private String name; //节点名字
 	private String mainPowerStatus;//供电状态   ture -->主电 ;false --> 备电
 	private String power; //电量
@@ -14,17 +15,19 @@ public class SensorDevice {
 		this.id = id;
 		this.name = name;
 	}
-	public SensorDevice(String id,String name,String mainPowerStatus,String power,String sensorType){
-			
-			this.id = id;
-			this.name = name;
-			this.mainPowerStatus = mainPowerStatus;
-			this.power = power;
-			this.sensorType = sensorType;
-	}
-	public SensorDevice(String name,String mainPowerStatus,String power,String sensorType){
+	public SensorDevice(String id,String layer,String name,String mainPowerStatus,String power,String sensorType){
 		
+		this.id = id;
+		this.layer =layer;
+		this.name = name;
+		this.mainPowerStatus = mainPowerStatus;
+		this.power = power;
+		this.sensorType = sensorType;
+}
+
+	public SensorDevice(String layer,String name,String mainPowerStatus,String power,String sensorType){
 		
+		this.layer =layer;
 		this.name = name;
 		this.mainPowerStatus = mainPowerStatus;
 		this.power = power;
@@ -69,6 +72,13 @@ public class SensorDevice {
 
 	public void setSensorType(String sensorType) {
 		this.sensorType = sensorType;
+	}
+	public String getLayer() {
+		return layer;
+	}
+
+	public void setLayer(String layer) {
+		layer = layer;
 	}
 	
 
