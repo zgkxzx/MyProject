@@ -60,6 +60,7 @@ public class LayerListView extends Activity {
 		
 		ListView myList = (ListView)findViewById(R.id.lvCommon);
 		
+	
 		myList.setAdapter(arrayAdapt);
 		//ListView 的事件处理
 		myList.setOnItemClickListener(new OnItemClickListener(){
