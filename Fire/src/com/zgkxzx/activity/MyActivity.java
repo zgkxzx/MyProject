@@ -47,7 +47,7 @@ public class MyActivity extends Activity {
 			"信息查看",
 			"联动控制",
 			"系统设置",
-			"无线打印",
+			"日志打印",
 			"扩展功能",
 			"产品信息"			
 	};
@@ -81,6 +81,7 @@ public class MyActivity extends Activity {
 	    gridView = (GridView) findViewById(R.id.menuGridView);
 	    
 	    gridView.setAdapter(new MenuGirdView(myMenuItem,MyActivity.this));
+	    
         gridView.setOnItemClickListener(new OnItemClickListener() {
 			
 
@@ -100,6 +101,7 @@ public class MyActivity extends Activity {
 						//overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);//由下到上
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						break;
+						
 					case 1:
 						
 						
@@ -108,6 +110,7 @@ public class MyActivity extends Activity {
 						//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out); 
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);    
 						break;
+						
 					case 2:
 						
 						
@@ -116,8 +119,10 @@ public class MyActivity extends Activity {
 						//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						break;
+						
 					case 3:
 						Toast.makeText(MyActivity.this,"无线打印", 1000).show();
+						
 						
 						devSql = new DevSqlSevice(MyActivity.this);
 					    SensorDevice dev = new SensorDevice("1","101","main","90%","smoke");

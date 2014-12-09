@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class DeviceView extends Activity {
 	
@@ -69,7 +70,6 @@ public class DeviceView extends Activity {
 				// TODO Auto-generated method stub
 			
 				showNodeDetail(position);
-				//Toast.makeText(GirdViewDemo.this, new Integer(position).toString(), 1000).show();
 				
 			}
 		
@@ -87,7 +87,7 @@ public class DeviceView extends Activity {
 			builder.setTitle("节点详细信息");
 			
 			StringBuffer message = new StringBuffer();
-			message.append("\n\t编号: " + sensorDeviceList.get(position).getId());
+			message.append("\t楼层: " + sensorDeviceList.get(position).getLayer());
 			message.append("\n\t名称: " + sensorDeviceList.get(position).getName());
 			message.append("\n\t电量: " + sensorDeviceList.get(position).getPower());
 			message.append("\n\t供电: " + sensorDeviceList.get(position).getMainPowerStatus());
@@ -116,7 +116,7 @@ public class DeviceView extends Activity {
 			{
 				case Menu.FIRST+1:
 					
-					
+					Toast.makeText(this, "详细", Toast.LENGTH_SHORT).show();
 					break;
 				
 				case Menu.FIRST+2:

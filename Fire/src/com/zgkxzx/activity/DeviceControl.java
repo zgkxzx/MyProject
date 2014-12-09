@@ -202,7 +202,6 @@ public class DeviceControl extends Activity {
 					item6stutas = false;
 				}else
 				{
-					
 					ivControlItem6.setImageResource(R.drawable.switch_off_normal);
 					item6stutas = true;
 				}
