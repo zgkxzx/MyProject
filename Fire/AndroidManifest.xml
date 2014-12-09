@@ -12,6 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:name="android_serialport_api.MyApplication" 
         >
         <activity
             android:name="com.zgkxzx.activity.MyActivity"
@@ -23,16 +24,12 @@
             </intent-filter>
         </activity>
         
-        <activity
-            android:name="com.zgkxzx.activity.LayerListView"/>
-        <activity
-            android:name="com.zgkxzx.activity.DeviceView"/>
-        <activity
-            android:name="com.zgkxzx.activity.DeviceControl"/>
-        <activity
-            android:name="com.zgkxzx.activity.Settings"/>
-        <activity
-            android:name="com.zgkxzx.activity.ProductInfo"/>
+        <activity android:name="com.zgkxzx.activity.LayerListView"/>
+        <activity android:name="com.zgkxzx.activity.DeviceView"/>
+        <activity android:name="com.zgkxzx.activity.DeviceControl"/>
+        <activity android:name="com.zgkxzx.activity.Settings"/>
+        <activity android:name="com.zgkxzx.activity.ProductInfo"/>
+        <service  android:name="com.zgkxzx.server.DataProcessServer"/>
     </application>
 
 </manifest>

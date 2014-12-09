@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.zgkxzx.activity.R;
 import com.zgkxzx.mysql.DBOpenHelper;
+import com.zgkxzx.server.DataProcessServer;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
 
@@ -134,10 +135,7 @@ public class MyActivity extends Activity {
 						break;
 					case 4:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
-						devSql = new DevSqlSevice(MyActivity.this);
-						
-					    dev = new SensorDevice("3","201","main","90%","smoke");
-					    devSql.save(dev);
+						MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
 					    
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("添加功能");
@@ -147,6 +145,7 @@ public class MyActivity extends Activity {
 						break;
 					case 5:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
+						
 						
 						startActivity(new Intent(MyActivity.this,ProductInfo.class));
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
