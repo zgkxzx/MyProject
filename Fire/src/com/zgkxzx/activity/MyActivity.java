@@ -16,6 +16,7 @@ import com.zgkxzx.sth.SensorDevice;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -72,6 +73,9 @@ public class MyActivity extends Activity {
 				 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
 	   // overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);//由下到上
+	    
+	   
+	    
 	    myMenuItem = new ArrayList <MyMenuIcon>();
 	    
 	    //将菜单条目加入到 集合
@@ -123,14 +127,17 @@ public class MyActivity extends Activity {
 						
 					case 3:
 						Toast.makeText(MyActivity.this,"无线打印", 1000).show();
+						try
+						{
+							Intent intent = new Intent();										
+							intent.setComponent(new ComponentName("com.lvrenyang.myprinter","com.lvrenyang.myprinter.MainActivity"));
+							startActivity(intent);
+						}catch(Exception e)
+						{
+							Toast.makeText(MyActivity.this,"请安装打印程序！", 1000).show();
+						}
 						
-						MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
-						/*devSql = new DevSqlSevice(MyActivity.this);
-					    SensorDevice dev = new SensorDevice("1","101","main","90%","smoke");
-					    devSql.save(dev);
-					    
-					    dev = new SensorDevice("2","103","other","40%","sss");
-					    devSql.save(dev);*/
+						
 						
 						break;
 					case 4:
@@ -146,9 +153,9 @@ public class MyActivity extends Activity {
 					case 5:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
 						
-						
-						startActivity(new Intent(MyActivity.this,ProductInfo.class));
-						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+						 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
+						//startActivity(new Intent(MyActivity.this,ProductInfo.class));
+						//overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						/*
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("关于");
@@ -167,6 +174,8 @@ public class MyActivity extends Activity {
 	   
 	   
         });
+        
+       
 	}
 	
 

@@ -7,7 +7,6 @@
 
 
 
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -35,7 +34,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_normal"
         android:text="@+string/info_content"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:textSize="18px" />  
         
        <TextView
@@ -54,7 +53,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_normal"
         android:text="@+string/tech_content"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:textSize="18px" />
 
     <TextView
@@ -73,7 +72,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_normal"
         android:text="@+string/good_content"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:textSize="18px" />
      
      <TextView
@@ -91,7 +90,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_normal"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:text="@+string/iso_content"
         android:textSize="18px" />
       <TextView
@@ -109,7 +108,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_normal"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:text="@+string/company_content"
         android:textSize="18px" />
      
