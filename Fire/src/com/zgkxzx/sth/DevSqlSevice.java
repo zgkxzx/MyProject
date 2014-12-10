@@ -97,7 +97,7 @@ public class DevSqlSevice {
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 		
 		Cursor cursor = db.rawQuery("select * from sensor limit ?,?", 
-				new String[]{String.valueOf(0), String.valueOf(100)});
+				new String[]{String.valueOf(0), String.valueOf(getCount())});
 		while(cursor.moveToNext())
 		{
 			if((cursor.getString(cursor.getColumnIndex("layer")).equals(layerName)))
@@ -144,7 +144,7 @@ public class DevSqlSevice {
 		Cursor cursor = db.query("sensor", new String[]{"count(*)"} , null, null, null, null, null);
 		cursor.moveToFirst();
 		long count = cursor.getLong(0);
-		db.close();
+		//db.close();
 		return count;
 	}
 	

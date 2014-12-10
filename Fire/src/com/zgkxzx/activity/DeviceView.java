@@ -44,9 +44,7 @@ public class DeviceView extends Activity implements Runnable{
 		super.onCreate(savedInstanceState);
 		//进度条
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		// 全屏显示
-		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+			
 		setContentView(R.layout.girdnode);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
 		
@@ -169,6 +167,7 @@ public class DeviceView extends Activity implements Runnable{
 					Thread.sleep(5000);
 				}catch(InterruptedException e)
 				{
+					
 				}
 				
 			}
