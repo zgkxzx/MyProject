@@ -2,6 +2,7 @@ package com.zgkxzx.activity;
 
 
 
+import java.io.IOException;
 import java.util.List;
 
 import com.zgkxzx.activity.R;
@@ -78,7 +79,10 @@ public class LayerListView extends Activity {
 				overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
 			}
 		
+		
 	   });
+		
+		 
 	}
 
 	@Override

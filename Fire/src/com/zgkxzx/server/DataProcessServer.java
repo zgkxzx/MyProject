@@ -20,9 +20,9 @@ import android_serialport_api.SerialPort;
 public class DataProcessServer extends Service {
 	
 	private static final String TAG = "DataProcessServer";
-	protected MyApplication mApplication;
-	protected SerialPort mSerialPort;
-	protected OutputStream mOutputStream;
+	private MyApplication mApplication;
+	private SerialPort mSerialPort;
+	private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
 	
@@ -58,7 +58,7 @@ public class DataProcessServer extends Service {
 		protected void onDataReceived(final byte[] buffer, final int size) {
 			runEncodeThread(new Runnable() {
 				public void run() {
-					Log.d(TAG, "onDataReceived is running!");
+					//Log.d(TAG, "onDataReceived is running!");
 					receiveValue += new String(buffer, 0, size);
 					if(receiveValue.indexOf("\r\n")!=-1&&(receiveValue.indexOf("$")!=-1))//
 					{
@@ -68,22 +68,20 @@ public class DataProcessServer extends Service {
 						
 						int startIndex = secondValue.indexOf("$");
 						
-						String elseValue = secondValue.substring(startIndex);
+						String elseValue = secondValue.substring(startIndex+1);
 	
 						receiveValue= receiveValue.substring(endIndex+1);
 						
 						//mReception.append("[Time:"+sDateFormat.format(new java.util.Date())+"]: "+elseValue+"\n");
 						
 						
-						String[] gpsStr =  elseValue.split(",");
+						String[] infoStrings =  elseValue.split(",");
 						
 						
 						devSql = new DevSqlSevice(DataProcessServer.this);
-					    SensorDevice dev = new SensorDevice(gpsStr[0],gpsStr[1],gpsStr[2],gpsStr[3],gpsStr[4]);
+					    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4]);
 					    devSql.save(dev);
-						//for(int i=0;i<gpsStr.length;i++)
-							//Log.d(TAG, "--"+gpsStr[i]);
-							//System.out.print(">>"+new Integer(i).toString()+":"+gpsStr[i]+"<<");
+						
 					}
 					
 					
@@ -111,7 +109,7 @@ public class DataProcessServer extends Service {
 
 			/* Create a receiving thread */
 			mReadThread = new ReadThread();
-			mReadThread.start();
+			
 		} catch (SecurityException e) {
 			Log.d(TAG, e.toString());
 		} catch (IOException e) {
@@ -128,6 +126,7 @@ public class DataProcessServer extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
 		Log.d(TAG, "Service on StartCommand!");
+		mReadThread.start();
 		return super.onStartCommand(intent, flags, startId);
 	}
 	//销毁时候调用

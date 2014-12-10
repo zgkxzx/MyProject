@@ -15,6 +15,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,13 +29,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class DeviceView extends Activity {
+public class DeviceView extends Activity implements Runnable{
 	
-
+    private final String TAG = "DeviceViewTag";
 	private List<SensorDevice> sensorDeviceList = null; 
 	
 	private GridView gridView = null;
 	private String bLayer=null;
+	private DevSqlSevice devSqlSevice;
+	private Thread thread;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -51,9 +55,8 @@ public class DeviceView extends Activity {
 		bLayer = extras.getString("Layer");
 		this.setTitle("第"+bLayer+"层");
 		
-		DevSqlSevice devSqlSevice = new DevSqlSevice(DeviceView.this);
+		devSqlSevice = new DevSqlSevice(DeviceView.this);
 		
-		//sensorDeviceList = devSqlSevice.getScrollData(0, 50);
 		sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
 		
 		gridView = (GridView)this.findViewById(R.id.gridView);
@@ -74,11 +77,18 @@ public class DeviceView extends Activity {
 			}
 		
 		
+	    });
+		
+		thread = new Thread(this);
+		thread.start();
 		
 		
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
 		
-	});
-		
+		super.onDestroy();
 	}
 	//详细信息显示菜单
     private void showNodeDetail(int position) {	
@@ -132,6 +142,40 @@ public class DeviceView extends Activity {
 			
 			}
 			return super.onContextItemSelected(item);
+		}
+		private final int SEARCH_NODE = 0 ;
+		private Handler handler = new Handler() {
+			// 当消息发送过来的时候会执行下面这个方法
+			public void handleMessage(android.os.Message msg) {
+				super.handleMessage(msg);
+				if(msg.what == SEARCH_NODE){
+					Log.d(TAG, "handleMessage!");
+					gridView.setAdapter(new NodeGirdView(sensorDeviceList,DeviceView.this));
+				
+				}
+			};
+		};
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			while(true)
+			{
+				Log.d(TAG, "runing!");
+				sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
+				
+				handler.sendEmptyMessage(SEARCH_NODE);
+				try
+				{
+					Thread.sleep(5000);
+				}catch(InterruptedException e)
+				{
+				}
+				
+			}
+			
+			
+			
+			
 		}
 		
 		
