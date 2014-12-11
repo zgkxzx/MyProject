@@ -82,7 +82,7 @@ public class MyActivity extends Activity {
 	    for(int i=0;i<menuTitle.length;i++)
 	       myMenuItem.add(new MyMenuIcon(menuTitle[i],iconTilte[i]));
 	    
-	     
+
 	    gridView = (GridView) findViewById(R.id.menuGridView);
 	    
 	    gridView.setAdapter(new MenuGirdView(myMenuItem,MyActivity.this));
@@ -142,6 +142,8 @@ public class MyActivity extends Activity {
 						break;
 					case 4:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
+						
+						//停止服务
 						MyActivity.this.stopService(new Intent(MyActivity.this,DataProcessServer.class));
 						
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
@@ -153,6 +155,7 @@ public class MyActivity extends Activity {
 					case 5:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
 						
+						//开启服务
 						 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
 						//startActivity(new Intent(MyActivity.this,ProductInfo.class));
 						//overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
