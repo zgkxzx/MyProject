@@ -22,9 +22,6 @@ public class ProductInfo extends Activity {
 		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//Ç¿ÖÆÎªºáÆÁ 
 		
-				
-		
-		
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

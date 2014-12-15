@@ -32,10 +32,6 @@ public class Settings extends Activity {
 				 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//Ç¿ÖÆÎªºáÆÁ 
 	    
-	    
-	    	
-	    
-	    
 		
 	    ivSettingsItem1 = (ImageView)this.findViewById(R.id.settings01);
 	    ivSettingsItem1.setOnClickListener(new OnClickListener(){
@@ -43,7 +39,6 @@ public class Settings extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
 				
 				if(settings1status)
 				{
@@ -60,9 +55,7 @@ public class Settings extends Activity {
 				
 				
 			}
-		
-	    	
-	    	
+		    	 	
 	    	
 	    }); 
 	    
@@ -72,7 +65,6 @@ public class Settings extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
 				
 				if(settings2status)
 				{
@@ -89,19 +81,13 @@ public class Settings extends Activity {
 				
 				
 			}
-		
-	    	
-	    	
+		   	
 	    	
 	    }); 
-	    
-	    
+	   	   
 	}
 	
-	
-	
-	
-	
+		
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -136,9 +122,6 @@ public class Settings extends Activity {
     	editor.putBoolean("setting02", settings2status);
     	editor.commit();
 	}
-
-
-
 
 
 	@Override

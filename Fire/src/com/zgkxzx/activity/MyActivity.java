@@ -84,7 +84,7 @@ public class MyActivity extends Activity {
 	    
 
 	    gridView = (GridView) findViewById(R.id.menuGridView);
-	    
+	    //将集合添加到适配器
 	    gridView.setAdapter(new MenuGirdView(myMenuItem,MyActivity.this));
 	    
         gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -130,8 +130,11 @@ public class MyActivity extends Activity {
 						try
 						{
 							Intent intent = new Intent();										
-							intent.setComponent(new ComponentName("com.lvrenyang.myprinter","com.lvrenyang.myprinter.MainActivity"));
+							//intent.setComponent(new ComponentName("com.lvrenyang.myprinter","com.lvrenyang.myprinter.MainActivity"));
+							intent.setComponent(new ComponentName("com.jerry.bluetoothprinter.view","com.jerry.bluetoothprinter.view.BluetoothActivity"));
+							overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 							startActivity(intent);
+							
 						}catch(Exception e)
 						{
 							Toast.makeText(MyActivity.this,"请安装打印程序！", 1000).show();
