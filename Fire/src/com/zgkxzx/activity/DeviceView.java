@@ -98,8 +98,9 @@ public class DeviceView extends Activity implements Runnable{
 			message.append("\t楼层: " + sensorDeviceList.get(position).getLayer());
 			message.append("\n\t名称: " + sensorDeviceList.get(position).getName());
 			message.append("\n\t电量: " + sensorDeviceList.get(position).getPower());
-			message.append("\n\t供电: " + sensorDeviceList.get(position).getMainPowerStatus());
-			message.append("\n\t探头: " + sensorDeviceList.get(position).getSensorType());
+			message.append("\n\t供电模式: " + sensorDeviceList.get(position).getPowerMode());
+			message.append("\n\t探头状态: " + sensorDeviceList.get(position).getSensorsStatus());
+			message.append("\n\t探头类型: " + sensorDeviceList.get(position).getSensorsType());
 			builder.setMessage(message.toString());
 			builder.setIcon(R.drawable.node_green);
 			

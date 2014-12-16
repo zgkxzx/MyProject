@@ -4,9 +4,10 @@ public class SensorDevice {
 	private String id; //ID
 	private String layer; //楼层
 	private String name; //节点名字
-	private String mainPowerStatus;//供电状态   ture -->主电 ;false --> 备电
+	private String PowerMode;//供电状态   ture -->主电 ;false --> 备电
 	private String power; //电量
-	private String sensorType;   //传感器类型  ture -->光 ;false --> 烟
+	private String sensorsStatus;   //传感器类型  ture -->光 ;false --> 烟
+	private String sensorsType;   //传感器类型  ture -->光 ;false --> 烟
 	
 	public SensorDevice(){}
 	
@@ -15,23 +16,25 @@ public class SensorDevice {
 		this.id = id;
 		this.name = name;
 	}
-	public SensorDevice(String id,String layer,String name,String mainPowerStatus,String power,String sensorType){
+	public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType){
 		
 		this.id = id;
 		this.layer =layer;
 		this.name = name;
-		this.mainPowerStatus = mainPowerStatus;
+		this.PowerMode = PowerMode;
 		this.power = power;
-		this.sensorType = sensorType;
-}
+		this.sensorsStatus = sensorsStatus;
+		this.sensorsType = sensorsType;
+	}
 
-	public SensorDevice(String layer,String name,String mainPowerStatus,String power,String sensorType){
+	public SensorDevice(String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType){
 		
 		this.layer =layer;
 		this.name = name;
-		this.mainPowerStatus = mainPowerStatus;
+		this.PowerMode = PowerMode;
 		this.power = power;
-		this.sensorType = sensorType;
+		this.sensorsStatus = sensorsStatus;
+		this.sensorsType = sensorsType;
    }
 
 	public String getId() {
@@ -50,12 +53,20 @@ public class SensorDevice {
 		this.name = name;
 	}
 
-	public String getMainPowerStatus() {
-		return mainPowerStatus;
+	public String getPowerMode() {
+		return PowerMode;
 	}
 
-	public void setMainPowerStatus(String mainPowerStatus) {
-		this.mainPowerStatus = mainPowerStatus;
+	public String getSensorsStatus() {
+		return sensorsStatus;
+	}
+
+	public void setSensorsStatus(String sensorsStatus) {
+		this.sensorsStatus = sensorsStatus;
+	}
+
+	public void setPowerMode(String PowerMode) {
+		this.PowerMode = PowerMode;
 	}
 
 	public String getPower() {
@@ -66,12 +77,12 @@ public class SensorDevice {
 		this.power = power;
 	}
 
-	public String getSensorType() {
-		return sensorType;
+	public String getSensorsType() {
+		return sensorsType;
 	}
 
-	public void setSensorType(String sensorType) {
-		this.sensorType = sensorType;
+	public void setSensorType(String sensorsType) {
+		this.sensorsType = sensorsType;
 	}
 	public String getLayer() {
 		return layer;

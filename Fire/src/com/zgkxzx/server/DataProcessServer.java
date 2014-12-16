@@ -58,7 +58,7 @@ public class DataProcessServer extends Service {
 		protected void onDataReceived(final byte[] buffer, final int size) {
 			runEncodeThread(new Runnable() {
 				public void run() {
-					//Log.d(TAG, "onDataReceived is running!");
+					Log.d(TAG, receiveValue);
 					receiveValue += new String(buffer, 0, size);
 					if(receiveValue.indexOf("\r\n")!=-1&&(receiveValue.indexOf("$")!=-1))//
 					{
@@ -77,9 +77,10 @@ public class DataProcessServer extends Service {
 						
 						String[] infoStrings =  elseValue.split(",");
 						
+						//串口取出来的数据保存到数据库
 						
 						devSql = new DevSqlSevice(DataProcessServer.this);
-					    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4]);
+					    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
 					    devSql.save(dev);
 						
 					}
