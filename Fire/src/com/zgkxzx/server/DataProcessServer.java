@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
@@ -25,6 +26,7 @@ public class DataProcessServer extends Service {
 	private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
+	private ArrayList<String> node;
 	
 	private DevSqlSevice devSql;
 	
@@ -72,16 +74,32 @@ public class DataProcessServer extends Service {
 	
 						receiveValue= receiveValue.substring(endIndex+1);
 						
-						//mReception.append("[Time:"+sDateFormat.format(new java.util.Date())+"]: "+elseValue+"\n");
 						
 						
 						String[] infoStrings =  elseValue.split(",");
 						
 						//串口取出来的数据保存到数据库
 						
-						devSql = new DevSqlSevice(DataProcessServer.this);
-					    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
-					    devSql.save(dev);
+						
+					    if(!(node.contains(infoStrings[1])))
+					    {
+					    	
+						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+						    devSql.save(dev);
+					    	node.add(infoStrings[1]);
+					    }else
+					    {
+					    	
+						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+						    devSql.update(dev);
+					    }
+					    if(Integer.parseInt(infoStrings[0])>8)
+					    {
+					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+					    	devSql.saveLog(dev);
+					    }
+					    	
+					   
 						
 					}
 					
@@ -110,6 +128,10 @@ public class DataProcessServer extends Service {
 
 			/* Create a receiving thread */
 			mReadThread = new ReadThread();
+			
+			node = new ArrayList<String>();
+			
+			devSql = new DevSqlSevice(DataProcessServer.this);
 			
 		} catch (SecurityException e) {
 			Log.d(TAG, e.toString());

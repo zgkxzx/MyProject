@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.zgkxzx.activity.R;
 import com.zgkxzx.mysql.DBOpenHelper;
+import com.zgkxzx.printer.BluetoothActivity;
 import com.zgkxzx.server.DataProcessServer;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
@@ -130,9 +131,10 @@ public class MyActivity extends Activity {
 						try
 						{
 							Intent intent = new Intent();										
-							//intent.setComponent(new ComponentName("com.lvrenyang.myprinter","com.lvrenyang.myprinter.MainActivity"));
-							intent.setComponent(new ComponentName("com.jerry.bluetoothprinter.view","com.jerry.bluetoothprinter.view.BluetoothActivity"));
+							//intent.setComponent(new ComponentName("com.lvrenyang.myprinter","com.lvrenyang.myprinter.MainActivity"));BluetoothActivity
+							//intent.setComponent(new ComponentName("com.jerry.bluetoothprinter.view","com.jerry.bluetoothprinter.view.BluetoothActivity"));
 							overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+							intent.setClass(MyActivity.this, BluetoothActivity.class);
 							startActivity(intent);
 							
 						}catch(Exception e)

@@ -25,8 +25,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				"sensorsType varchar(8))"
 		);
 		//建立一张 报警日志 表
-		db.execSQL("CREATE TABLE log (id integer primary key autoincrement," +
-				"time varchar(20)," +
+		db.execSQL("CREATE TABLE log (logid integer primary key autoincrement," +
+				"time varchar(25)," +
 				"name varchar(20)," +
 				"detail varchar(20))"
 		);

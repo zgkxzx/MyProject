@@ -1,5 +1,6 @@
 package com.zgkxzx.sth;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +14,48 @@ import com.zgkxzx.mysql.DBOpenHelper;
 public class DevSqlSevice {
 	private DBOpenHelper dbOpenHelper;
 	
+	private SimpleDateFormat sDateFormat;
+	
 	public DevSqlSevice(Context context){
+		sDateFormat = new SimpleDateFormat("yyyy-MM-dd#hh:mm:ss");
 		dbOpenHelper = new DBOpenHelper(context);
 	}
+	//
+	public void saveLog(SensorDevice dev){
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		//values.put("id", dev.getId());
+		values.put("time",sDateFormat.format(new java.util.Date()));
+		values.put("name", dev.getName());
+		values.put("detail", dev.getSensorsStatus());
+		
+		db.insert("log", null, values); 
+		db.close();
+	}
+	public List<SensorLog> getLogData(int offset, int maxResult){
+		List<SensorLog> sensors = new ArrayList<SensorLog>();
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 	
-
+		Cursor cursor = db.rawQuery("select * from log limit ?,?", 
+				new String[]{String.valueOf(offset), String.valueOf(getLogCount())});
+		while(cursor.moveToNext()){
+			String subTime = cursor.getString(cursor.getColumnIndex("time"));
+			String subName = cursor.getString(cursor.getColumnIndex("name"));
+			String subDetail = cursor.getString(cursor.getColumnIndex("detail"));
+		
+			sensors.add(new SensorLog(subTime,subName,subDetail));
+		}
+		db.close();
+		return sensors;
+	}
+	public long getLogCount(){
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+		Cursor cursor = db.query("log", new String[]{"count(*)"} , null, null, null, null, null);
+		cursor.moveToFirst();
+		long count = cursor.getLong(0);
+		//db.close();
+		return count;
+	}
 	public void save(SensorDevice dev){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -76,7 +114,7 @@ public class DevSqlSevice {
 	 *maxResult : 最大条目
 	 * */
 	public List<SensorDevice> getScrollData(int offset, int maxResult){
-		List<SensorDevice> persons = new ArrayList<SensorDevice>();
+		List<SensorDevice> sensors = new ArrayList<SensorDevice>();
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 	
 		Cursor cursor = db.rawQuery("select * from subMachine limit ?,?", 
@@ -89,10 +127,10 @@ public class DevSqlSevice {
 			String power = cursor.getString(cursor.getColumnIndex("power"));
 			String sensorsStatus = cursor.getString(cursor.getColumnIndex("sensorsStatus"));
 			String sensorsType = cursor.getString(cursor.getColumnIndex("sensorType"));
-			persons.add(new SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType));
+			sensors.add(new SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType));
 		}
 		db.close();
-		return persons;
+		return sensors;
 	}
 	//相同名的放在一个集合里面
 	public List<SensorDevice> getCommonAttrNode(String layerName)
@@ -118,27 +156,7 @@ public class DevSqlSevice {
 			
 		}
 		
-		/*
-		Cursor cursor = db.query("sensor", new String[]{"sensorid","layer","name","mainPowerStatus","power","sensorType"}, 
-				"layer=?", new String[]{layerName}, null, null, null, null);
 		
-		sensorDev = null;
-		
-		
-		
-		for(cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext())
-		{
-			if((cursor.getString(cursor.getColumnIndex("layer")).equals(layerName)))
-			{
-				int sensorid = cursor.getInt(cursor.getColumnIndex("sensorid"));
-				String layer = cursor.getString(cursor.getColumnIndex("layer"));
-				String name = cursor.getString(cursor.getColumnIndex("name"));
-				String mainPowerStatus = cursor.getString(cursor.getColumnIndex("mainPowerStatus"));
-				String power = cursor.getString(cursor.getColumnIndex("power"));
-				String sensorType = cursor.getString(cursor.getColumnIndex("sensorType"));
-				//sensorDev.add(new SensorDevice(String.valueOf(sensorid), layer,name, mainPowerStatus, power,sensorType));
-			}
-		}*/
 		cursor.close();
 		db.close();
 		

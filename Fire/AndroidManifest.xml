@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +31,8 @@
         <activity android:name="com.zgkxzx.activity.DeviceControl"/>
         <activity android:name="com.zgkxzx.activity.Settings"/>
         <activity android:name="com.zgkxzx.activity.ProductInfo"/>
+        <activity android:name="com.zgkxzx.printer.BluetoothActivity"/>
+        <activity android:name="com.zgkxzx.printer.PrintDataActivity"/>
         <service  android:name="com.zgkxzx.server.DataProcessServer"/>
     </application>
 
