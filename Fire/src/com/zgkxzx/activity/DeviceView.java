@@ -89,23 +89,22 @@ public class DeviceView extends Activity implements Runnable{
 		super.onDestroy();
 	}
 	//详细信息显示菜单
-    private void showNodeDetail(int position) {	
-    	   //创建 AlertDialog.Builder 实例
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("节点详细信息");
-			
-			StringBuffer message = new StringBuffer();
-			message.append("\t楼层: " + sensorDeviceList.get(position).getLayer());
-			message.append("\n\t名称: " + sensorDeviceList.get(position).getName());
-			message.append("\n\t电量: " + sensorDeviceList.get(position).getPower());
-			message.append("\n\t供电模式: " + sensorDeviceList.get(position).getPowerMode());
-			message.append("\n\t探头状态: " + sensorDeviceList.get(position).getSensorsStatus());
-			message.append("\n\t探头类型: " + sensorDeviceList.get(position).getSensorsType());
-			builder.setMessage(message.toString());
-			builder.setIcon(R.drawable.node_green);
-			
-			builder.setPositiveButton("确定", null);//仅仅是让Dialog消失
-			builder.show();
+    private void showNodeDetail(int position) {
+    	
+    	NodeInfoDialog nid = new NodeInfoDialog(DeviceView.this);
+    	
+    	
+    	nid.setLayerContent(sensorDeviceList.get(position).getLayer()+"楼");
+    	nid.setNodeNameContent(sensorDeviceList.get(position).getName());
+    	nid.setPowerModeContent(sensorDeviceList.get(position).getPowerMode());
+    	nid.setPowerContent(sensorDeviceList.get(position).getPower()+"%");
+    	nid.setSensorsStatus(sensorDeviceList.get(position).getSensorsStatus());
+    	nid.setSensorsType(sensorDeviceList.get(position).getSensorsType());
+    	
+    	nid.setTitle("子机"+sensorDeviceList.get(position).getName()+"具体信息窗");
+    	
+    	nid.show();
+    	 
 		}
     
 		@Override

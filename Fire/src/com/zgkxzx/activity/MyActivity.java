@@ -162,6 +162,7 @@ public class MyActivity extends Activity {
 						
 						//¿ªÆô·þÎñ
 						 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
+						 
 						//startActivity(new Intent(MyActivity.this,ProductInfo.class));
 						//overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						/*
