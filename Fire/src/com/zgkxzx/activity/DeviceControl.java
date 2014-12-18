@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 
 import com.zgkxzx.activity.R;
+import com.zgkxzx.infosend.ControlSend;
 import com.zgkxzx.mymath.CRC16;
 import com.zgkxzx.server.DataProcessServer;
 
@@ -97,14 +98,12 @@ public class DeviceControl extends Activity {
 				
 				if(item1stutas)
 				{
-					byte [] buffer={(byte)0xFF,(byte)0x01,(byte)0x03,(byte)0x50,
-									(byte)0x00,(byte)0x00,(byte)0x01,(byte)0x01,
-									(byte)0x01,(byte)0x00,(byte)0x03
-									};
 					
+					
+					byte [] sendData = ControlSend.sendControl("1","24",ControlSend.FIREPLUG);
 					try {
-						mOutputStream.write(CRC16.data2send(buffer), 0, CRC16.data2send(buffer).length);
-						Log.d(TAG,CRC16.data2send(buffer).toString());
+						mOutputStream.write(sendData, 0, sendData.length);
+						Log.d(TAG,sendData.toString());
 						Toast.makeText(DeviceControl.this, "³É¹¦", 500).show();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
