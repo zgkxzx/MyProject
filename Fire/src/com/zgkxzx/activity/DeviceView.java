@@ -96,12 +96,11 @@ public class DeviceView extends Activity implements Runnable{
     	
     	nid.setLayerContent(sensorDeviceList.get(position).getLayer()+"楼");
     	nid.setNodeNameContent(sensorDeviceList.get(position).getName());
-    	nid.setPowerModeContent(sensorDeviceList.get(position).getPowerMode());
-    	nid.setPowerContent(sensorDeviceList.get(position).getPower()+"%");
+    	nid.setPowerModeContent(sensorDeviceList.get(position).getPowerMode(),sensorDeviceList.get(position).getPower());
     	nid.setSensorsStatus(sensorDeviceList.get(position).getSensorsStatus());
     	nid.setSensorsType(sensorDeviceList.get(position).getSensorsType());
     	
-    	nid.setTitle("子机"+sensorDeviceList.get(position).getName()+"具体信息窗");
+    	nid.setTitle("子机"+sensorDeviceList.get(position).getName()+"   信息窗");
     	
     	nid.show();
     	 

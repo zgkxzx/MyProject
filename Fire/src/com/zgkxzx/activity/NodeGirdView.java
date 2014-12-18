@@ -57,7 +57,7 @@ public class NodeGirdView extends BaseAdapter {
 		TextView tv = (TextView) view.findViewById(R.id.gv_item_appname);
 		ImageView iv = (ImageView) view.findViewById(R.id.gv_item_icon);
 		//tv.setText(packageInfos.get(position).applicationInfo.loadLabel(context.getPackageManager()));
-		tv.setText("л╫м╥"+sensorDevice.get(position).getName());
+		tv.setText("вс╩З"+sensorDevice.get(position).getName());
 		//iv.setImageDrawable(packageInfos.get(position).applicationInfo.loadIcon(context.getPackageManager()));
 		
 		if(sensorDevice.get(position).getPower().equals("90%"))

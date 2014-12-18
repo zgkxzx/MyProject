@@ -24,6 +24,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +41,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class MyActivity extends Activity {
 
+	private final String TAG = "MyActivity";
 	private List<MyMenuIcon> myMenuItem = null;
 	private GridView gridView = null;
 	private DevSqlSevice devSql;
@@ -88,6 +90,11 @@ public class MyActivity extends Activity {
 	    //将集合添加到适配器
 	    gridView.setAdapter(new MenuGirdView(myMenuItem,MyActivity.this));
 	    
+	    
+	    //开启服务
+		 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
+		 Log.d(TAG, "串口数据接收服务开启");
+	    
         gridView.setOnItemClickListener(new OnItemClickListener() {
 			
 
@@ -122,7 +129,6 @@ public class MyActivity extends Activity {
 						
 						Toast.makeText(MyActivity.this,"进入系统设置菜单", 1000).show();
 						startActivity(new Intent(MyActivity.this,Settings.class));
-						//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						break;
 						
@@ -131,8 +137,7 @@ public class MyActivity extends Activity {
 						try
 						{
 							Intent intent = new Intent();										
-							//intent.setComponent(new ComponentName("com.lvrenyang.myprinter","com.lvrenyang.myprinter.MainActivity"));BluetoothActivity
-							//intent.setComponent(new ComponentName("com.jerry.bluetoothprinter.view","com.jerry.bluetoothprinter.view.BluetoothActivity"));
+							
 							overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 							intent.setClass(MyActivity.this, BluetoothActivity.class);
 							startActivity(intent);
@@ -148,9 +153,6 @@ public class MyActivity extends Activity {
 					case 4:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
 						
-						//停止服务
-						MyActivity.this.stopService(new Intent(MyActivity.this,DataProcessServer.class));
-						
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("添加功能");
 						builder.setMessage("功能尚未开通，保留");
@@ -160,11 +162,10 @@ public class MyActivity extends Activity {
 					case 5:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
 						
-						//开启服务
-						 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
+						
 						 
-						//startActivity(new Intent(MyActivity.this,ProductInfo.class));
-						//overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+						startActivity(new Intent(MyActivity.this,ProductInfo.class));
+						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						/*
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("关于");
@@ -185,6 +186,16 @@ public class MyActivity extends Activity {
         });
         
        
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		
+		//停止服务
+		MyActivity.this.stopService(new Intent(MyActivity.this,DataProcessServer.class));
+		Log.d(TAG, "串口数据接收服务开启");
+		
+		super.onDestroy();
 	}
 	
 

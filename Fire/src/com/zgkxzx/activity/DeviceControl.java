@@ -2,22 +2,40 @@ package com.zgkxzx.activity;
 
 
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+
+
 import com.zgkxzx.activity.R;
+import com.zgkxzx.mymath.CRC16;
+import com.zgkxzx.server.DataProcessServer;
+
+import com.zgkxzx.sth.DevSqlSevice;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android_serialport_api.MyApplication;
+import android_serialport_api.SerialPort;
 
 public class DeviceControl extends Activity {
 	
+	private final String TAG = "DeviceControl";
+	
+	private MyApplication mApplication;
+	private SerialPort mSerialPort;
+	private OutputStream mOutputStream;
 	
 	private ImageView ivControlItem1;
 	private boolean item1stutas = true;
@@ -53,6 +71,22 @@ public class DeviceControl extends Activity {
 				 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
 	    
+	    
+	    
+	    
+	    mApplication = (MyApplication) getApplication();
+		try {
+			mSerialPort = mApplication.getSerialPort();
+			mOutputStream = mSerialPort.getOutputStream();
+		
+		} catch (SecurityException e) {
+			Log.d(TAG, e.toString());
+		} catch (IOException e) {
+			Log.d(TAG, e.toString());
+		} catch (InvalidParameterException e) {
+			Log.d(TAG, e.toString());
+		}
+	    
 	    ivControlItem1 = (ImageView)this.findViewById(R.id.settings01);
 	    ivControlItem1.setOnClickListener(new OnClickListener(){
 
@@ -63,10 +97,25 @@ public class DeviceControl extends Activity {
 				
 				if(item1stutas)
 				{
+					byte [] buffer={(byte)0xFF,(byte)0x01,(byte)0x03,(byte)0x50,
+									(byte)0x00,(byte)0x00,(byte)0x01,(byte)0x01,
+									(byte)0x01,(byte)0x00,(byte)0x03
+									};
 					
+					try {
+						mOutputStream.write(CRC16.data2send(buffer), 0, CRC16.data2send(buffer).length);
+						Log.d(TAG,CRC16.data2send(buffer).toString());
+						Toast.makeText(DeviceControl.this, "成功", 500).show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.d(TAG,"发送失败");
+						Toast.makeText(DeviceControl.this, "失败", 500).show();
+					}
 					ivControlItem1.setImageResource(R.drawable.switch_on_normal);
 					item1stutas = false;
-					Toast.makeText(DeviceControl.this, "设备1开", 500).show();
+					Log.d(TAG,"设备1开");
+					
 				}else
 				{
 					

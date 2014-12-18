@@ -541,12 +541,23 @@ public final class R {
         public static final int node_unlink=0x7f020038;
         public static final int node_warning=0x7f020039;
         public static final int password_edit_confirm_icon_bg_normal=0x7f02003a;
-        public static final int power_icon_2=0x7f02003b;
-        public static final int rs_achievement_mid_btn_bg_press=0x7f02003c;
-        public static final int switch_off_normal=0x7f02003d;
-        public static final int switch_on_normal=0x7f02003e;
-        public static final int textview_bg=0x7f02003f;
-        public static final int title_bg=0x7f020040;
+        public static final int power_icon_0=0x7f02003b;
+        public static final int power_icon_1=0x7f02003c;
+        public static final int power_icon_2=0x7f02003d;
+        public static final int power_icon_3=0x7f02003e;
+        public static final int power_icon_4=0x7f02003f;
+        public static final int power_icon_5=0x7f020040;
+        public static final int power_icon_6=0x7f020041;
+        public static final int power_icon_7=0x7f020042;
+        public static final int power_icon_8=0x7f020043;
+        public static final int power_icon_9=0x7f020044;
+        public static final int power_icon_full=0x7f020045;
+        public static final int power_icon_no=0x7f020046;
+        public static final int rs_achievement_mid_btn_bg_press=0x7f020047;
+        public static final int switch_off_normal=0x7f020048;
+        public static final int switch_on_normal=0x7f020049;
+        public static final int textview_bg=0x7f02004a;
+        public static final int title_bg=0x7f02004b;
     }
     public static final class id {
         public static final int TableRow01=0x7f080000;

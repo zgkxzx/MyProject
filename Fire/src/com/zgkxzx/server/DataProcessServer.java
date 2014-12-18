@@ -23,7 +23,7 @@ public class DataProcessServer extends Service {
 	private static final String TAG = "DataProcessServer";
 	private MyApplication mApplication;
 	private SerialPort mSerialPort;
-	private OutputStream mOutputStream;
+	//private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
 	private ArrayList<String> node;
@@ -60,8 +60,11 @@ public class DataProcessServer extends Service {
 		protected void onDataReceived(final byte[] buffer, final int size) {
 			runEncodeThread(new Runnable() {
 				public void run() {
+					
 					Log.d(TAG, receiveValue);
 					receiveValue += new String(buffer, 0, size);
+					
+					Log.d(TAG, "ss:"+receiveValue);
 					if(receiveValue.indexOf("\r\n")!=-1&&(receiveValue.indexOf("$")!=-1))//
 					{
 						int endIndex = receiveValue.indexOf("\r\n");
@@ -84,18 +87,21 @@ public class DataProcessServer extends Service {
 					    if(!(node.contains(infoStrings[1])))
 					    {
 					    	
-						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
+						    		infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
 						    devSql.save(dev);
 					    	node.add(infoStrings[1]);
 					    }else
 					    {
 					    	
-						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
+						    		infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
 						    devSql.update(dev);
 					    }
 					    if(Integer.parseInt(infoStrings[0])>8)
 					    {
-					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
+					    			infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
 					    	devSql.saveLog(dev);
 					    }
 					    	
@@ -123,7 +129,7 @@ public class DataProcessServer extends Service {
 		mApplication = (MyApplication) getApplication();
 		try {
 			mSerialPort = mApplication.getSerialPort();
-			mOutputStream = mSerialPort.getOutputStream();
+			//mOutputStream = mSerialPort.getOutputStream();
 			mInputStream = mSerialPort.getInputStream();
 
 			/* Create a receiving thread */
