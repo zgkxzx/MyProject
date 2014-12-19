@@ -82,9 +82,8 @@ public class DataProcessServer extends Service {
 						String[] infoStrings =  elseValue.split(",");
 						
 						//串口取出来的数据保存到数据库
-						
-						
-					    if(!(node.contains(infoStrings[1])))
+												
+					    if(!(node.contains(infoStrings[1])))//如果数据库不存在 ，那么添加；如果数据库存在，那么更新
 					    {
 					    	
 						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
@@ -98,7 +97,8 @@ public class DataProcessServer extends Service {
 						    		infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
 						    devSql.update(dev);
 					    }
-					    if(Integer.parseInt(infoStrings[0])>8)
+					    
+					    if(Integer.parseInt(infoStrings[0])>8)//8层以上保存日志
 					    {
 					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
 					    			infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);

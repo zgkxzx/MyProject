@@ -115,16 +115,8 @@ public class MyActivity extends Activity {
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						break;
 						
+						
 					case 1:
-						
-						
-						Toast.makeText(MyActivity.this,"进入联动控制", 1000).show();
-						startActivity(new Intent(MyActivity.this,DeviceControl.class));
-						//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out); 
-						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);    
-						break;
-						
-					case 2:
 						
 						
 						Toast.makeText(MyActivity.this,"进入系统设置菜单", 1000).show();
@@ -132,7 +124,7 @@ public class MyActivity extends Activity {
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						break;
 						
-					case 3:
+					case 2:
 						Toast.makeText(MyActivity.this,"无线打印", 1000).show();
 						try
 						{
@@ -150,7 +142,7 @@ public class MyActivity extends Activity {
 						
 						
 						break;
-					case 4:
+					case 3:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
 						
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
@@ -159,7 +151,7 @@ public class MyActivity extends Activity {
 						builder.show();
 						
 						break;
-					case 5:
+					case 4:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
 						
 						

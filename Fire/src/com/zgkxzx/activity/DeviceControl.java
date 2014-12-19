@@ -102,7 +102,8 @@ public class DeviceControl extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onStart();
 		
-		/*SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
+		/*
+		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
 		item1stutas = sharedSettings.getBoolean("control01", false);	
     	if(!item1stutas)				
     		ivControlItem1.setImageResource(R.drawable.switch_on_normal);

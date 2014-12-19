@@ -113,7 +113,7 @@ public class SensorDevice {
 	}
 
 	public void setLayer(String layer) {
-		layer = layer;
+		this.layer = layer;
 	}
 	
 
