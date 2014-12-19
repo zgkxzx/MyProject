@@ -56,13 +56,12 @@ public class NodeGirdView extends BaseAdapter {
 		View view = inflater.inflate(R.layout.gridviewitem, null);
 		TextView tv = (TextView) view.findViewById(R.id.gv_item_appname);
 		ImageView iv = (ImageView) view.findViewById(R.id.gv_item_icon);
-		//tv.setText(packageInfos.get(position).applicationInfo.loadLabel(context.getPackageManager()));
 		tv.setText("вс╩З"+sensorDevice.get(position).getName());
-		//iv.setImageDrawable(packageInfos.get(position).applicationInfo.loadIcon(context.getPackageManager()));
 		
-		if(sensorDevice.get(position).getPower().equals("90%"))
+		
+		if((Integer.parseInt(sensorDevice.get(position).getName())%25)==0)
 		{
-			iv.setImageResource(R.drawable.node_red);
+			iv.setImageResource(R.drawable.node_box);
 			
 		}else 
 			iv.setImageResource(R.drawable.node_green);

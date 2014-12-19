@@ -36,6 +36,9 @@ public class DeviceView extends Activity implements Runnable{
 	
 	private GridView gridView = null;
 	private String bLayer=null;
+	
+	private int nodePosition;
+	
 	private DevSqlSevice devSqlSevice;
 	private Thread thread;
 	@Override
@@ -69,7 +72,7 @@ public class DeviceView extends Activity implements Runnable{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-			
+			    DeviceView.this.nodePosition = position;
 				showNodeDetail(position);
 				
 			}
@@ -85,7 +88,7 @@ public class DeviceView extends Activity implements Runnable{
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		
+		thread.stop();
 		super.onDestroy();
 	}
 	//详细信息显示菜单
@@ -112,13 +115,14 @@ public class DeviceView extends Activity implements Runnable{
 			// TODO Auto-generated method stub
 			super.onCreateContextMenu(menu, v, menuInfo);
 			
-			menu.setHeaderTitle("zgkxzx");
+			menu.setHeaderTitle("操作选项");
 			menu.add(Menu.NONE, Menu.FIRST+1, 1, "详细");
 			menu.add(Menu.NONE, Menu.FIRST+2, 2, "控制");
 		}
 		@Override
 		public boolean onContextItemSelected(MenuItem item) {
 			// TODO Auto-generated method stub
+			
 			switch(item.getItemId())
 			{
 				case Menu.FIRST+1:
@@ -128,8 +132,16 @@ public class DeviceView extends Activity implements Runnable{
 				
 				case Menu.FIRST+2:
 					
-					this.startActivity(new Intent(DeviceView.this,DeviceControl.class));
-					//overridePendingTransition(R.anim.fade, R.anim.hold); 
+					String layer = this.bLayer;
+					String nodeNumber = Integer.toString(this.nodePosition);
+					
+					Intent intent = new Intent();
+					intent.setClass(DeviceView.this, DeviceControl.class);
+					intent.putExtra("Layer", layer);
+					intent.putExtra("NodeNumber", nodeNumber);
+					startActivity(intent);
+					
+					//this.startActivity(new Intent(DeviceView.this,DeviceControl.class));
 				   // overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 					break;
 			

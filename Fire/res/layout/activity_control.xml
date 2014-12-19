@@ -30,7 +30,7 @@
 			android:text="  卷帘门" />
 		
 		<ImageView 
-			android:id="@+id/settings01" 
+			android:id="@+id/ctl_rolldoor" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
@@ -54,7 +54,7 @@
 			android:text="  电动门" />
 		
 		<ImageView 
-			android:id="@+id/settings02" 
+			android:id="@+id/ctl_motordoor" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
@@ -79,7 +79,7 @@
 			android:text="  消防栓" />
 		
 		<ImageView 
-			android:id="@+id/settings03" 
+			android:id="@+id/ctl_fireplug" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
@@ -102,7 +102,7 @@
 			android:text="  电    梯" />
 		
 		<ImageView 
-			android:id="@+id/settings04" 
+			android:id="@+id/ctl_lift" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
@@ -126,7 +126,7 @@
 			android:text="  断    电" />
 		
 		<ImageView 
-			android:id="@+id/settings05" 
+			android:id="@+id/ctl_power" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
@@ -147,10 +147,10 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
-			android:text="  排烟扇" />
+			android:text="  风    机" />
 		
 		<ImageView 
-			android:id="@+id/settings06" 
+			android:id="@+id/ctl_fun" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
@@ -174,7 +174,7 @@
 			android:text="  广    播" />
 		
 		<ImageView 
-			android:id="@+id/settings07" 
+			android:id="@+id/ctl_broast" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"

@@ -61,6 +61,9 @@ public class DeviceControl extends Activity {
 	
 	private ImageView ivControlItem7;
 	private boolean item7stutas = true;
+	
+	private String nodeLayer;
+	private String nodeNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +76,9 @@ public class DeviceControl extends Activity {
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//Ç¿ÖÆÎªºáÆÁ 
 	    
 	    
-	    
+	    Bundle extras = getIntent().getExtras();
+	    nodeLayer = extras.getString("Layer");
+	    nodeNumber = extras.getString("NodeNumber");
 	    
 	    mApplication = (MyApplication) getApplication();
 		try {
@@ -88,6 +93,8 @@ public class DeviceControl extends Activity {
 			Log.d(TAG, e.toString());
 		}
 	    
+		
+		
 	    ivControlItem1 = (ImageView)this.findViewById(R.id.settings01);
 	    ivControlItem1.setOnClickListener(new OnClickListener(){
 
