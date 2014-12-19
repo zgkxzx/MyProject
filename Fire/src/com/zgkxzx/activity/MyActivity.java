@@ -50,7 +50,7 @@ public class MyActivity extends Activity {
 	//主菜单标题
 	private static String []menuTitle={
 			"信息查看",
-			"联动控制",
+			//"联动控制",
 			"系统设置",
 			"日志打印",
 			"扩展功能",
@@ -59,7 +59,7 @@ public class MyActivity extends Activity {
 	//主菜单图标资源
 	private static int [] iconTilte = {
 			R.drawable.menu_home,
-			R.drawable.menu_control,
+			//R.drawable.menu_control,
 			R.drawable.menu_settings,
 			R.drawable.menu_fax,
 			R.drawable.menu_add,

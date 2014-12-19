@@ -25,6 +25,7 @@ import android.view.ContextMenu;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -72,7 +73,7 @@ public class DeviceView extends Activity implements Runnable{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-			    DeviceView.this.nodePosition = position;
+			
 				showNodeDetail(position);
 				
 			}
@@ -88,14 +89,16 @@ public class DeviceView extends Activity implements Runnable{
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		thread.stop();
+		//thread.stop();
+		//thread.interrupted();
 		super.onDestroy();
 	}
 	//详细信息显示菜单
     private void showNodeDetail(int position) {
     	
-    	NodeInfoDialog nid = new NodeInfoDialog(DeviceView.this);
     	
+    	
+    	NodeInfoDialog nid = new NodeInfoDialog(DeviceView.this);
     	
     	nid.setLayerContent(sensorDeviceList.get(position).getLayer()+"楼");
     	nid.setNodeNameContent(sensorDeviceList.get(position).getName());
@@ -116,29 +119,29 @@ public class DeviceView extends Activity implements Runnable{
 			super.onCreateContextMenu(menu, v, menuInfo);
 			
 			menu.setHeaderTitle("操作选项");
-			menu.add(Menu.NONE, Menu.FIRST+1, 1, "详细");
-			menu.add(Menu.NONE, Menu.FIRST+2, 2, "控制");
+			menu.add(Menu.NONE, Menu.FIRST+1, 1, "控制");
 		}
 		@Override
 		public boolean onContextItemSelected(MenuItem item) {
 			// TODO Auto-generated method stub
+			AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+			long id = menuInfo.id;
+			DeviceView.this.nodePosition = (int)id;
 			
 			switch(item.getItemId())
 			{
+				
+				
 				case Menu.FIRST+1:
 					
-					Toast.makeText(this, "详细", Toast.LENGTH_SHORT).show();
-					break;
-				
-				case Menu.FIRST+2:
-					
 					String layer = this.bLayer;
-					String nodeNumber = Integer.toString(this.nodePosition);
 					
+					Log.d(TAG, "nodeNumber");
+					 Log.d(TAG, sensorDeviceList.get(nodePosition).getName());
 					Intent intent = new Intent();
 					intent.setClass(DeviceView.this, DeviceControl.class);
 					intent.putExtra("Layer", layer);
-					intent.putExtra("NodeNumber", nodeNumber);
+					intent.putExtra("NodeNumber", sensorDeviceList.get(nodePosition).getName());
 					startActivity(intent);
 					
 					//this.startActivity(new Intent(DeviceView.this,DeviceControl.class));

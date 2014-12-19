@@ -30,7 +30,7 @@ import android.widget.Toast;
 import android_serialport_api.MyApplication;
 import android_serialport_api.SerialPort;
 
-public class DeviceControl extends Activity {
+public class DeviceControl extends Activity implements OnClickListener {
 	
 	private final String TAG = "DeviceControl";
 	
@@ -38,29 +38,18 @@ public class DeviceControl extends Activity {
 	private SerialPort mSerialPort;
 	private OutputStream mOutputStream;
 	
-	private ImageView ivControlItem1;
-	private boolean item1stutas = true;
+	private ImageView ivControlItem[] = new ImageView[7];
+	private boolean itemStatus[]  = new boolean[7];
 	
-	private ImageView ivControlItem2;
-	private boolean item2stutas = true;
-	
-	private ImageView ivControlItem3;
-	private boolean item3stutas = true;
-	
-	private ImageView ivControlItem4;
-	private boolean item4stutas = true;
-	
-	
-	private ImageView ivControlItem5;
-	private boolean item5stutas = true;
-	
-	
-	private ImageView ivControlItem6;
-	private boolean item6stutas = true;
-	
-	
-	private ImageView ivControlItem7;
-	private boolean item7stutas = true;
+	private static final int controlItemIdRes[]={
+		R.id.ctl_rolldoor,
+		R.id.ctl_fireplug,
+		R.id.ctl_fun,
+		R.id.ctl_power,
+		R.id.ctl_lift,
+		R.id.ctl_broast,
+		R.id.ctl_motordoor,
+	};
 	
 	private String nodeLayer;
 	private String nodeNumber;
@@ -79,6 +68,7 @@ public class DeviceControl extends Activity {
 	    Bundle extras = getIntent().getExtras();
 	    nodeLayer = extras.getString("Layer");
 	    nodeNumber = extras.getString("NodeNumber");
+	    Log.d(TAG, nodeNumber);
 	    
 	    mApplication = (MyApplication) getApplication();
 		try {
@@ -93,205 +83,14 @@ public class DeviceControl extends Activity {
 			Log.d(TAG, e.toString());
 		}
 	    
+		for(int i =0;i< 7;i++)
+		{
+			ivControlItem[i] = (ImageView)this.findViewById(controlItemIdRes[i]);
+			ivControlItem[i].setOnClickListener(this);
+			itemStatus[i] = false;
+		}
 		
-		
-	    ivControlItem1 = (ImageView)this.findViewById(R.id.settings01);
-	    ivControlItem1.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item1stutas)
-				{
-					
-					
-					byte [] sendData = ControlSend.sendControl("1","24",ControlSend.FIREPLUG);
-					try {
-						mOutputStream.write(sendData, 0, sendData.length);
-						Log.d(TAG,sendData.toString());
-						Toast.makeText(DeviceControl.this, "成功", 500).show();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.d(TAG,"发送失败");
-						Toast.makeText(DeviceControl.this, "失败", 500).show();
-					}
-					ivControlItem1.setImageResource(R.drawable.switch_on_normal);
-					item1stutas = false;
-					Log.d(TAG,"设备1开");
-					
-				}else
-				{
-					
-					ivControlItem1.setImageResource(R.drawable.switch_off_normal);
-					item1stutas = true;
-					Toast.makeText(DeviceControl.this, "设备1关", 500).show();
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
 	    
-	    
-	    ivControlItem2 = (ImageView)this.findViewById(R.id.settings02);
-	    ivControlItem2.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item2stutas)
-				{
-					ivControlItem2.setImageResource(R.drawable.switch_on_normal);
-					item2stutas = false;
-					Toast.makeText(DeviceControl.this, "设备2开", 500).show();
-				}else
-				{
-					
-					ivControlItem2.setImageResource(R.drawable.switch_off_normal);
-					item2stutas = true;
-					Toast.makeText(DeviceControl.this, "设备2关", 500).show();
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
-	    
-	    
-	    ivControlItem3 = (ImageView)this.findViewById(R.id.settings03);
-	    ivControlItem3.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item3stutas)
-				{
-					ivControlItem3.setImageResource(R.drawable.switch_on_normal);
-					item3stutas = false;
-				}else
-				{
-					
-					ivControlItem3.setImageResource(R.drawable.switch_off_normal);
-					item3stutas = true;
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
-	    
-	    
-	    ivControlItem4 = (ImageView)this.findViewById(R.id.settings04);
-	    ivControlItem4.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item4stutas)
-				{
-					ivControlItem4.setImageResource(R.drawable.switch_on_normal);
-					item4stutas = false;
-				}else
-				{
-					
-					ivControlItem4.setImageResource(R.drawable.switch_off_normal);
-					item4stutas = true;
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
-	    
-	    
-	    ivControlItem5 = (ImageView)this.findViewById(R.id.settings05);
-	    ivControlItem5.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item5stutas)
-				{
-					ivControlItem5.setImageResource(R.drawable.switch_on_normal);
-					item5stutas = false;
-				}else
-				{
-					
-					ivControlItem5.setImageResource(R.drawable.switch_off_normal);
-					item5stutas = true;
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
-	    
-	    
-	    ivControlItem6 = (ImageView)this.findViewById(R.id.settings06);
-	    ivControlItem6.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item6stutas)
-				{
-					ivControlItem6.setImageResource(R.drawable.switch_on_normal);
-					item6stutas = false;
-				}else
-				{
-					ivControlItem6.setImageResource(R.drawable.switch_off_normal);
-					item6stutas = true;
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
-	    
-	    
-	    ivControlItem7 = (ImageView)this.findViewById(R.id.settings07);
-	    ivControlItem7.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				
-				if(item7stutas)
-				{
-					ivControlItem7.setImageResource(R.drawable.switch_on_normal);
-					item7stutas = false;
-				}else
-				{
-					
-					ivControlItem7.setImageResource(R.drawable.switch_off_normal);
-					item7stutas = true;
-				}
-				
-			}
-	    	
-	    	
-	    	
-	    });
 	    
 		
 	}
@@ -302,23 +101,14 @@ public class DeviceControl extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
+		
+		/*SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
 		item1stutas = sharedSettings.getBoolean("control01", false);	
     	if(!item1stutas)				
     		ivControlItem1.setImageResource(R.drawable.switch_on_normal);
 		else
-			ivControlItem1.setImageResource(R.drawable.switch_off_normal);
-    	
-    	item2stutas = sharedSettings.getBoolean("control02", false);	
-    	if(!item2stutas)				
-    		ivControlItem2.setImageResource(R.drawable.switch_on_normal);
-		else
-			ivControlItem2.setImageResource(R.drawable.switch_off_normal);
-    	item3stutas = sharedSettings.getBoolean("control03", false);	
-    	if(!item3stutas)				
-    		ivControlItem3.setImageResource(R.drawable.switch_on_normal);
-		else
-			ivControlItem3.setImageResource(R.drawable.switch_off_normal);
+			ivControlItem1.setImageResource(R.drawable.switch_off_normal);*/
+    
 	}
 
 
@@ -330,17 +120,12 @@ public class DeviceControl extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		
-		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
+		/*SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
     	SharedPreferences.Editor editor = sharedSettings.edit();
     	
     	editor.putBoolean("control01", item1stutas);
-    	editor.putBoolean("control02", item2stutas);
-    	editor.putBoolean("control03", item3stutas);
-    	editor.putBoolean("control04", item4stutas);
-    	editor.putBoolean("control05", item5stutas);
-    	editor.putBoolean("control06", item6stutas);
-    
-    	editor.commit();
+    	editor.commit();*/
+		
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -352,5 +137,65 @@ public class DeviceControl extends Activity {
 			return false;
 		}
 		return false;
+	}
+    
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		//Log.d(TAG, Integer.toString(v.getId()));
+		int deviceNum=0;
+		switch (v.getId()) 
+		{
+			case R.id.ctl_rolldoor:
+				deviceNum=1;
+				break;
+			case R.id.ctl_fireplug:
+				deviceNum=2;
+				break;
+			case R.id.ctl_fun:
+				deviceNum=3;
+				break;
+			case R.id.ctl_power:
+				deviceNum=4;
+				break;
+			case R.id.ctl_lift:
+				deviceNum=5;
+				break;
+			case R.id.ctl_broast:
+				deviceNum=6;
+				break;
+			case R.id.ctl_motordoor:
+				deviceNum=7;
+				break;
+			default:break;
+		}
+		if(deviceNum!=0)
+		{
+			if(itemStatus[deviceNum-1])
+			{
+				ivControlItem[deviceNum-1].setImageResource(R.drawable.switch_on_normal);
+				
+				itemStatus[deviceNum-1] = false;
+				Log.d(TAG,"设备开");
+			}else
+			{
+				ivControlItem[deviceNum-1].setImageResource(R.drawable.switch_off_normal);
+				
+				itemStatus[deviceNum-1] = true;
+				Log.d(TAG,"设备关");
+			}
+			
+			byte [] sendData = ControlSend.sendControl(nodeLayer,nodeNumber,ControlSend.FIREPLUG, ControlSend.getSW(itemStatus[deviceNum-1]));
+			try {
+				mOutputStream.write(sendData, 0, sendData.length);
+				Log.d(TAG,"发送成功");
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+				Log.d(TAG,"发送失败");
+			}
+		}
+		
+		
 	}
 }

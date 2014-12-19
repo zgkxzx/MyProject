@@ -4,10 +4,11 @@ public class SensorDevice {
 	private String id; //ID
 	private String layer; //楼层
 	private String name; //节点名字
-	private String PowerMode;//供电状态   ture -->主电 ;false --> 备电
+	private String PowerMode;//供电状态   
 	private String power; //电量
-	private String sensorsStatus;   //传感器类型  ture -->光 ;false --> 烟
-	private String sensorsType;   //传感器类型  ture -->光 ;false --> 烟
+	private String sensorsStatus;   //传感器状态  
+	private String sensorsType;   //传感器类型  
+	private String devicesStatus;//设备状态
 	
 	public SensorDevice(){}
 	
@@ -15,6 +16,29 @@ public class SensorDevice {
 		
 		this.id = id;
 		this.name = name;
+	}
+    public String getDevicesStatus() {
+		return devicesStatus;
+	}
+
+	public void setDevicesStatus(String devicesStatus) {
+		this.devicesStatus = devicesStatus;
+	}
+
+	public void setSensorsType(String sensorsType) {
+		this.sensorsType = sensorsType;
+	}
+
+   public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType,String devicesStatus){
+		
+		this.id = id;
+		this.layer =layer;
+		this.name = name;
+		this.PowerMode = PowerMode;
+		this.power = power;
+		this.sensorsStatus = sensorsStatus;
+		this.sensorsType = sensorsType;
+		this.devicesStatus = devicesStatus;
 	}
 	public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType){
 		

@@ -35,7 +35,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow02" 
@@ -59,7 +59,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	
 	<TableRow 
@@ -84,7 +84,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow04" 
@@ -107,7 +107,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow05" 
@@ -131,7 +131,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow06" 
@@ -155,7 +155,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow07" 
@@ -179,7 +179,7 @@
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="10px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_no_data" />
 	</TableRow>
 	<ImageView
         android:id="@+id/logoImageView"

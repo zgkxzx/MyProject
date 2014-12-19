@@ -22,8 +22,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				"powerMode varchar(1),"+
 				"power varchar(3),"+
 				"sensorsStatus varchar(8),"+
-				"sensorsType varchar(8))"
+				"sensorsType varchar(8)),"+
+				"devicesStatus varchar(7)"
 		);
+		
 		//建立一张 报警日志 表
 		db.execSQL("CREATE TABLE log (logid integer primary key autoincrement," +
 				"time varchar(25)," +
