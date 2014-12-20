@@ -17,13 +17,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		//建立一张 传感节点的数据表
 		db.execSQL("CREATE TABLE subMachine (subid integer primary key autoincrement," +
-				"layer varchar(4),"+
-				"name varchar(20)," +
+				"layer varchar(3),"+
+				"name varchar(3)," +
 				"powerMode varchar(1),"+
 				"power varchar(3),"+
 				"sensorsStatus varchar(8),"+
-				"sensorsType varchar(8)),"+
-				"devicesStatus varchar(7)"
+				"sensorsType varchar(8),"+
+				"devicesStatus varchar(8))"
 		);
 		
 		//建立一张 报警日志 表

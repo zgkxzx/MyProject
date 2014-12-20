@@ -40,7 +40,7 @@ public class SensorDevice {
 		this.sensorsType = sensorsType;
 		this.devicesStatus = devicesStatus;
 	}
-	public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType){
+    public SensorDevice(String layer,String name,String PowerMode,String power,String sensorsStatus,String devicesStatus){
 		
 		this.id = id;
 		this.layer =layer;
@@ -48,18 +48,21 @@ public class SensorDevice {
 		this.PowerMode = PowerMode;
 		this.power = power;
 		this.sensorsStatus = sensorsStatus;
-		this.sensorsType = sensorsType;
-	}
+		this.devicesStatus = devicesStatus;
 
-	public SensorDevice(String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType){
-		
-		this.layer =layer;
-		this.name = name;
-		this.PowerMode = PowerMode;
-		this.power = power;
-		this.sensorsStatus = sensorsStatus;
-		this.sensorsType = sensorsType;
-   }
+	}
+    //SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType);
+    public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String sensorsType)
+    {
+    	this.id = id;
+    	this.layer = layer;
+    	this.name = name;
+    	this.PowerMode = PowerMode;
+    	this.power = power;
+    	this.sensorsStatus = sensorsStatus;
+    	this.sensorsType = sensorsType;
+    }
+	
 
 	public String getId() {
 		return id;

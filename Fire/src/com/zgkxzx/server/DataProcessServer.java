@@ -61,7 +61,7 @@ public class DataProcessServer extends Service {
 			runEncodeThread(new Runnable() {
 				public void run() {
 					
-					Log.d(TAG, receiveValue);
+					
 					receiveValue += new String(buffer, 0, size);
 					
 					Log.d(TAG, "ss:"+receiveValue);
@@ -82,8 +82,73 @@ public class DataProcessServer extends Service {
 						String[] infoStrings =  elseValue.split(",");
 						
 						//串口取出来的数据保存到数据库
+						if(infoStrings.length>2)
+						{
+							String layer = infoStrings[0];
+							for(int i=2;i<infoStrings.length;i++)
+							{
+								try{
+									Log.d(TAG, "*************");
+									String getString = infoStrings[i];
+									char[] temp1 = new char[8] ;
+									getString.getChars(0, 8, temp1, 0);
+									String sensorsStatus = String.valueOf(temp1);
+									Log.d(TAG, "sensorsStatus："+sensorsStatus);
+									
+									String PowerMode =  String.valueOf(getString.charAt(8));
+									Log.d(TAG, "PowerMode："+PowerMode);
+									
+									char[] temp2 = new char[3] ;
+									getString.getChars(9, 12, temp2, 0);
+									String power = String.valueOf(temp2);
+									Log.d(TAG, "power："+power);
+									
+									char[] temp3 = new char[8] ;
+									getString.getChars(12, 20, temp3, 0);
+									String devicesStatus = String.valueOf(temp3);
+									Log.d(TAG, "devicesStatus："+devicesStatus);
+									
+									
+									String nodeId = Integer.toString(i-2);
+									String name = layer+ nodeId;
+									
+									if((name.length()<7)&&(name.length()>2))
+									{
+										
+										Log.d(TAG, "-----------------");
+										Log.d(TAG, "name："+name);
+										//Log.d(TAG, layer+"-"+nodeId+"-"+PowerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
+										if(!(node.contains(name)))
+										{
+											SensorDevice dev = new SensorDevice(layer,nodeId,
+													PowerMode,power,sensorsStatus,devicesStatus);
+										    devSql.save(dev);
+									    	node.add(name);
+									    	Log.d(TAG, "add：");
+										}else
+										{
+											SensorDevice dev = new SensorDevice(layer,Integer.toString(i-2),
+													PowerMode,power,sensorsStatus,devicesStatus);
+										    devSql.update(dev);
+										    Log.d(TAG, "update：");
+										}
+										
+										
+									}
+									
+								}catch(Exception e)
+								{
+									Log.d(TAG,"数据接收异常！");
+								}
+								
+							}
+							
+							
+						}
+						
+						//public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String devicesStatus)
 												
-					    if(!(node.contains(infoStrings[1])))//如果数据库不存在 ，那么添加；如果数据库存在，那么更新
+					   /* if(!(node.contains(infoStrings[1])))//如果数据库不存在 ，那么添加；如果数据库存在，那么更新
 					    {
 					    	
 						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
@@ -103,7 +168,7 @@ public class DataProcessServer extends Service {
 					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
 					    			infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
 					    	devSql.saveLog(dev);
-					    }
+					    }*/
 					    	
 					   
 						

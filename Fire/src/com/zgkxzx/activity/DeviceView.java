@@ -175,6 +175,10 @@ public class DeviceView extends Activity implements Runnable{
 				Log.d(TAG, "runing!");
 				sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
 				
+				Log.d(TAG, String.valueOf(sensorDeviceList.size()));
+				/*Log.d(TAG, sensorDeviceList.get(1).getLayer());
+				Log.d(TAG, sensorDeviceList.get(1).getId());
+				Log.d(TAG, sensorDeviceList.get(1).getPower());*/
 				handler.sendEmptyMessage(SEARCH_NODE);
 				try
 				{

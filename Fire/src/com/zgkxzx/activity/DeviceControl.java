@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.Toast;
 import android_serialport_api.MyApplication;
 import android_serialport_api.SerialPort;
@@ -53,6 +54,7 @@ public class DeviceControl extends Activity implements OnClickListener {
 	
 	private String nodeLayer;
 	private String nodeNumber;
+	private TableRow tableRow01;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +88,13 @@ public class DeviceControl extends Activity implements OnClickListener {
 		for(int i =0;i< 7;i++)
 		{
 			ivControlItem[i] = (ImageView)this.findViewById(controlItemIdRes[i]);
-			ivControlItem[i].setOnClickListener(this);
+			//ivControlItem[i].setOnClickListener(this);
 			itemStatus[i] = false;
 		}
 		
-	    
+		tableRow01  = (TableRow)this.findViewById(R.id.TableRow01); 
+		
+		tableRow01.setOnClickListener(this);
 	    
 		
 	}
@@ -147,25 +151,25 @@ public class DeviceControl extends Activity implements OnClickListener {
 		int deviceNum=0;
 		switch (v.getId()) 
 		{
-			case R.id.ctl_rolldoor:
+			case R.id.TableRow01:
 				deviceNum=1;
 				break;
-			case R.id.ctl_fireplug:
+			case R.id.TableRow02:
 				deviceNum=2;
 				break;
-			case R.id.ctl_fun:
+			case R.id.TableRow03:
 				deviceNum=3;
 				break;
-			case R.id.ctl_power:
+			case R.id.TableRow04:
 				deviceNum=4;
 				break;
-			case R.id.ctl_lift:
+			case R.id.TableRow05:
 				deviceNum=5;
 				break;
-			case R.id.ctl_broast:
+			case R.id.TableRow06:
 				deviceNum=6;
 				break;
-			case R.id.ctl_motordoor:
+			case R.id.TableRow07:
 				deviceNum=7;
 				break;
 			default:break;
@@ -178,6 +182,7 @@ public class DeviceControl extends Activity implements OnClickListener {
 				
 				itemStatus[deviceNum-1] = false;
 				Log.d(TAG,"设备开");
+				
 			}else
 			{
 				ivControlItem[deviceNum-1].setImageResource(R.drawable.switch_off_normal);
@@ -185,7 +190,7 @@ public class DeviceControl extends Activity implements OnClickListener {
 				itemStatus[deviceNum-1] = true;
 				Log.d(TAG,"设备关");
 			}
-			
+			//tableRow01.setBackgroundDrawable(R.drawable.power_icon_0);
 			byte [] sendData = ControlSend.sendControl(nodeLayer,nodeNumber,ControlSend.FIREPLUG, ControlSend.getSW(itemStatus[deviceNum-1]));
 			try {
 				mOutputStream.write(sendData, 0, sendData.length);

@@ -8,10 +8,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.zgkxzx.mysql.DBOpenHelper;
 
 public class DevSqlSevice {
+	
+	private final String TAG = "DevSqlSevice";
 	private DBOpenHelper dbOpenHelper;
 	
 	private SimpleDateFormat sDateFormat;
@@ -65,7 +68,10 @@ public class DevSqlSevice {
 		values.put("PowerMode", dev.getPowerMode());
 		values.put("power", dev.getPower());
 		values.put("sensorsStatus", dev.getSensorsStatus());
-		values.put("sensorsType", dev.getSensorsType());
+		//values.put("sensorsType", dev.getSensorsType());
+		values.put("sensorsType", "11111111");
+		
+		values.put("devicesStatus", dev.getDevicesStatus());
 		
 		db.insert("subMachine", null, values); 
 		db.close();
@@ -80,7 +86,10 @@ public class DevSqlSevice {
 		values.put("PowerMode", dev.getPowerMode());
 		values.put("power", dev.getPower());
 		values.put("sensorsStatus", dev.getSensorsStatus());
-		values.put("sensorsType", dev.getSensorsType());
+		//values.put("sensorsType", dev.getSensorsType());
+		values.put("sensorsType", "22222222");
+		values.put("devicesStatus", dev.getDevicesStatus());
+		
 		db.update("subMachine", values, "name=?", new String[]{dev.getName()});
 		db.close();
 	}
@@ -142,7 +151,10 @@ public class DevSqlSevice {
 				new String[]{String.valueOf(0), String.valueOf(getCount())});
 		while(cursor.moveToNext())
 		{
-			if((cursor.getString(cursor.getColumnIndex("layer")).equals(layerName)))
+			Log.d(TAG, "-----------------------------");
+			Log.d(TAG, cursor.getString(cursor.getColumnIndex("layer")));
+			String comLayer = cursor.getString(cursor.getColumnIndex("layer"));
+			if(Integer.parseInt(comLayer)==Integer.parseInt(layerName))
 			{
 				int subid = cursor.getInt(cursor.getColumnIndex("subid"));
 				String layer = cursor.getString(cursor.getColumnIndex("layer"));
@@ -151,7 +163,8 @@ public class DevSqlSevice {
 				String power = cursor.getString(cursor.getColumnIndex("power"));
 				String sensorsStatus = cursor.getString(cursor.getColumnIndex("sensorsStatus"));
 				String sensorsType = cursor.getString(cursor.getColumnIndex("sensorsType"));
-				sensorDev.add(new SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType));
+				String devicesStatus = cursor.getString(cursor.getColumnIndex("devicesStatus"));
+				sensorDev.add(new SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType,devicesStatus));
 			}
 			
 		}
