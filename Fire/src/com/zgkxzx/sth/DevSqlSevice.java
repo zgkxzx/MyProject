@@ -151,8 +151,8 @@ public class DevSqlSevice {
 				new String[]{String.valueOf(0), String.valueOf(getCount())});
 		while(cursor.moveToNext())
 		{
-			Log.d(TAG, "-----------------------------");
-			Log.d(TAG, cursor.getString(cursor.getColumnIndex("layer")));
+			
+			//Log.d(TAG, cursor.getString(cursor.getColumnIndex("layer")));
 			String comLayer = cursor.getString(cursor.getColumnIndex("layer"));
 			if(Integer.parseInt(comLayer)==Integer.parseInt(layerName))
 			{

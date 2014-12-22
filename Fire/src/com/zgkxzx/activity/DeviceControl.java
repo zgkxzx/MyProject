@@ -20,13 +20,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 import android_serialport_api.MyApplication;
 import android_serialport_api.SerialPort;
@@ -39,22 +43,36 @@ public class DeviceControl extends Activity implements OnClickListener {
 	private SerialPort mSerialPort;
 	private OutputStream mOutputStream;
 	
-	private ImageView ivControlItem[] = new ImageView[7];
-	private boolean itemStatus[]  = new boolean[7];
+	private Button ivDevicesControl[] = new Button[7];
+	private TextView ivDevicesStatus[] = new TextView[7];
+	private boolean devicesStatus[]  = new boolean[7];
 	
-	private static final int controlItemIdRes[]={
-		R.id.ctl_rolldoor,
-		R.id.ctl_fireplug,
-		R.id.ctl_fun,
-		R.id.ctl_power,
-		R.id.ctl_lift,
-		R.id.ctl_broast,
-		R.id.ctl_motordoor,
-	};
-	
+	private final int buttonsId[]={
+			R.id.device_button_1,
+			R.id.device_button_2,
+			R.id.device_button_3,
+			R.id.device_button_4,
+			R.id.device_button_5,
+			R.id.device_button_6,
+			R.id.device_button_7,
+			
+		};
+	private final int deviceStatusId[]={
+			R.id.device_status_1,
+			R.id.device_status_2,
+			R.id.device_status_3,
+			R.id.device_status_4,
+			R.id.device_status_5,
+			R.id.device_status_6,
+			R.id.device_status_7,
+			
+		};
 	private String nodeLayer;
 	private String nodeNumber;
 	private TableRow tableRow01;
+	
+	private Handler mHandler;
+	private Runnable runnable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,18 +103,34 @@ public class DeviceControl extends Activity implements OnClickListener {
 			Log.d(TAG, e.toString());
 		}
 	    
-		for(int i =0;i< 7;i++)
+		
+		for(int i=0;i<7;i++)
 		{
-			ivControlItem[i] = (ImageView)this.findViewById(controlItemIdRes[i]);
-			//ivControlItem[i].setOnClickListener(this);
-			itemStatus[i] = false;
+			ivDevicesControl[i]= (Button)this.findViewById(buttonsId[i]); 
+			ivDevicesStatus [i] = (TextView)this.findViewById(deviceStatusId[i]); 
+			devicesStatus[i] = false;
+			ivDevicesControl[i].setOnClickListener(this);
 		}
-		
-		tableRow01  = (TableRow)this.findViewById(R.id.TableRow01); 
-		
-		tableRow01.setOnClickListener(this);
 	    
+		HandlerThread thread = new HandlerThread("DeviceControlThread");
+		thread.start();
 		
+		mHandler  = new Handler(thread.getLooper());
+		
+		mHandler.post(runnable);
+		
+		runnable = new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//while(true)
+				{
+					Log.d(TAG,"runnable is runging!");
+				}
+			}
+			
+		};
 	}
 	
 	
@@ -106,13 +140,6 @@ public class DeviceControl extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onStart();
 		
-		/*
-		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
-		item1stutas = sharedSettings.getBoolean("control01", false);	
-    	if(!item1stutas)				
-    		ivControlItem1.setImageResource(R.drawable.switch_on_normal);
-		else
-			ivControlItem1.setImageResource(R.drawable.switch_off_normal);*/
     
 	}
 
@@ -124,12 +151,7 @@ public class DeviceControl extends Activity implements OnClickListener {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		
-		/*SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_control", Activity.MODE_PRIVATE);
-    	SharedPreferences.Editor editor = sharedSettings.edit();
-    	
-    	editor.putBoolean("control01", item1stutas);
-    	editor.commit();*/
+		mHandler.removeCallbacks(runnable);
 		
 	}
 	@Override
@@ -143,7 +165,7 @@ public class DeviceControl extends Activity implements OnClickListener {
 		}
 		return false;
 	}
-    
+   
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -151,54 +173,48 @@ public class DeviceControl extends Activity implements OnClickListener {
 		int deviceNum=0;
 		switch (v.getId()) 
 		{
-			case R.id.TableRow01:
+			case R.id.device_button_1:
 				deviceNum=1;
 				break;
-			case R.id.TableRow02:
+			case R.id.device_button_2:
 				deviceNum=2;
 				break;
-			case R.id.TableRow03:
-				deviceNum=3;
+			case R.id.device_button_3:
+				deviceNum=2;
 				break;
-			case R.id.TableRow04:
-				deviceNum=4;
-				break;
-			case R.id.TableRow05:
+			case R.id.device_button_4:
 				deviceNum=5;
 				break;
-			case R.id.TableRow06:
-				deviceNum=6;
+			case R.id.device_button_5:
+				deviceNum=3;
 				break;
-			case R.id.TableRow07:
-				deviceNum=7;
+			case R.id.device_button_6:
+				deviceNum=4;
+				break;
+			case R.id.device_button_7:
+				deviceNum=6;
 				break;
 			default:break;
 		}
 		if(deviceNum!=0)
 		{
-			if(itemStatus[deviceNum-1])
+			
 			{
-				ivControlItem[deviceNum-1].setImageResource(R.drawable.switch_on_normal);
+			  // devicesStatus[deviceNum-1] = false;
+			   Log.d(TAG,"设备开启");
+			
+			   byte [] sendData = ControlSend.sendControl(nodeLayer,nodeNumber,deviceNum, ControlSend.getSW(true));
+				try 
+				{
+					mOutputStream.write(sendData, 0, sendData.length);
+					Log.d(TAG,"发送成功");
+				} catch (IOException e) 
+				{
+					e.printStackTrace();
+					Log.d(TAG,"发送失败");
+				}
 				
-				itemStatus[deviceNum-1] = false;
-				Log.d(TAG,"设备开");
-				
-			}else
-			{
-				ivControlItem[deviceNum-1].setImageResource(R.drawable.switch_off_normal);
-				
-				itemStatus[deviceNum-1] = true;
-				Log.d(TAG,"设备关");
-			}
-			//tableRow01.setBackgroundDrawable(R.drawable.power_icon_0);
-			byte [] sendData = ControlSend.sendControl(nodeLayer,nodeNumber,ControlSend.FIREPLUG, ControlSend.getSW(itemStatus[deviceNum-1]));
-			try {
-				mOutputStream.write(sendData, 0, sendData.length);
-				Log.d(TAG,"发送成功");
-			} catch (IOException e) 
-			{
-				e.printStackTrace();
-				Log.d(TAG,"发送失败");
+			
 			}
 		}
 		

@@ -161,7 +161,7 @@ public class DeviceView extends Activity implements Runnable{
 			public void handleMessage(android.os.Message msg) {
 				super.handleMessage(msg);
 				if(msg.what == SEARCH_NODE){
-					Log.d(TAG, "handleMessage!");
+					//Log.d(TAG, "handleMessage!");
 					gridView.setAdapter(new NodeGirdView(sensorDeviceList,DeviceView.this));
 				
 				}
@@ -175,14 +175,12 @@ public class DeviceView extends Activity implements Runnable{
 				Log.d(TAG, "runing!");
 				sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
 				
-				Log.d(TAG, String.valueOf(sensorDeviceList.size()));
-				/*Log.d(TAG, sensorDeviceList.get(1).getLayer());
-				Log.d(TAG, sensorDeviceList.get(1).getId());
-				Log.d(TAG, sensorDeviceList.get(1).getPower());*/
+				//Log.d(TAG, String.valueOf(sensorDeviceList.size()));
+				
 				handler.sendEmptyMessage(SEARCH_NODE);
 				try
 				{
-					Thread.sleep(5000);
+					Thread.sleep(50000);
 				}catch(InterruptedException e)
 				{
 					

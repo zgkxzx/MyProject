@@ -18,168 +18,253 @@
 		android:id="@+id/TableRow01" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
+		android:gravity="center_vertical"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical">
-		
+		>
+        
 		<TextView 
 			android:id="@+id/settingsText01" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
+			android:textColor="@color/black"
 			android:textSize="30px" 
 			android:text="  卷帘门" />
 		
-		<ImageView 
-			android:id="@+id/ctl_rolldoor" 
+		<TextView 
+			android:id="@+id/device_status_1" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="20px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_1" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow02" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
-		
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical">
+		android:gravity="center_vertical">
 		
 		<TextView 
 			android:id="@+id/settingsText02" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
+			android:textColor="@color/black"
 			android:text="  电动门" />
-		
-		<ImageView 
-			android:id="@+id/ctl_motordoor" 
+		<TextView 
+			android:id="@+id/device_status_2" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="15px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_2" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
 	</TableRow>
 	
 	<TableRow 
 		android:id="@+id/TableRow03" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical">
+		android:gravity="center_vertical">
 		
 		<TextView 
 			android:id="@+id/settingsText03" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
-			android:textColor="@color/white" 
+			android:textColor="@color/black"
 			android:textSize="30px" 
 			android:text="  消防栓" />
-		
-		<ImageView 
-			android:id="@+id/ctl_fireplug" 
+		<TextView 
+			android:id="@+id/device_status_3" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="15px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_3" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow04" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical">
+		android:gravity="center_vertical">
 		
 		<TextView 
 			android:id="@+id/settingsText04" 
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
+			android:layout_height="wrap_content"
+			android:textColor="@color/black" 
 			android:textSize="30px" 
 			android:text="  电    梯" />
-		
-		<ImageView 
-			android:id="@+id/ctl_lift" 
+		<TextView 
+			android:id="@+id/device_status_4" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="15px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_4" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow05" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical"
+		android:gravity="center_vertical"
 	    >
 		
 		<TextView 
 			android:id="@+id/settingsText05" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
+			android:textColor="@color/black"
 			android:textSize="30px" 
 			android:text="  断    电" />
-		
-		<ImageView 
-			android:id="@+id/ctl_power" 
+		<TextView 
+			android:id="@+id/device_status_5" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="15px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_5" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow06" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical"
+		android:gravity="center_vertical"
 		>
 		
 		<TextView 
 			android:id="@+id/settingsText06" 
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
+			android:layout_height="wrap_content"
+			android:textColor="@color/black" 
 			android:textSize="30px" 
 			android:text="  风    机" />
-		
-		<ImageView 
-			android:id="@+id/ctl_fun" 
+		<TextView 
+			android:id="@+id/device_status_6" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="15px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_6" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow07" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
-		android:layout_marginLeft="10px"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical"
+		android:gravity="center_vertical"
 		>
 		
 		<TextView 
 			android:id="@+id/settingsText07" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
+			android:textColor="@color/black"
 			android:textSize="30px" 
 			android:text="  广    播" />
-		
-		<ImageView 
-			android:id="@+id/ctl_broast" 
+		<TextView 
+			android:id="@+id/device_status_7" 
+			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="10px"
-			android:src="@drawable/switch_no_data" />
+			android:layout_marginLeft="40px"
+			android:layout_marginTop="15px"
+			android:textSize="18px"
+			android:textColor="@color/green" 
+			android:text="设备开" />
+		
+		<Button
+			android:id="@+id/device_button_7" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="200px"
+			
+			android:textSize="20px" 
+			android:text="启动" />
+		
+		
 	</TableRow>
 	<ImageView
         android:id="@+id/logoImageView"
