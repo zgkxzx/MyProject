@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
+	private SQLiteDatabase db;
 	public DBOpenHelper(Context context) {
 		super(context, "zx.db", null, 2);
 		// TODO Auto-generated constructor stub
@@ -32,9 +33,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				"name varchar(20)," +
 				"detail varchar(20))"
 		);
-
+        this.db = db;
 	}
-
+    public SQLiteDatabase getSQLiteDataBase(){
+    	return this.db;
+    }
+   
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub

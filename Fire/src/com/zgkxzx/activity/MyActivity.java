@@ -90,7 +90,8 @@ public class MyActivity extends Activity {
 	    //将集合添加到适配器
 	    gridView.setAdapter(new MenuGirdView(myMenuItem,MyActivity.this));
 	    
-	    
+	    DevSqlSevice devSql = new DevSqlSevice(MyActivity.this);
+	    devSql.clearTab();
 	    //开启服务
 		 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
 		 Log.d(TAG, "串口数据接收服务开启");

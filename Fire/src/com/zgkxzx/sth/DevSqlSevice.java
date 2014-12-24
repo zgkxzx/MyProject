@@ -47,6 +47,7 @@ public class DevSqlSevice {
 			String subDetail = cursor.getString(cursor.getColumnIndex("detail"));
 		
 			sensors.add(new SensorLog(subTime,subName,subDetail));
+			
 		}
 		db.close();
 		return sensors;
@@ -55,8 +56,9 @@ public class DevSqlSevice {
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 		Cursor cursor = db.query("log", new String[]{"count(*)"} , null, null, null, null, null);
 		cursor.moveToFirst();
+		
 		long count = cursor.getLong(0);
-		//db.close();
+		db.close();
 		return count;
 	}
 	public void save(SensorDevice dev){
@@ -77,9 +79,21 @@ public class DevSqlSevice {
 		db.close();
 	}
 	
+	public void clearTab()
+	{
+		
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		db.execSQL("delete from subMachine;");
+		
+        String sql ="update sqlite_sequence set seq = 0 where name ='"+"subMachine"+"'";
+		
+		db.execSQL(sql);
+		db.close();
+	}
 	public void update(SensorDevice dev){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
+		
 		//values.put("sensorid", dev.getId());
 		values.put("layer", dev.getLayer());
 		values.put("name", dev.getName());
@@ -90,7 +104,7 @@ public class DevSqlSevice {
 		values.put("sensorsType", "22222222");
 		values.put("devicesStatus", dev.getDevicesStatus());
 		
-		db.update("subMachine", values, "name=?", new String[]{dev.getName()});
+		db.update("subMachine", values, "layer=?", new String[]{dev.getName()});
 		db.close();
 	}
 	
@@ -145,10 +159,12 @@ public class DevSqlSevice {
 	public List<SensorDevice> getCommonAttrNode(String layerName)
 	{
 		List<SensorDevice> sensorDev = new ArrayList<SensorDevice>();
+		
+		long count = getCount();
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 		
 		Cursor cursor = db.rawQuery("select * from subMachine limit ?,?", 
-				new String[]{String.valueOf(0), String.valueOf(getCount())});
+				new String[]{String.valueOf(0), String.valueOf(count)});
 		while(cursor.moveToNext())
 		{
 			
@@ -180,7 +196,7 @@ public class DevSqlSevice {
 		Cursor cursor = db.query("subMachine", new String[]{"count(*)"} , null, null, null, null, null);
 		cursor.moveToFirst();
 		long count = cursor.getLong(0);
-		//db.close();
+		db.close();
 		return count;
 	}
 	

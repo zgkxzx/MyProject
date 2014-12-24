@@ -42,6 +42,8 @@ public class DeviceView extends Activity implements Runnable{
 	
 	private DevSqlSevice devSqlSevice;
 	private Thread thread;
+	
+	private boolean threadSw = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -91,7 +93,14 @@ public class DeviceView extends Activity implements Runnable{
 		// TODO Auto-generated method stub
 		//thread.stop();
 		//thread.interrupted();
+		threadSw = false;
 		super.onDestroy();
+	}
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		threadSw = true;
+		super.onStart();
 	}
 	//详细信息显示菜单
     private void showNodeDetail(int position) {
@@ -170,7 +179,7 @@ public class DeviceView extends Activity implements Runnable{
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			while(true)
+			while(threadSw)
 			{
 				Log.d(TAG, "runing!");
 				sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
@@ -180,7 +189,7 @@ public class DeviceView extends Activity implements Runnable{
 				handler.sendEmptyMessage(SEARCH_NODE);
 				try
 				{
-					Thread.sleep(50000);
+					Thread.sleep(5000);
 				}catch(InterruptedException e)
 				{
 					

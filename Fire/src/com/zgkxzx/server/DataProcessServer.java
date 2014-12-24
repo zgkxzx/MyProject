@@ -64,10 +64,11 @@ public class DataProcessServer extends Service {
 					
 					receiveValue += new String(buffer, 0, size);
 					
-					Log.d(TAG, "ss:"+receiveValue);
-					if(receiveValue.indexOf("\r\n")!=-1&&(receiveValue.indexOf("$")!=-1))//
+					//Log.d(TAG, "getAll:"+receiveValue);
+					if((receiveValue.indexOf("#")!=-1)&&(receiveValue.indexOf("$")!=-1))//
 					{
-						int endIndex = receiveValue.indexOf("\r\n");
+						Log.d(TAG, "getL:"+receiveValue);
+						int endIndex = receiveValue.indexOf("#");
 
 						String secondValue = receiveValue.substring(0, endIndex);
 						
@@ -77,7 +78,7 @@ public class DataProcessServer extends Service {
 	
 						receiveValue= receiveValue.substring(endIndex+1);
 						
-						
+						Log.d(TAG, "getReceiveValue:"+receiveValue);
 						
 						String[] infoStrings =  elseValue.split(",");
 						
@@ -88,35 +89,34 @@ public class DataProcessServer extends Service {
 							for(int i=2;i<infoStrings.length;i++)
 							{
 								try{
-									Log.d(TAG, "*************");
+									//Log.d(TAG, "*************");
 									String getString = infoStrings[i];
 									char[] temp1 = new char[8] ;
 									getString.getChars(0, 8, temp1, 0);
 									String sensorsStatus = String.valueOf(temp1);
-									Log.d(TAG, "sensorsStatus："+sensorsStatus);
+									//Log.d(TAG, "sensorsStatus："+sensorsStatus);
 									
 									String PowerMode =  String.valueOf(getString.charAt(8));
-									Log.d(TAG, "PowerMode："+PowerMode);
+									//Log.d(TAG, "PowerMode："+PowerMode);
 									
 									char[] temp2 = new char[3] ;
 									getString.getChars(9, 12, temp2, 0);
 									String power = String.valueOf(temp2);
-									Log.d(TAG, "power："+power);
+									//Log.d(TAG, "power："+power);
 									
 									char[] temp3 = new char[8] ;
 									getString.getChars(12, 20, temp3, 0);
 									String devicesStatus = String.valueOf(temp3);
-									Log.d(TAG, "devicesStatus："+devicesStatus);
-									
+									//Log.d(TAG, "devicesStatus："+devicesStatus);
 									
 									String nodeId = Integer.toString(i-2);
 									String name = layer+ nodeId;
+							
 									
 									if((name.length()<7)&&(name.length()>2))
 									{
 										
-										Log.d(TAG, "-----------------");
-										Log.d(TAG, "name："+name);
+									   
 										//Log.d(TAG, layer+"-"+nodeId+"-"+PowerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
 										if(!(node.contains(name)))
 										{
@@ -124,13 +124,14 @@ public class DataProcessServer extends Service {
 													PowerMode,power,sensorsStatus,devicesStatus);
 										    devSql.save(dev);
 									    	node.add(name);
-									    	Log.d(TAG, "add：");
+									    
+											Log.d(TAG, "add name："+name);
 										}else
 										{
-											SensorDevice dev = new SensorDevice(layer,Integer.toString(i-2),
+											SensorDevice dev = new SensorDevice(layer,nodeId,
 													PowerMode,power,sensorsStatus,devicesStatus);
 										    devSql.update(dev);
-										    Log.d(TAG, "update：");
+										    Log.d(TAG, "updata name："+name);
 										}
 										
 										
@@ -138,7 +139,8 @@ public class DataProcessServer extends Service {
 									
 								}catch(Exception e)
 								{
-									Log.d(TAG,"数据接收异常！");
+									Log.d(TAG+"数据接收异常:",e.toString());
+									
 								}
 								
 							}
@@ -146,23 +148,8 @@ public class DataProcessServer extends Service {
 							
 						}
 						
-						//public SensorDevice(String id,String layer,String name,String PowerMode,String power,String sensorsStatus,String devicesStatus)
-												
-					   /* if(!(node.contains(infoStrings[1])))//如果数据库不存在 ，那么添加；如果数据库存在，那么更新
-					    {
-					    	
-						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
-						    		infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
-						    devSql.save(dev);
-					    	node.add(infoStrings[1]);
-					    }else
-					    {
-					    	
-						    SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
-						    		infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
-						    devSql.update(dev);
-					    }
-					    
+						
+					    /*
 					    if(Integer.parseInt(infoStrings[0])>8)//8层以上保存日志
 					    {
 					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
