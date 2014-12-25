@@ -9,6 +9,7 @@ import com.zgkxzx.printer.BluetoothActivity;
 import com.zgkxzx.server.DataProcessServer;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
+import com.zgkxzx.universal.Global;
 
 
 
@@ -51,7 +52,7 @@ public class MyActivity extends Activity {
 	private static String []menuTitle={
 			"信息查看",
 			//"联动控制",
-			"系统设置",
+			"系统配置",
 			"日志打印",
 			"扩展功能",
 			"产品信息"			
@@ -146,10 +147,21 @@ public class MyActivity extends Activity {
 					case 3:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
 						
-						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
+						if(Global.sendCommandData)
+						{
+							Global.sendCommandData=false;
+							
+						}else
+						{
+							Global.sendCommandData=true;
+						}
+						System.out.println("----------------");
+						System.out.println(Global.sendCommandData);
+						
+						/*AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("添加功能");
 						builder.setMessage("功能尚未开通，保留");
-						builder.show();
+						builder.show();*/
 						
 						break;
 					case 4:

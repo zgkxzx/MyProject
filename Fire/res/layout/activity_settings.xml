@@ -5,12 +5,18 @@
 	android:layout_height="fill_parent"
 	android:background="@drawable/bg1"
 	>
-
+  <ImageView 
+			android:id="@+id/iv_settings" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="100px"
+			android:src="@drawable/settings" /> 
+<!--  android:layout_marginLeft="250px" -->
 <LinearLayout
     android:layout_width="500px" 
 	android:layout_height="wrap_content"
-	android:layout_marginLeft="250px"
-	android:layout_marginTop="50px"
+	android:layout_marginLeft="150px"
+	android:layout_marginTop="100px"
 	android:orientation="vertical" 
 	>
     
@@ -20,29 +26,34 @@
 		android:layout_height="60px"
 		android:layout_marginLeft="10px"
 		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical">
+		android:gravity="center_horizontal|center_vertical"
+		android:focusable="true"
+		android:focusableInTouchMode="true">
 		
 		<TextView 
-			android:id="@+id/settingsText01" 
+			android:id="@+id/tv_mode_settings" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
-			android:textSize="30px" 
-			android:text="  设置1" />
+			android:textSize="30px"
+			android:textColor="@color/black" 
+			android:text="  模  式" />
 		
 		<ImageView 
-			android:id="@+id/settings01" 
+			android:id="@+id/iv_mode_settings" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="20px"
-			android:src="@drawable/switch_on_normal" />
+			android:src="@drawable/switch_on_normal" /> 
+		
+		
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow02" 
 		android:layout_width="fill_parent" 
 		android:layout_height="60px"
 		android:layout_marginLeft="10px"
-		
 		android:background="@drawable/bg_recipient_sms_normal"
 		android:gravity="center_horizontal|center_vertical">
 		
@@ -51,15 +62,23 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
-			android:text="  设置2" />
-		
-		<ImageView 
-			android:id="@+id/settings02" 
+			android:textColor="@color/black" 
+			android:text="  楼  层 "/>
+			
+			
+		<EditText 
+		    android:id="@+id/et_layer" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:layout_marginLeft="300px"
 			android:layout_marginRight="20px"
-			android:src="@drawable/switch_off_normal" />
+			android:textColor="@color/black"
+			android:textSize="20px"
+			android:numeric="integer"
+			android:gravity="center_vertical|right"
+            android:orientation="horizontal"
+		    />
+		
 	</TableRow>
 	
 	<TableRow 
@@ -75,13 +94,14 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
-			android:text="  设置3" />
+			android:textColor="@color/black" 
+			android:text="  文件配置" />
 		
 		<ImageView 
 			android:id="@+id/settings03" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
+			android:layout_marginLeft="250px"
 			android:layout_marginRight="20px"
 			android:src="@drawable/switch_off_normal" />
 	</TableRow>
@@ -98,13 +118,14 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
-			android:text="  设置4" />
+			android:textColor="@color/black" 
+			android:text="  清除记录" />
 		
 		<ImageView 
 			android:id="@+id/settings04" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
+			android:layout_marginLeft="250px"
 			android:layout_marginRight="20px"
 			android:src="@drawable/switch_off_normal" />
 	</TableRow>
@@ -122,13 +143,14 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
-			android:text="  设置5" />
+			android:textColor="@color/black" 
+			android:text="  电话配置" />
 		
 		<ImageView 
 			android:id="@+id/settings05" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
+			android:layout_marginLeft="250px"
 			android:layout_marginRight="20px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
@@ -146,40 +168,18 @@
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
 			android:textSize="30px" 
-			android:text="  设置6" />
+			android:textColor="@color/black" 
+			android:text="  密码设置" />
 		
 		<ImageView 
 			android:id="@+id/settings06" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
+			android:layout_marginLeft="250px"
 			android:layout_marginRight="20px"
 			android:src="@drawable/switch_on_normal" />
 	</TableRow>
-	<TableRow 
-		android:id="@+id/TableRow07" 
-		android:layout_width="fill_parent" 
-		android:layout_height="60px"
-		android:layout_marginLeft="10px"
-		android:background="@drawable/bg_recipient_sms_normal"
-		android:gravity="center_horizontal|center_vertical"
-		>
-		
-		<TextView 
-			android:id="@+id/settingsText07" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
-			android:textSize="30px" 
-			android:text="  设置7" />
-		
-		<ImageView 
-			android:id="@+id/settings07" 
-			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
-			android:layout_marginRight="20px"
-			android:src="@drawable/switch_on_normal" />
-	</TableRow>
+	
 </LinearLayout>	
    
    

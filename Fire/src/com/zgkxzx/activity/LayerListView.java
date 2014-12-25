@@ -3,6 +3,7 @@ package com.zgkxzx.activity;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.zgkxzx.activity.R;
@@ -12,6 +13,7 @@ import com.zgkxzx.activity.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -34,7 +36,7 @@ public class LayerListView extends Activity {
 	
 	
 	
-	
+	private ArrayList<String> alLayer=null;
 	private static String[] ListItem = new String[]{
 		"第1层",
 		"第2层",
@@ -56,9 +58,19 @@ public class LayerListView extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
 		
 		this.setTitle("楼层查看");
-		ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this,R.layout.list_com,ListItem);
 		
+		alLayer = new ArrayList<String>();
+		//ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this,R.layout.list_com,ListItem);
 		
+		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
+		String layer = sharedSettings.getString("layer"," ");
+		
+		for(int i=1;i<Integer.parseInt(layer)+1;i++)
+		{
+			alLayer.add("第"+Integer.toString(i)+"层");
+		}
+		
+		ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this,R.layout.list_com, alLayer);
 		ListView myList = (ListView)findViewById(R.id.lvCommon);
 		
 	

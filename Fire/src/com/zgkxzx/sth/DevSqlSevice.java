@@ -29,7 +29,7 @@ public class DevSqlSevice {
 		ContentValues values = new ContentValues();
 		//values.put("id", dev.getId());
 		values.put("time",sDateFormat.format(new java.util.Date()));
-		values.put("name", dev.getName());
+		values.put("name", dev.getLayer()+"-"+dev.getName());
 		values.put("detail", dev.getSensorsStatus());
 		
 		db.insert("log", null, values); 
@@ -71,7 +71,7 @@ public class DevSqlSevice {
 		values.put("power", dev.getPower());
 		values.put("sensorsStatus", dev.getSensorsStatus());
 		//values.put("sensorsType", dev.getSensorsType());
-		values.put("sensorsType", "11111111");
+		values.put("sensorsType", "3212132312312121");
 		
 		values.put("devicesStatus", dev.getDevicesStatus());
 		
@@ -101,7 +101,7 @@ public class DevSqlSevice {
 		values.put("power", dev.getPower());
 		values.put("sensorsStatus", dev.getSensorsStatus());
 		//values.put("sensorsType", dev.getSensorsType());
-		values.put("sensorsType", "22222222");
+		values.put("sensorsType", "1231231231231231");
 		values.put("devicesStatus", dev.getDevicesStatus());
 		
 		db.update("subMachine", values, "layer=?", new String[]{dev.getName()});

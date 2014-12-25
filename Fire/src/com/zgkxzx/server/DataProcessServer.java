@@ -6,13 +6,18 @@ import java.io.OutputStream;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+import com.zgkxzx.activity.DeviceView;
+import com.zgkxzx.activity.NodeGirdView;
+import com.zgkxzx.infosend.ControlSend;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
+import com.zgkxzx.universal.Global;
 
 
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android_serialport_api.MyApplication;
@@ -21,14 +26,18 @@ import android_serialport_api.SerialPort;
 public class DataProcessServer extends Service {
 	
 	private static final String TAG = "DataProcessServer";
+	private final int DATA_SEND_HANDLE = 0 ;
+	private Handler handler = null;
 	private MyApplication mApplication;
 	private SerialPort mSerialPort;
-	//private OutputStream mOutputStream;
+	private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
 	private ArrayList<String> node;
 	
 	private DevSqlSevice devSql;
+	
+	private int scanLayer=1;
 	
 	private class ReadThread extends Thread {
 
@@ -67,7 +76,7 @@ public class DataProcessServer extends Service {
 					//Log.d(TAG, "getAll:"+receiveValue);
 					if((receiveValue.indexOf("#")!=-1)&&(receiveValue.indexOf("$")!=-1))//
 					{
-						Log.d(TAG, "getL:"+receiveValue);
+						//Log.d(TAG, "getL:"+receiveValue);
 						int endIndex = receiveValue.indexOf("#");
 
 						String secondValue = receiveValue.substring(0, endIndex);
@@ -78,7 +87,7 @@ public class DataProcessServer extends Service {
 	
 						receiveValue= receiveValue.substring(endIndex+1);
 						
-						Log.d(TAG, "getReceiveValue:"+receiveValue);
+						//Log.d(TAG, "getReceiveValue:"+receiveValue);
 						
 						String[] infoStrings =  elseValue.split(",");
 						
@@ -91,26 +100,34 @@ public class DataProcessServer extends Service {
 								try{
 									//Log.d(TAG, "*************");
 									String getString = infoStrings[i];
-									char[] temp1 = new char[8] ;
-									getString.getChars(0, 8, temp1, 0);
+									char[] temp1 = new char[16] ;
+									getString.getChars(0, 16, temp1, 0);
 									String sensorsStatus = String.valueOf(temp1);
 									//Log.d(TAG, "sensorsStatus："+sensorsStatus);
 									
-									String PowerMode =  String.valueOf(getString.charAt(8));
+									String PowerMode =  String.valueOf(getString.charAt(16));
 									//Log.d(TAG, "PowerMode："+PowerMode);
 									
 									char[] temp2 = new char[3] ;
-									getString.getChars(9, 12, temp2, 0);
+									getString.getChars(17, 20, temp2, 0);
 									String power = String.valueOf(temp2);
 									//Log.d(TAG, "power："+power);
 									
 									char[] temp3 = new char[8] ;
-									getString.getChars(12, 20, temp3, 0);
+									getString.getChars(20, 27, temp3, 0);
 									String devicesStatus = String.valueOf(temp3);
 									//Log.d(TAG, "devicesStatus："+devicesStatus);
 									
 									String nodeId = Integer.toString(i-2);
 									String name = layer+ nodeId;
+									
+									if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))
+									{
+										SensorDevice devLog = new SensorDevice(infoStrings[0],infoStrings[1],
+								    			infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+								    	devSql.saveLog(devLog);
+								    	Log.d(TAG, "Log Name："+name);
+									}
 							
 									
 									if((name.length()<7)&&(name.length()>2))
@@ -125,13 +142,13 @@ public class DataProcessServer extends Service {
 										    devSql.save(dev);
 									    	node.add(name);
 									    
-											Log.d(TAG, "add name："+name);
+											//Log.d(TAG, "add name："+name);
 										}else
 										{
 											SensorDevice dev = new SensorDevice(layer,nodeId,
 													PowerMode,power,sensorsStatus,devicesStatus);
 										    devSql.update(dev);
-										    Log.d(TAG, "updata name："+name);
+										    //Log.d(TAG, "updata name："+name);
 										}
 										
 										
@@ -142,6 +159,7 @@ public class DataProcessServer extends Service {
 									Log.d(TAG+"数据接收异常:",e.toString());
 									
 								}
+								
 								
 							}
 							
@@ -157,7 +175,6 @@ public class DataProcessServer extends Service {
 					    	devSql.saveLog(dev);
 					    }*/
 					    	
-					   
 						
 					}
 					
@@ -181,7 +198,7 @@ public class DataProcessServer extends Service {
 		mApplication = (MyApplication) getApplication();
 		try {
 			mSerialPort = mApplication.getSerialPort();
-			//mOutputStream = mSerialPort.getOutputStream();
+			mOutputStream = mSerialPort.getOutputStream();
 			mInputStream = mSerialPort.getInputStream();
 
 			/* Create a receiving thread */
@@ -199,6 +216,52 @@ public class DataProcessServer extends Service {
 			Log.d(TAG, e.toString());
 		}
 		super.onCreate();
+		
+		
+		handler = new Handler() {
+			// 当消息发送过来的时候会执行下面这个方法
+			public void handleMessage(android.os.Message msg) {
+				super.handleMessage(msg);
+				if(msg.what == DATA_SEND_HANDLE){
+					
+					
+					byte [] sendData = ControlSend.sendCommand(Integer.toString(scanLayer), Integer.toString(25), ControlSend.NODE_MAIN_DATA);
+					scanLayer++;
+					if(scanLayer==10)
+						scanLayer=1;
+					try 
+					{
+						mOutputStream.write(sendData, 0, sendData.length);
+						Log.d(TAG,"发送成功");
+					} catch (IOException e) 
+					{
+						e.printStackTrace();
+						Log.d(TAG,"发送失败");
+					}
+				}
+			};
+		};
+		
+		 new Thread()
+			{
+				@Override
+				public void run()
+				{
+					while(true)
+					{
+						
+						try
+						{
+							Thread.sleep(5000);
+						}catch(InterruptedException e)
+						{
+							
+						}
+						if(Global.sendCommandData)
+						handler.sendEmptyMessage(DATA_SEND_HANDLE);
+					}
+				}
+			}.start();
 	}
 
 	
@@ -223,6 +286,7 @@ public class DataProcessServer extends Service {
 		super.onDestroy();
 	}
 
+	
 	@Override
 	public boolean onUnbind(Intent intent) {
 		// TODO Auto-generated method stub
