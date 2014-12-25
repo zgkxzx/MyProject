@@ -37,10 +37,13 @@ public class DevSqlSevice {
 	}
 	public List<SensorLog> getLogData(int offset, int maxResult){
 		List<SensorLog> sensors = new ArrayList<SensorLog>();
+		
+		long l = getLogCount();
+		
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 	
 		Cursor cursor = db.rawQuery("select * from log limit ?,?", 
-				new String[]{String.valueOf(offset), String.valueOf(getLogCount())});
+				new String[]{String.valueOf(offset), String.valueOf(l)});
 		while(cursor.moveToNext()){
 			String subTime = cursor.getString(cursor.getColumnIndex("time"));
 			String subName = cursor.getString(cursor.getColumnIndex("name"));

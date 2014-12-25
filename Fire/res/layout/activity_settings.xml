@@ -16,7 +16,7 @@
     android:layout_width="500px" 
 	android:layout_height="wrap_content"
 	android:layout_marginLeft="150px"
-	android:layout_marginTop="100px"
+	android:layout_marginTop="50px"
 	android:orientation="vertical" 
 	>
     

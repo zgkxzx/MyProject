@@ -50,10 +50,10 @@ public class MyActivity extends Activity {
 	
 	//主菜单标题
 	private static String []menuTitle={
-			"信息查看",
+			"查看与控制",
 			//"联动控制",
 			"系统配置",
-			"日志打印",
+			"故障与报警",
 			"扩展功能",
 			"产品信息"			
 	};
@@ -127,41 +127,24 @@ public class MyActivity extends Activity {
 						break;
 						
 					case 2:
-						Toast.makeText(MyActivity.this,"无线打印", 1000).show();
-						try
-						{
-							Intent intent = new Intent();										
-							
-							overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-							intent.setClass(MyActivity.this, BluetoothActivity.class);
-							startActivity(intent);
-							
-						}catch(Exception e)
-						{
-							Toast.makeText(MyActivity.this,"请安装打印程序！", 1000).show();
-						}
 						
 						
+						Intent intent = new Intent();										
+						
+						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+						intent.setClass(MyActivity.this, HistoryCheckActivity.class);
+						startActivity(intent);
 						
 						break;
 					case 3:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
 						
-						if(Global.sendCommandData)
-						{
-							Global.sendCommandData=false;
-							
-						}else
-						{
-							Global.sendCommandData=true;
-						}
-						System.out.println("----------------");
-						System.out.println(Global.sendCommandData);
 						
-						/*AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
+						
+						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("添加功能");
 						builder.setMessage("功能尚未开通，保留");
-						builder.show();*/
+						builder.show();
 						
 						break;
 					case 4:

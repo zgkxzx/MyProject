@@ -28,7 +28,8 @@ public class Settings extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE); //隐藏
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE); //隐藏
+		this.setTitle("系统配置");
 		this.setContentView(R.layout.activity_settings);
 				 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 

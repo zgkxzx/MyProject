@@ -30,10 +30,12 @@
         <activity android:name="com.zgkxzx.activity.DeviceView"/>
         <activity android:name="com.zgkxzx.activity.DeviceControl"/>
         <activity android:name="com.zgkxzx.activity.Settings"/>
+        <activity android:name="com.zgkxzx.activity.HistoryCheckActivity"/>
         <activity android:name="com.zgkxzx.activity.ProductInfo"/>
         <activity android:name="com.zgkxzx.printer.BluetoothActivity"/>
         <activity android:name="com.zgkxzx.printer.PrintDataActivity"/>
         <service  android:name="com.zgkxzx.server.DataProcessServer"/>
+       
     </application>
 
 </manifest>
