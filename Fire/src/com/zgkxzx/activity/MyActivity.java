@@ -93,9 +93,14 @@ public class MyActivity extends Activity {
 	    
 	    DevSqlSevice devSql = new DevSqlSevice(MyActivity.this);
 	    devSql.clearTab();
-	    //开启服务
-		 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
-		 Log.d(TAG, "串口数据接收服务开启");
+	    if(Global.dataServiceFlag)
+	    {
+		    //开启服务
+			 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
+			 Log.d(TAG, "串口数据接收服务开启");
+			 //
+	    }
+	    
 	    
         gridView.setOnItemClickListener(new OnItemClickListener() {
 			
@@ -138,9 +143,7 @@ public class MyActivity extends Activity {
 						break;
 					case 3:
 						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
-						
-						
-						
+												
 						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
 						builder.setTitle("添加功能");
 						builder.setMessage("功能尚未开通，保留");
@@ -149,16 +152,10 @@ public class MyActivity extends Activity {
 						break;
 					case 4:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
-						
-						
 						 
 						startActivity(new Intent(MyActivity.this,ProductInfo.class));
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-						/*
-						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
-						builder.setTitle("关于");
-						builder.setMessage(R.string.about_msg);
-						builder.show();*/
+						
 						break;
 					default:
 						
@@ -180,8 +177,8 @@ public class MyActivity extends Activity {
 		// TODO Auto-generated method stub
 		
 		//停止服务
-		MyActivity.this.stopService(new Intent(MyActivity.this,DataProcessServer.class));
-		Log.d(TAG, "串口数据接收服务开启");
+		//MyActivity.this.stopService(new Intent(MyActivity.this,DataProcessServer.class));
+		//Log.d(TAG, "串口数据接收服务关闭");
 		
 		super.onDestroy();
 	}

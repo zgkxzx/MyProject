@@ -219,6 +219,7 @@ public class DataProcessServer extends Service {
 		}
 		super.onCreate();
 		
+		Global.dataServiceFlag = false;
 		
 		handler = new Handler() {
 			// 当消息发送过来的时候会执行下面这个方法
