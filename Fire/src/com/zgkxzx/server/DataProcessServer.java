@@ -103,6 +103,8 @@ public class DataProcessServer extends Service {
 									char[] temp1 = new char[16] ;
 									getString.getChars(0, 16, temp1, 0);
 									String sensorsStatus = String.valueOf(temp1);
+									
+									
 									//Log.d(TAG, "sensorsStatus£º"+sensorsStatus);
 									
 									String PowerMode =  String.valueOf(getString.charAt(16));
@@ -123,8 +125,8 @@ public class DataProcessServer extends Service {
 									
 									if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))
 									{
-										SensorDevice devLog = new SensorDevice(infoStrings[0],infoStrings[1],
-								    			infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
+										SensorDevice devLog = new SensorDevice(layer,nodeId,
+												PowerMode,power,sensorsStatus,devicesStatus);
 								    	devSql.saveLog(devLog);
 								    	Log.d(TAG, "Log Name£º"+name);
 									}

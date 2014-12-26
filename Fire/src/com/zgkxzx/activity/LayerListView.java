@@ -37,19 +37,6 @@ public class LayerListView extends Activity {
 	
 	
 	private ArrayList<String> alLayer=null;
-	private static String[] ListItem = new String[]{
-		"第1层",
-		"第2层",
-		"第3层",
-		"第4层",
-		"第5层",
-		"第6层",
-		"第7层",
-		"第8层",
-		"第9层",
-		"第10层",
-		
-	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +47,6 @@ public class LayerListView extends Activity {
 		this.setTitle("楼层查看");
 		
 		alLayer = new ArrayList<String>();
-		//ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this,R.layout.list_com,ListItem);
 		
 		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
 		String layer = sharedSettings.getString("layer"," ");
@@ -70,7 +56,7 @@ public class LayerListView extends Activity {
 			alLayer.add("第"+Integer.toString(i)+"层");
 		}
 		
-		ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this,R.layout.list_com, alLayer);
+		ArrayAdapter<String> arrayAdapt = new ArrayAdapter<String>(this,R.layout.list_com,alLayer);
 		ListView myList = (ListView)findViewById(R.id.lvCommon);
 		
 	
