@@ -11,7 +11,7 @@ import com.zgkxzx.activity.NodeGirdView;
 import com.zgkxzx.infosend.ControlSend;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
-import com.zgkxzx.universal.Global;
+
 
 
 
@@ -219,7 +219,6 @@ public class DataProcessServer extends Service {
 		}
 		super.onCreate();
 		
-		Global.dataServiceFlag = false;
 		
 		handler = new Handler() {
 			// 当消息发送过来的时候会执行下面这个方法
@@ -260,7 +259,7 @@ public class DataProcessServer extends Service {
 						{
 							
 						}
-						if(Global.sendCommandData)
+						if(mApplication.isSendCommandFlag())
 						handler.sendEmptyMessage(DATA_SEND_HANDLE);
 					}
 				}

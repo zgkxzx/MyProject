@@ -14,7 +14,6 @@ import com.zgkxzx.mymath.CRC16;
 import com.zgkxzx.server.DataProcessServer;
 
 import com.zgkxzx.sth.DevSqlSevice;
-import com.zgkxzx.universal.Global;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -203,7 +202,8 @@ public class DeviceControl extends Activity implements OnClickListener {
 			{
 			  // devicesStatus[deviceNum-1] = false;
 			   Log.d(TAG,"设备开启");
-			   Global.sendCommandData = false;
+			   
+			   mApplication.setSendCommandFlag(false);
 			
 			   byte [] sendData = ControlSend.sendControl(nodeLayer,nodeNumber,deviceNum, ControlSend.getSW(true));
 				try 
@@ -215,8 +215,8 @@ public class DeviceControl extends Activity implements OnClickListener {
 					e.printStackTrace();
 					Log.d(TAG,"发送失败");
 				}
-				Global.sendCommandData = true;
-			
+				
+				mApplication.setSendCommandFlag(true);
 			}
 		}
 		

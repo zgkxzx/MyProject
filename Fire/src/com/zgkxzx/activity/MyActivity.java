@@ -9,7 +9,6 @@ import com.zgkxzx.printer.BluetoothActivity;
 import com.zgkxzx.server.DataProcessServer;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
-import com.zgkxzx.universal.Global;
 
 
 
@@ -38,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android_serialport_api.MyApplication;
 
 
 public class MyActivity extends Activity {
@@ -46,6 +46,8 @@ public class MyActivity extends Activity {
 	private List<MyMenuIcon> myMenuItem = null;
 	private GridView gridView = null;
 	private DevSqlSevice devSql;
+	
+	private MyApplication mApplication =null;
 	
 	
 	//主菜单标题
@@ -78,7 +80,7 @@ public class MyActivity extends Activity {
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
 	   // overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_in_top);//由下到上
 	    
-	   
+	    mApplication = (MyApplication) getApplication();
 	    
 	    myMenuItem = new ArrayList <MyMenuIcon>();
 	    
@@ -93,12 +95,13 @@ public class MyActivity extends Activity {
 	    
 	    DevSqlSevice devSql = new DevSqlSevice(MyActivity.this);
 	    devSql.clearTab();
-	    if(Global.dataServiceFlag)
+	    if(mApplication.isDataServiceFlag())
 	    {
 		    //开启服务
 			 MyActivity.this.startService(new Intent(MyActivity.this,DataProcessServer.class));
 			 Log.d(TAG, "串口数据接收服务开启");
 			 //
+			 mApplication.setDataServiceFlag(false);
 	    }
 	    
 	    
@@ -112,8 +115,7 @@ public class MyActivity extends Activity {
 				switch(position)
 				{
 					case 0:
-						
-						//Toast.makeText(MyActivity.this, new Integer(position).toString(), 1000).show();
+			
 						Toast.makeText(MyActivity.this,"进入信息查询", 1000).show();
 						
 						startActivity(new Intent(MyActivity.this,LayerListView.class));

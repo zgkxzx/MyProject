@@ -49,7 +49,6 @@ public class Settings extends Activity {
 		super.onStart();
 		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
 		layer = sharedSettings.getString("layer"," ");
-		
 		ivSettingsLayer.setText(layer);
 		
     	
