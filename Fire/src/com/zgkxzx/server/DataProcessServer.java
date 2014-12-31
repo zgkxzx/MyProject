@@ -33,7 +33,10 @@ public class DataProcessServer extends Service {
 	private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
+	
 	private ArrayList<String> node;
+	
+	private ArrayList<String> logTempList;
 	
 	private DevSqlSevice devSql;
 	
@@ -76,7 +79,7 @@ public class DataProcessServer extends Service {
 					//Log.d(TAG, "getAll:"+receiveValue);
 					if((receiveValue.indexOf("#")!=-1)&&(receiveValue.indexOf("$")!=-1))//
 					{
-						//Log.d(TAG, "getL:"+receiveValue);
+						Log.d(TAG, "getL:"+receiveValue);
 						int endIndex = receiveValue.indexOf("#");
 
 						String secondValue = receiveValue.substring(0, endIndex);
@@ -89,95 +92,38 @@ public class DataProcessServer extends Service {
 						
 						//Log.d(TAG, "getReceiveValue:"+receiveValue);
 						
-						String[] infoStrings =  elseValue.split(",");
+						String[] infoStrings;
+						infoStrings =  elseValue.split(",");
 						
 						//串口取出来的数据保存到数据库
-						if(infoStrings.length>2)
+						if(infoStrings.length>2&&infoStrings.length<20)
 						{
-							String layer = infoStrings[0];
-							for(int i=2;i<infoStrings.length;i++)
+				
+													
+							switch(infoStrings[0].charAt(0))
 							{
-								try{
-									//Log.d(TAG, "*************");
-									String getString = infoStrings[i];
-									char[] temp1 = new char[16] ;
-									getString.getChars(0, 16, temp1, 0);
-									String sensorsStatus = String.valueOf(temp1);
+								case 'A':
 									
+									dataReceive(infoStrings);
+									break; 
+								case 'B':
+									//接收 一次性 数据
 									
-									//Log.d(TAG, "sensorsStatus："+sensorsStatus);
-									
-									String PowerMode =  String.valueOf(getString.charAt(16));
-									//Log.d(TAG, "PowerMode："+PowerMode);
-									
-									char[] temp2 = new char[3] ;
-									getString.getChars(17, 20, temp2, 0);
-									String power = String.valueOf(temp2);
-									//Log.d(TAG, "power："+power);
-									
-									char[] temp3 = new char[8] ;
-									getString.getChars(20, 27, temp3, 0);
-									String devicesStatus = String.valueOf(temp3);
-									//Log.d(TAG, "devicesStatus："+devicesStatus);
-									
-									String nodeId = Integer.toString(i-2);
-									String name = layer+ nodeId;
-									
-									if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))
-									{
-										SensorDevice devLog = new SensorDevice(layer,nodeId,
-												PowerMode,power,sensorsStatus,devicesStatus);
-								    	devSql.saveLog(devLog);
-								    	Log.d(TAG, "Log Name："+name);
-									}
-							
-									
-									if((name.length()<7)&&(name.length()>2))
-									{
-										
-									   
-										//Log.d(TAG, layer+"-"+nodeId+"-"+PowerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
-										if(!(node.contains(name)))
-										{
-											SensorDevice dev = new SensorDevice(layer,nodeId,
-													PowerMode,power,sensorsStatus,devicesStatus);
-										    devSql.save(dev);
-									    	node.add(name);
-									    
-											//Log.d(TAG, "add name："+name);
-										}else
-										{
-											SensorDevice dev = new SensorDevice(layer,nodeId,
-													PowerMode,power,sensorsStatus,devicesStatus);
-										    devSql.update(dev);
-										    //Log.d(TAG, "updata name："+name);
-										}
-										
-										
-									}
-									
-								}catch(Exception e)
-								{
-									Log.d(TAG+"数据接收异常:",e.toString());
-									
-								}
-								
-								
+									break;
+								case 'C':
+									//标志功能
+									mApplication.setLogRevFlag(true);
+									break;
+								default:
+									System.out.println("default");
+									break;
 							}
 							
+						}	
+								
+											
 							
-						}
-						
-						
-					    /*
-					    if(Integer.parseInt(infoStrings[0])>8)//8层以上保存日志
-					    {
-					    	SensorDevice dev = new SensorDevice(infoStrings[0],infoStrings[1],
-					    			infoStrings[2],infoStrings[3],infoStrings[4],infoStrings[5]);
-					    	devSql.saveLog(dev);
-					    }*/
-					    	
-						
+							
 					}
 					
 					
@@ -207,6 +153,7 @@ public class DataProcessServer extends Service {
 			mReadThread = new ReadThread();
 			
 			node = new ArrayList<String>();
+			logTempList =  new ArrayList<String>();
 			
 			devSql = new DevSqlSevice(DataProcessServer.this);
 			
@@ -294,6 +241,81 @@ public class DataProcessServer extends Service {
 		// TODO Auto-generated method stub
 		return super.onUnbind(intent);
 	}
+	
+	public void dataReceive(String [] sbuffer)
+	{
+		
+		String layer = sbuffer[1];
+		for(int i=3;i<sbuffer.length;i++)
+		{
+				//Log.d(TAG, "*************");
+				String getString = sbuffer[i];
+				char[] temp1 = new char[16] ;
+				getString.getChars(0, 16, temp1, 0);
+				String sensorsStatus = String.valueOf(temp1);
+				
+				
+				//Log.d(TAG, "sensorsStatus："+sensorsStatus);
+				
+				String PowerMode =  String.valueOf(getString.charAt(16));
+				//Log.d(TAG, "PowerMode："+PowerMode);
+				
+				char[] temp2 = new char[3] ;
+				getString.getChars(17, 20, temp2, 0);
+				String power = String.valueOf(temp2);
+				//Log.d(TAG, "power："+power);
+				
+				char[] temp3 = new char[8] ;
+				getString.getChars(20, 27, temp3, 0);
+				String devicesStatus = String.valueOf(temp3);
+				//Log.d(TAG, "devicesStatus："+devicesStatus);
+				
+				String nodeId = Integer.toString(i-2);
+				String name = layer+ nodeId;
+				
+				//如果状态 有警告和报警的 ，加入到日志
+				if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))
+				{
+					if(mApplication.getLogRevFlag()||(!logTempList.contains(name)))
+					{
+						SensorDevice devLog = new SensorDevice(layer,nodeId,
+								PowerMode,power,sensorsStatus,devicesStatus);
+				    	devSql.saveLog(devLog);
+				    	
+				    	logTempList.add(name);
+				    	
+				    	mApplication.setLogRevFlag(false);
+				    	Log.d(TAG, "Log Name："+name);
+					}
+				}
+		
+				
+				if((name.length()<7)&&(name.length()>2))
+				{
+					
+				   
+					//Log.d(TAG, layer+"-"+nodeId+"-"+PowerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
+					if(!(node.contains(name)))
+					{
+						SensorDevice dev = new SensorDevice(layer,nodeId,
+								PowerMode,power,sensorsStatus,devicesStatus);
+					    devSql.save(dev);
+				    	node.add(name);
+				    
+						//Log.d(TAG, "add name："+name);
+					}else
+					{
+						SensorDevice dev = new SensorDevice(layer,nodeId,
+								PowerMode,power,sensorsStatus,devicesStatus);
+					    devSql.update(dev);
+					    //Log.d(TAG, "updata name："+name);
+					}
+					
+					
+				}
+		}
+				
+		}
 
 	
 
