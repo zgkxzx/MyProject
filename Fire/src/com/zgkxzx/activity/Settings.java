@@ -1,7 +1,9 @@
 package com.zgkxzx.activity;
 
 import com.zgkxzx.activity.R;
+import com.zgkxzx.fileoperate.FileOperate;
 import com.zgkxzx.sth.DevSqlSevice;
+import com.zgkxzx.sth.NodeConfig;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,10 +24,13 @@ import android.widget.Toast;
 
 public class Settings extends Activity {
 	
-	
+	private final String TAG= "Settings";
 	private EditText ivSettingsLayer;
 	private ImageButton btn_clear;
+	private ImageButton btn_config_file;
 	private String layer = "";
+	
+	
 	
 	
 	@Override
@@ -39,8 +45,56 @@ public class Settings extends Activity {
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏 
 	    
 	    
-		
+	    
 	    ivSettingsLayer = (EditText)this.findViewById(R.id.et_layer);
+	    
+	    btn_config_file = (ImageButton)findViewById(R.id.fileconfig);         
+	    btn_config_file.setOnTouchListener(new View.OnTouchListener(){            
+		    public boolean onTouch(View v, MotionEvent event) {
+		    	
+		    	  
+		            if(event.getAction() == MotionEvent.ACTION_DOWN){       
+		  
+		               ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.input_finish));
+		               
+		               FileOperate nodeConfig = new FileOperate(Settings.this);
+		               
+		               DevSqlSevice dsl = new DevSqlSevice(Settings.this);
+		               
+		               dsl.clearConfig();
+		               
+		               String s = null;
+			       		try 
+			       		{
+			       			s = nodeConfig.getConfigFile("zgkxzx.txt");
+			       		
+			       			String [] temp = s.split("\r\n");
+			       			
+			       			for(String ss:temp)
+			       			{
+			       				System.out.println(ss);
+			       				String [] sData =ss.split(":");
+			       				dsl.saveDatailNodeConfig(new NodeConfig(sData[0], sData[1]));
+			       			}
+			       		    Toast.makeText(Settings.this, "数据已导入到数据库", Toast.LENGTH_SHORT).show();
+				       	} catch (Exception e1) {
+				       			Log.d(TAG, "打开失败");
+				       		 Toast.makeText(Settings.this, "数据已导入失败", Toast.LENGTH_SHORT).show();
+				       	}
+		    	              
+		            }else if(event.getAction() == MotionEvent.ACTION_UP){       
+		               
+		                ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.input_data));
+		                
+		                
+		            }          
+		            return false;       
+		    }
+			
+		});
+	    
+		
+	  
 	    
 	    btn_clear = (ImageButton)findViewById(R.id.settings_clear);         
 	    btn_clear.setOnTouchListener(new View.OnTouchListener(){            

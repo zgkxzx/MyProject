@@ -97,13 +97,14 @@
 			android:textColor="@color/black" 
 			android:text="  文件配置" />
 		
-		<ImageView 
-			android:id="@+id/settings03" 
+		<ImageButton 
+			android:id="@+id/fileconfig" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
+			android:layout_width="wrap_content"
+			android:background="#00000000"
 			android:layout_marginLeft="250px"
 			android:layout_marginRight="20px"
-			android:src="@drawable/switch_off_normal" />
+			android:src="@drawable/input_data" />
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow04" 

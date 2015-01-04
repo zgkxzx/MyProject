@@ -64,6 +64,7 @@ public class DevSqlSevice {
 		db.close();
 		return count;
 	}
+	//保存节点信息到数据库
 	public void save(SensorDevice dev){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -79,6 +80,46 @@ public class DevSqlSevice {
 		values.put("devicesStatus", dev.getDevicesStatus());
 		
 		db.insert("subMachine", null, values); 
+		db.close();
+	}
+	//保存具体详细节点信息对应查询表到数据库
+	public void saveDatailNodeConfig(NodeConfig nc){
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		//values.put("id", dev.getId());
+		values.put("nodeName", nc.getNodeName());
+		values.put("addressName",nc.getAddrName());
+
+		db.insert("addrInfo", null, values); 
+		db.close();
+	}
+	
+	public  NodeConfig getNodeConfigInfo(String name){
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+		String nodeName = null;
+		String addressName = "没有配置信息";
+		Cursor cursor = db.query("addrInfo", new String[]{"infoid","nodeName","addressName"}, 
+				"nodeName=?", new String[]{name.toString()}, null, null, null, null);
+		if(cursor.moveToFirst()){
+			
+			nodeName = cursor.getString(cursor.getColumnIndex("nodeName"));
+			addressName = cursor.getString(cursor.getColumnIndex("addressName"));
+		
+			cursor.close();
+			db.close();
+			
+		}
+		return new NodeConfig(nodeName,addressName);
+	}
+	public void clearConfig()
+	{
+		
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		db.execSQL("delete from addrInfo;");
+		
+        String sql ="update sqlite_sequence set seq = 0 where name ='"+"addrInfo"+"'";
+		
+		db.execSQL(sql);
 		db.close();
 	}
 	
@@ -214,6 +255,7 @@ public class DevSqlSevice {
 		db.close();
 		return count;
 	}
+
 	
 	
 
