@@ -32,6 +32,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 				"name varchar(20)," +
 				"detail varchar(20))"
 		);
+		//建立一张 具体探头名称 具体地点 表
+				db.execSQL("CREATE TABLE addrInfo (infoid integer primary key autoincrement," +
+						"nodeName varchar(20)," +
+						"addressName varchar(32))"
+				);
 	}
 
    

@@ -93,6 +93,18 @@ public class DevSqlSevice {
 		db.execSQL(sql);
 		db.close();
 	}
+	public void clearLogHistory()
+	{
+		
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		db.execSQL("delete from log;");
+		
+        String sql ="update sqlite_sequence set seq = 0 where name ='"+"log"+"'";
+		
+		db.execSQL(sql);
+		db.close();
+	}
+	
 	public void update(SensorDevice dev){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();

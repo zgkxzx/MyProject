@@ -113,7 +113,7 @@
 		android:background="@drawable/bg_recipient_sms_normal"
 		android:gravity="center_horizontal|center_vertical">
 		
-		<TextView 
+		<TextView
 			android:id="@+id/settingsText04" 
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content" 
@@ -121,13 +121,15 @@
 			android:textColor="@color/black" 
 			android:text="  清除记录" />
 		
-		<ImageView 
-			android:id="@+id/settings04" 
-			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent"
+		<ImageButton
+			android:id="@+id/settings_clear" 
+			android:background="#00000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 			android:layout_marginLeft="250px"
 			android:layout_marginRight="20px"
-			android:src="@drawable/switch_off_normal" />
+			android:src="@drawable/clear" />
+		
 	</TableRow>
 	<TableRow 
 		android:id="@+id/TableRow05" 

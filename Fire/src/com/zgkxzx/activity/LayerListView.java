@@ -49,7 +49,7 @@ public class LayerListView extends Activity {
 		alLayer = new ArrayList<String>();
 		
 		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
-		String layer = sharedSettings.getString("layer"," ");
+		String layer = sharedSettings.getString("layer","1");
 		
 		for(int i=1;i<Integer.parseInt(layer)+1;i++)
 		{
