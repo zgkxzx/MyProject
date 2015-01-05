@@ -347,7 +347,7 @@ public class DataProcessServer extends Service {
 
 				if((name.length()<7)&&(name.length()>2))
 				{
-					if(devSql.getLogCount()==0)
+					if(devSql.getCount()==0)
 						node.clear();
 					
 					Log.d(TAG, layer+"-"+nodeId+"-"+powerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
@@ -361,10 +361,12 @@ public class DataProcessServer extends Service {
 						Log.d(TAG, "add name£º"+name);
 					}else
 					{
+						
 						SensorDevice dev = new SensorDevice(layer,nodeId,
 								powerMode,power,sensorsStatus,devicesStatus);
 					    devSql.update(dev);
 					    Log.d(TAG, "updata name£º"+name);
+					    Log.d(TAG, "getLogCount£º"+Integer.toString((int)devSql.getCount()));
 					}
 					
 					
