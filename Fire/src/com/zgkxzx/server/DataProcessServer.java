@@ -306,6 +306,8 @@ public class DataProcessServer extends Service {
 				//报警节点处理 
 				if(sensorsStatus!=null)
 				{
+					if(devSql.getLogCount()==0)
+						logTempList.clear();
 					
 					if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))
 					{

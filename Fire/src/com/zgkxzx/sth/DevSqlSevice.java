@@ -231,12 +231,12 @@ public class DevSqlSevice {
 				int subid = cursor.getInt(cursor.getColumnIndex("subid"));
 				String layer = cursor.getString(cursor.getColumnIndex("layer"));
 				String name = cursor.getString(cursor.getColumnIndex("name"));
-				String PowerMode = cursor.getString(cursor.getColumnIndex("powerMode"));
+				String powerMode = cursor.getString(cursor.getColumnIndex("powerMode"));
 				String power = cursor.getString(cursor.getColumnIndex("power"));
 				String sensorsStatus = cursor.getString(cursor.getColumnIndex("sensorsStatus"));
 				String sensorsType = cursor.getString(cursor.getColumnIndex("sensorsType"));
 				String devicesStatus = cursor.getString(cursor.getColumnIndex("devicesStatus"));
-				sensorDev.add(new SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType,devicesStatus));
+				sensorDev.add(new SensorDevice(String.valueOf(subid),layer, name, powerMode, power,sensorsStatus,sensorsType,devicesStatus));
 			}
 			
 		}
