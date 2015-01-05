@@ -78,7 +78,8 @@ public class Settings extends Activity {
 			       			{
 			       				System.out.println(ss);
 			       				String [] sData =ss.split(":");
-			       				dsl.saveDatailNodeConfig(new NodeConfig(sData[0], sData[1]));
+			       				//for(int i=1;i<=sData.length;i++)
+			       				   dsl.saveDatailNodeConfig(new NodeConfig(sData[0]+"-"+sData[1], sData[2]));
 			       			}
 			       		    Toast.makeText(Settings.this, "数据已导入到数据库", Toast.LENGTH_SHORT).show();
 				       	} catch (Exception e1) {

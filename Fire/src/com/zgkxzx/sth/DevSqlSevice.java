@@ -97,7 +97,7 @@ public class DevSqlSevice {
 	public  NodeConfig getNodeConfigInfo(String name){
 		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 		String nodeName = null;
-		String addressName = "没有配置信息";
+		String addressName = "无配置信息";
 		Cursor cursor = db.query("addrInfo", new String[]{"infoid","nodeName","addressName"}, 
 				"nodeName=?", new String[]{name.toString()}, null, null, null, null);
 		if(cursor.moveToFirst()){
@@ -122,7 +122,7 @@ public class DevSqlSevice {
 		db.execSQL(sql);
 		db.close();
 	}
-	
+	///////////////////////////////////////////////////////
 	public void clearTab()
 	{
 		
