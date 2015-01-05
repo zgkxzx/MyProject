@@ -60,6 +60,8 @@ public class NodeGirdView extends BaseAdapter {
 		ImageView iv = (ImageView) view.findViewById(R.id.gv_item_icon);
 		tv.setText("вс╩З"+sensorDevice.get(position).getName());
 		
+		String nodeStatusInfo = sensorDevice.get(position).getSensorsStatus();
+		
 		int temp = Integer.parseInt(sensorDevice.get(position).getName());
 		if((temp!=0)&&(temp%25==0))
 		{
@@ -67,7 +69,12 @@ public class NodeGirdView extends BaseAdapter {
 			//Log.d(TAG, "R.drawable.node_box!");
 		}else 
 		{
-			iv.setImageResource(R.drawable.node_green);
+			if(nodeStatusInfo.contains("1"))
+				iv.setImageResource(R.drawable.node_red);
+			else if(nodeStatusInfo.contains("2"))
+				iv.setImageResource(R.drawable.node_black);
+			else 
+				iv.setImageResource(R.drawable.node_green);
 			//Log.d(TAG, "R.drawable.node_box!");
 		}
 		
