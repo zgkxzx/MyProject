@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android_serialport_api.MyApplication;
 
 public class Settings extends Activity {
 	
@@ -29,6 +30,8 @@ public class Settings extends Activity {
 	private ImageButton btn_clear;
 	private ImageButton btn_config_file;
 	private String layer = "";
+	
+	private MyApplication mApplication = null;
 	
 	
 	
@@ -45,6 +48,7 @@ public class Settings extends Activity {
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//Ç¿ÖÆÎªºáÆÁ 
 	    
 	    
+	    mApplication = (MyApplication)this.getApplication();
 	    
 	    ivSettingsLayer = (EditText)this.findViewById(R.id.et_layer);
 	    
@@ -157,6 +161,8 @@ public class Settings extends Activity {
     	editor.putString("layer",layer.replace(" ", ""));
     	
     	editor.commit();
+    	
+    	mApplication.setScanLayer(Integer.parseInt(layer));
 	}
 
 

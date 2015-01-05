@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.database.sqlite.SQLiteDatabase;
@@ -89,6 +90,12 @@ public class MyActivity extends Activity {
 	       myMenuItem.add(new MyMenuIcon(menuTitle[i],iconTilte[i]));
 	    
 
+	    SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
+		String getLayer = sharedSettings.getString("layer","1"); 
+		
+		mApplication.setScanLayer(Integer.parseInt(getLayer));
+	    
+	    
 	    gridView = (GridView) findViewById(R.id.menuGridView);
 	    //将集合添加到适配器
 	    gridView.setAdapter(new MenuGirdView(myMenuItem,MyActivity.this));

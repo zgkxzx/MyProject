@@ -192,7 +192,7 @@ public class DataProcessServer extends Service {
 					byte [] sendData = ControlSend.sendCommand(Integer.toString(scanLayer), Integer.toString(25), ControlSend.NODE_MAIN_DATA);
 					
 					scanLayer++;
-					if(scanLayer==10)
+					if(scanLayer==mApplication.getScanLayer())
 						scanLayer=1;
 					try 
 					{

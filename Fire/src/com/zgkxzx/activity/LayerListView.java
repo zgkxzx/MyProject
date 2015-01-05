@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android_serialport_api.MyApplication;
 
 
 
@@ -35,7 +36,7 @@ public class LayerListView extends Activity {
 	
 	
 	
-	
+	private MyApplication mApplication=null;
 	private ArrayList<String> alLayer=null;
 
 	@Override
@@ -46,12 +47,15 @@ public class LayerListView extends Activity {
 		
 		this.setTitle("Â¥²ã²é¿´");
 		
+		
+		mApplication  = (MyApplication)this.getApplication();
+		
 		alLayer = new ArrayList<String>();
 		
-		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
-		String layer = sharedSettings.getString("layer","1");
+		//SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
+		//String layer = sharedSettings.getString("layer","1");
 		
-		for(int i=1;i<Integer.parseInt(layer)+1;i++)
+		for(int i=1;i<mApplication.getScanLayer()+1;i++)
 		{
 			alLayer.add("µÚ"+Integer.toString(i)+"²ã");
 		}
