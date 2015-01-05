@@ -347,6 +347,9 @@ public class DataProcessServer extends Service {
 
 				if((name.length()<7)&&(name.length()>2))
 				{
+					if(devSql.getLogCount()==0)
+						node.clear();
+					
 					Log.d(TAG, layer+"-"+nodeId+"-"+powerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
 					if(!(node.contains(name)))
 					{
