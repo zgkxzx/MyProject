@@ -151,6 +151,9 @@ public class MyActivity extends Activity {
 						builder.setMessage("功能尚未开通，保留");
 						builder.show();
 						
+						
+						
+						
 						break;
 					case 4:
 						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();

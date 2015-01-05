@@ -6,8 +6,11 @@ import java.io.OutputStream;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+import com.zgkxzx.activity.DeviceControl;
 import com.zgkxzx.activity.DeviceView;
+import com.zgkxzx.activity.MyActivity;
 import com.zgkxzx.activity.NodeGirdView;
+import com.zgkxzx.activity.R;
 import com.zgkxzx.infosend.ControlSend;
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.SensorDevice;
@@ -15,8 +18,13 @@ import com.zgkxzx.sth.SensorDevice;
 
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -26,6 +34,9 @@ import android_serialport_api.SerialPort;
 public class DataProcessServer extends Service {
 	
 	private static final String TAG = "DataProcessServer";
+	
+	private final static int NOTIFICATION_ID_ICON = 0x10000;
+	
 	private final int DATA_SEND_HANDLE = 0 ;
 	private Handler handler = null;
 	private MyApplication mApplication;
@@ -33,6 +44,9 @@ public class DataProcessServer extends Service {
 	private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
+	
+	private String wNodeName=null;
+	private String wLayerName=null;
 	
 	private ArrayList<String> node;
 	
@@ -112,7 +126,8 @@ public class DataProcessServer extends Service {
 									break;
 								case 'C':
 									//标志功能
-									mApplication.setLogRevFlag(true);
+									//mApplication.setLogRevFlag(true);
+									logTempList.clear();
 									break;
 								default:
 									System.out.println("default");
@@ -173,8 +188,9 @@ public class DataProcessServer extends Service {
 				super.handleMessage(msg);
 				if(msg.what == DATA_SEND_HANDLE){
 					
-					
+					//扫描楼层
 					byte [] sendData = ControlSend.sendCommand(Integer.toString(scanLayer), Integer.toString(25), ControlSend.NODE_MAIN_DATA);
+					
 					scanLayer++;
 					if(scanLayer==10)
 						scanLayer=1;
@@ -287,7 +303,7 @@ public class DataProcessServer extends Service {
 				
 				name= layer+ nodeId;
 				
-				
+				//报警节点处理 
 				if(sensorsStatus!=null)
 				{
 					
@@ -300,9 +316,29 @@ public class DataProcessServer extends Service {
 					    	devSql.saveLog(devLog);
 					    	
 					    	logTempList.add(name);
-					    	
+					    	wNodeName = nodeId;
+					    	wLayerName = layer;
+					    	showWarningNotification();
 					    	//mApplication.setLogRevFlag(false);
-					    	Log.d(TAG, "Add Log Name："+name);
+					    	Log.d(TAG, "------------Add Log Name---------："+name);
+					    	
+					    	
+					    	 //发送信息到主机
+					    	  mApplication.setSendCommandFlag(false);
+							    	  			    	  
+							   byte [] sendData = ControlSend.sendAllWarn(layer, nodeId,  devSql.getNodeConfigInfo(name).getAddrName());
+								try 
+								{
+									mOutputStream.write(sendData, 0, sendData.length);
+									Log.d(TAG,"发送成功");
+								} catch (IOException e) 
+								{
+									e.printStackTrace();
+									Log.d(TAG,"发送失败");
+								}
+								
+								mApplication.setSendCommandFlag(true);
+					    	
 						}
 					}
 					
@@ -334,6 +370,30 @@ public class DataProcessServer extends Service {
 				
 		}
 
-	
+	//Intent intent = new Intent();
+	//intent.setClass(DeviceView.this, DeviceControl.class);
+	//intent.putExtra("Layer", wLayerName);
+	//intent.putExtra("NodeNumber", wNodeName);
+	//
+	 private void showWarningNotification() { 
+		 NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); 
+			Notification notification
+			= new Notification(R.drawable.fire_icon, null, System.currentTimeMillis());
+			
+			notification.flags |= Notification.FLAG_ONGOING_EVENT; 
+			notification.flags |= Notification.FLAG_NO_CLEAR; 
+			
+			Intent intent = new Intent();
+			intent.setClass(this, DeviceControl.class);
+			intent.putExtra("Layer", wLayerName);
+			intent.putExtra("NodeNumber", wNodeName);
+			
+			PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0); 
+			notification.contentIntent = pi; 
+			notification.setLatestEventInfo(this, "报警信息来自：",wLayerName+"楼"+wNodeName+"号", pi); 
+			
+			nm.notify(NOTIFICATION_ID_ICON, notification); 
+		 
+	    }
 
 }
