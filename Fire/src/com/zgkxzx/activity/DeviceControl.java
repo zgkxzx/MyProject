@@ -16,6 +16,7 @@ import com.zgkxzx.server.DataProcessServer;
 import com.zgkxzx.sth.DevSqlSevice;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -84,6 +85,10 @@ public class DeviceControl extends Activity implements OnClickListener {
 				 
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//Ç¿ÖÆÎªºáÆÁ 
 	    
+	    
+	    NotificationManager notificationManager = (NotificationManager) this 
+                .getSystemService(NOTIFICATION_SERVICE); 
+        notificationManager.cancel(0);
 	    
 	    Bundle extras = getIntent().getExtras();
 	    nodeLayer = extras.getString("Layer");

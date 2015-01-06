@@ -38,6 +38,7 @@ public class DataProcessServer extends Service {
 	private final static int NOTIFICATION_ID_ICON = 0x10000;
 	
 	private final int DATA_SEND_HANDLE = 0 ;
+	
 	private Handler handler = null;
 	private MyApplication mApplication;
 	private SerialPort mSerialPort;
@@ -117,7 +118,7 @@ public class DataProcessServer extends Service {
 							switch(infoStrings[0].charAt(0))
 							{
 								case 'A':
-									
+									//接收实时数据
 									dataReceive(infoStrings);
 									break; 
 								case 'B':
@@ -127,18 +128,20 @@ public class DataProcessServer extends Service {
 								case 'C':
 									//标志功能
 									//mApplication.setLogRevFlag(true);
+									
+									 /*NotificationManager notificationManager = (NotificationManager) DataProcessServer.this 
+						                .getSystemService(NOTIFICATION_SERVICE); 
+						              notificationManager.cancel(0);
+						              */
 									logTempList.clear();
 									break;
 								default:
-									System.out.println("default");
+									Log.d(TAG, "default!");
 									break;
 							}
 							
 						}	
-								
-											
-							
-							
+					
 					}
 					
 					
@@ -192,12 +195,12 @@ public class DataProcessServer extends Service {
 					byte [] sendData = ControlSend.sendCommand(Integer.toString(scanLayer), Integer.toString(25), ControlSend.NODE_MAIN_DATA);
 					
 					scanLayer++;
-					if(scanLayer==mApplication.getScanLayer())
+					if(scanLayer>=mApplication.getScanLayer())
 						scanLayer=1;
 					try 
 					{
 						mOutputStream.write(sendData, 0, sendData.length);
-						Log.d(TAG,"发送成功");
+						//Log.d(TAG,"发送成功");
 					} catch (IOException e) 
 					{
 						e.printStackTrace();
@@ -217,7 +220,7 @@ public class DataProcessServer extends Service {
 						
 						try
 						{
-							Thread.sleep(5000);
+							Thread.sleep(1000);
 						}catch(InterruptedException e)
 						{
 							
@@ -234,7 +237,7 @@ public class DataProcessServer extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "Service on StartCommand!");
+		//Log.d(TAG, "Service on StartCommand!");
 		mReadThread.start();
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -242,7 +245,7 @@ public class DataProcessServer extends Service {
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "Service on Destroy!");
+		//Log.d(TAG, "Service on Destroy!");
 		if (mReadThread != null)
 			mReadThread.interrupt();
 		mApplication.closeSerialPort();
@@ -309,7 +312,7 @@ public class DataProcessServer extends Service {
 					if(devSql.getLogCount()==0)
 						logTempList.clear();
 					
-					if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))
+					if(sensorsStatus.contains("1"))
 					{
 						if((!logTempList.contains(name)))
 						{
@@ -321,10 +324,11 @@ public class DataProcessServer extends Service {
 					    	wNodeName = nodeId;
 					    	wLayerName = layer;
 					    	showWarningNotification();
+					 
 					    	//mApplication.setLogRevFlag(false);
-					    	Log.d(TAG, "------------Add Log Name---------："+name);
+					    	//Log.d(TAG, "------------Add Log Name---------："+name);
 					    	
-					    	
+					    	Log.d(TAG,"出现异常现象，报警信息");
 					    	 //发送信息到主机
 					    	  mApplication.setSendCommandFlag(false);
 							    	  			    	  
@@ -332,7 +336,7 @@ public class DataProcessServer extends Service {
 								try 
 								{
 									mOutputStream.write(sendData, 0, sendData.length);
-									Log.d(TAG,"发送成功");
+									//Log.d(TAG,"发送成功");
 								} catch (IOException e) 
 								{
 									e.printStackTrace();
@@ -352,7 +356,7 @@ public class DataProcessServer extends Service {
 					if(devSql.getCount()==0)
 						node.clear();
 					
-					Log.d(TAG, layer+"-"+nodeId+"-"+powerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
+					//Log.d(TAG, layer+"-"+nodeId+"-"+powerMode+"-"+power+"-"+sensorsStatus+"-"+devicesStatus);
 					if(!(node.contains(name)))
 					{
 						SensorDevice dev = new SensorDevice(layer,nodeId,
@@ -360,15 +364,15 @@ public class DataProcessServer extends Service {
 					    devSql.save(dev);
 				    	node.add(name);
 				    
-						Log.d(TAG, "add name："+name);
+						//Log.d(TAG, "add name："+name);
 					}else
 					{
 						
 						SensorDevice dev = new SensorDevice(layer,nodeId,
 								powerMode,power,sensorsStatus,devicesStatus);
 					    devSql.update(dev);
-					    Log.d(TAG, "updata name："+name);
-					    Log.d(TAG, "getLogCount："+Integer.toString((int)devSql.getCount()));
+					   // Log.d(TAG, "updata name："+name);
+					    
 					}
 					
 					
@@ -377,30 +381,42 @@ public class DataProcessServer extends Service {
 				
 		}
 
-	//Intent intent = new Intent();
-	//intent.setClass(DeviceView.this, DeviceControl.class);
-	//intent.putExtra("Layer", wLayerName);
-	//intent.putExtra("NodeNumber", wNodeName);
-	//
 	 private void showWarningNotification() { 
-		 NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); 
-			Notification notification
-			= new Notification(R.drawable.fire_icon, null, System.currentTimeMillis());
-			
-			notification.flags |= Notification.FLAG_ONGOING_EVENT; 
-			notification.flags |= Notification.FLAG_NO_CLEAR; 
-			
-			Intent intent = new Intent();
+	        // 创建一个NotificationManager的引用 
+	        NotificationManager notificationManager = (NotificationManager) 
+	            this.getSystemService(android.content.Context.NOTIFICATION_SERVICE); 
+	        
+	        // 定义Notification的各种属性 
+	        
+	        Notification notification = new Notification(R.drawable.fire_icon, 
+	                "火灾报警信息提示", System.currentTimeMillis()); 
+	        notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中 
+	        notification.flags |= Notification.FLAG_NO_CLEAR; // 表明在点击了通知栏中的"清除通知"后，此通知不清除，经常与FLAG_ONGOING_EVENT一起使用 
+	        notification.flags |= Notification.FLAG_SHOW_LIGHTS; 
+	        notification.defaults = Notification.DEFAULT_LIGHTS; 
+	        notification.ledARGB = Color.BLUE; 
+	        notification.ledOnMS = 5000; 
+	        
+	        
+
+	        // 设置通知的事件消息 
+	        CharSequence contentTitle = "报警信息来自："; // 通知栏标题 
+	        CharSequence contentText = wLayerName+"楼"+wNodeName+"号"; // 通知栏内容 
+	        
+	        
+	        Intent intent = new Intent();
 			intent.setClass(this, DeviceControl.class);
 			intent.putExtra("Layer", wLayerName);
 			intent.putExtra("NodeNumber", wNodeName);
 			
-			PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0); 
-			notification.contentIntent = pi; 
-			notification.setLatestEventInfo(this, "报警信息来自：",wLayerName+"楼"+wNodeName+"号", pi); 
-			
-			nm.notify(NOTIFICATION_ID_ICON, notification); 
-		 
-	    }
+	       
+	        PendingIntent contentItent = PendingIntent.getActivity(this, 0, 
+	        		intent, 0); 
+	        notification.setLatestEventInfo(this, contentTitle, contentText, 
+	                contentItent); 
+
+	        // 把Notification传递给NotificationManager 
+	        notificationManager.notify(0, notification); 
+	    } 
 
 }

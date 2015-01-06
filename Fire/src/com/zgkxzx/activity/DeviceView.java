@@ -100,6 +100,7 @@ public class DeviceView extends Activity implements Runnable{
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		threadSw = true;
+				
 		super.onStart();
 	}
 	//详细信息显示菜单
@@ -179,17 +180,15 @@ public class DeviceView extends Activity implements Runnable{
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			while(threadSw)
+			while(true)
 			{
-				Log.d(TAG, "runing!");
 				sensorDeviceList = devSqlSevice.getCommonAttrNode(bLayer);
-				
 				//Log.d(TAG, String.valueOf(sensorDeviceList.size()));
 				
 				handler.sendEmptyMessage(SEARCH_NODE);
 				try
 				{
-					Thread.sleep(5000);
+					Thread.sleep(1000);
 				}catch(InterruptedException e)
 				{
 					

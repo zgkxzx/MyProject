@@ -20,7 +20,7 @@
         android:text="@string/sys_name"
         android:textColor="@color/white"
         android:textSize="40px" />
-    
+     
     
     <GridView
 		android:id="@+id/menuGridView"
