@@ -29,7 +29,7 @@ public class Settings extends Activity {
 	private EditText ivSettingsLayer;
 	private ImageButton btn_clear;
 	private ImageButton btn_config_file;
-	private String layer = "";
+	private String layer = "1";
 	
 	private MyApplication mApplication = null;
 	
@@ -138,7 +138,7 @@ public class Settings extends Activity {
 		// TODO Auto-generated method stub
 		super.onStart();
 		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
-		layer = sharedSettings.getString("layer","");
+		layer = sharedSettings.getString("layer","1");
 		ivSettingsLayer.setText(layer);
 		
     	
