@@ -134,35 +134,42 @@ public class DeviceView extends Activity implements Runnable{
 		@Override
 		public boolean onContextItemSelected(MenuItem item) {
 			// TODO Auto-generated method stub
+			
 			AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-			long id = menuInfo.id;
-			DeviceView.this.nodePosition = (int)id;
 			
-			switch(item.getItemId())
+			if(menuInfo!= null)
 			{
+				long id = menuInfo.id;
+				DeviceView.this.nodePosition = (int)id;
+				switch(item.getItemId())
+				{
+					
+					
+					case Menu.FIRST+1:
+						
+						String layer = this.bLayer;
+						
+						 Log.d(TAG, "nodeNumber");
+						 Log.d(TAG, sensorDeviceList.get(nodePosition).getName());
+						Intent intent = new Intent();
+						intent.setClass(DeviceView.this, DeviceControl.class);
+						intent.putExtra("Layer", layer);
+						intent.putExtra("NodeNumber", sensorDeviceList.get(nodePosition).getName());
+						startActivity(intent);
+						
+						//this.startActivity(new Intent(DeviceView.this,DeviceControl.class));
+					   // overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+						break;
 				
-				
-				case Menu.FIRST+1:
+					default:break;
+				   }			
+				}else
+				{
+					Toast.makeText(DeviceView.this, "没有接收到任何信息", Toast.LENGTH_LONG).show();
+				}
 					
-					String layer = this.bLayer;
-					
-					Log.d(TAG, "nodeNumber");
-					 Log.d(TAG, sensorDeviceList.get(nodePosition).getName());
-					Intent intent = new Intent();
-					intent.setClass(DeviceView.this, DeviceControl.class);
-					intent.putExtra("Layer", layer);
-					intent.putExtra("NodeNumber", sensorDeviceList.get(nodePosition).getName());
-					startActivity(intent);
-					
-					//this.startActivity(new Intent(DeviceView.this,DeviceControl.class));
-				   // overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-					break;
+						
 			
-				default:break;
-			
-			
-			
-			}
 			return super.onContextItemSelected(item);
 		}
 		private final int SEARCH_NODE = 0 ;

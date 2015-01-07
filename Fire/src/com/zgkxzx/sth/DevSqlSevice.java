@@ -106,9 +106,10 @@ public class DevSqlSevice {
 			addressName = cursor.getString(cursor.getColumnIndex("addressName"));
 		
 			cursor.close();
-			db.close();
+			
 			
 		}
+		db.close();
 		return new NodeConfig(nodeName,addressName);
 	}
 	public void clearConfig()
@@ -186,6 +187,7 @@ public class DevSqlSevice {
 			db.close();
 			return new SensorDevice(String.valueOf(subid),layer, name, PowerMode, power,sensorsStatus,sensorsType);
 		}
+		db.close();
 		return null;
 	}
 	/*
