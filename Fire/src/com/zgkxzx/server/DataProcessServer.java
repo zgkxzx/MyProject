@@ -334,7 +334,7 @@ public class DataProcessServer extends Service {
 							    	  			    	  
 					    	  for(int ii = 1;ii<=16;ii++)
 					    	  {
-					    		  System.out.println("II :"+Integer.toString(ii));
+					    		 
 					    		  String nodeName = layer+"-"+nodeId+"-"+Integer.toString(ii);
 					    		  System.out.println("SensorStatus:"+sensorsStatus);
 								  Character a  = sensorsStatus.charAt(ii-1);
