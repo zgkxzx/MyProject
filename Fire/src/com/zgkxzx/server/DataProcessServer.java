@@ -340,8 +340,7 @@ public class DataProcessServer extends Service {
 								  Character a  = sensorsStatus.charAt(ii-1);
 									if(a.equals('1'))
 									{
-										
-										 
+																			 
 										 byte [] sendData = ControlSend.sendAllWarn(layer, nodeId,  devSql.getNodeConfigInfo(nodeName).getAddrName());
 										   Log.d(TAG+"报警信息：",nodeName+" -- "+devSql.getNodeConfigInfo(nodeName).getAddrName());
 											try 
@@ -371,7 +370,7 @@ public class DataProcessServer extends Service {
 					
 					
 				}
-
+               //从串口接收到的数据放到数据库里面
 				if((name.length()<7)&&(name.length()>2))
 				{
 					if(devSql.getCount()==0)
@@ -411,8 +410,8 @@ public class DataProcessServer extends Service {
 	        
 	        Notification notification = new Notification(R.drawable.fire_icon, 
 	                "火灾报警信息提示", System.currentTimeMillis()); 
-	        notification.flags |= Notification.FLAG_ONGOING_EVENT; // 将此通知放到通知栏的"Ongoing"即"正在运行"组中 
-	        notification.flags |= Notification.FLAG_NO_CLEAR; // 表明在点击了通知栏中的"清除通知"后，此通知不清除，经常与FLAG_ONGOING_EVENT一起使用 
+	        notification.flags |= Notification.FLAG_ONGOING_EVENT;
+	        notification.flags |= Notification.FLAG_NO_CLEAR; 
 	        notification.flags |= Notification.FLAG_SHOW_LIGHTS; 
 	        notification.defaults = Notification.DEFAULT_LIGHTS; 
 	        notification.ledARGB = Color.BLUE; 
