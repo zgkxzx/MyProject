@@ -69,13 +69,17 @@ public class NodeGirdView extends BaseAdapter {
 			//Log.d(TAG, "R.drawable.node_box!");
 		}else 
 		{
-			if(nodeStatusInfo.contains("1"))
-				iv.setImageResource(R.drawable.node_red);
-			else if(nodeStatusInfo.contains("2"))
-				iv.setImageResource(R.drawable.node_black);
-			else 
-				iv.setImageResource(R.drawable.node_green);
-			//Log.d(TAG, "R.drawable.node_box!");
+			if(nodeStatusInfo!=null)
+			{
+				if(nodeStatusInfo.contains("1"))
+					iv.setImageResource(R.drawable.node_red);
+				else if(nodeStatusInfo.contains("2"))
+					iv.setImageResource(R.drawable.node_black);
+				else 
+					iv.setImageResource(R.drawable.node_green);
+				
+				
+			}
 		}
 		
 		return view;

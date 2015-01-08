@@ -328,20 +328,41 @@ public class DataProcessServer extends Service {
 					    	//mApplication.setLogRevFlag(false);
 					    	//Log.d(TAG, "------------Add Log Name---------："+name);
 					    	
-					    	Log.d(TAG,"出现异常现象，报警信息");
+					    	
 					    	 //发送信息到主机
 					    	  mApplication.setSendCommandFlag(false);
 							    	  			    	  
-							   byte [] sendData = ControlSend.sendAllWarn(layer, nodeId,  devSql.getNodeConfigInfo(name).getAddrName());
-								try 
-								{
-									mOutputStream.write(sendData, 0, sendData.length);
-									//Log.d(TAG,"发送成功");
-								} catch (IOException e) 
-								{
-									e.printStackTrace();
-									Log.d(TAG,"发送失败");
-								}
+					    	  for(int ii = 1;ii<=16;ii++)
+					    	  {
+					    		  System.out.println("II :"+Integer.toString(ii));
+					    		  String nodeName = layer+"-"+nodeId+"-"+Integer.toString(ii);
+					    		  System.out.println("SensorStatus:"+sensorsStatus);
+								  Character a  = sensorsStatus.charAt(ii-1);
+									if(a.equals('1'))
+									{
+										
+										 
+										 byte [] sendData = ControlSend.sendAllWarn(layer, nodeId,  devSql.getNodeConfigInfo(nodeName).getAddrName());
+										   Log.d(TAG+"报警信息：",nodeName+" -- "+devSql.getNodeConfigInfo(nodeName).getAddrName());
+											try 
+											{
+												mOutputStream.write(sendData, 0, sendData.length);
+												//Log.d(TAG,"发送成功");
+											} catch (IOException e) 
+											{
+												e.printStackTrace();
+												Log.d(TAG,"发送失败");
+											}
+										
+										
+									}
+									
+					    		  
+					    		   
+					    		  
+					    		  
+					    	  }
+							   
 								
 								mApplication.setSendCommandFlag(true);
 					    	
