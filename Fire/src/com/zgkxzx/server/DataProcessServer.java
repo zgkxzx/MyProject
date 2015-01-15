@@ -129,10 +129,10 @@ public class DataProcessServer extends Service {
 									//标志功能
 									//mApplication.setLogRevFlag(true);
 									
-									 /*NotificationManager notificationManager = (NotificationManager) DataProcessServer.this 
+									 NotificationManager notificationManager = (NotificationManager) DataProcessServer.this 
 						                .getSystemService(NOTIFICATION_SERVICE); 
 						              notificationManager.cancel(0);
-						              */
+						              
 									logTempList.clear();
 									break;
 								default:

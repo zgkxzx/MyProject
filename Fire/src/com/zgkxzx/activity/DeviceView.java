@@ -86,7 +86,6 @@ public class DeviceView extends Activity implements Runnable{
 		thread = new Thread(this);
 		thread.start();
 		
-		
 	}
 	@Override
 	protected void onDestroy() {
@@ -116,7 +115,7 @@ public class DeviceView extends Activity implements Runnable{
     	nid.setSensorsStatus(sensorDeviceList.get(position).getSensorsStatus());
     	nid.setSensorsType(sensorDeviceList.get(position).getSensorsType());
     	
-    	nid.setTitle("子机"+sensorDeviceList.get(position).getName()+"   信息窗");
+       	nid.setTitle(devSqlSevice.getNodeConfigInfo("0"+bLayer+"-"+Integer.toString(position+1)+"-0").getAddrName()+" : 子机"+sensorDeviceList.get(position).getName());
     	
     	nid.show();
     	 
@@ -149,8 +148,8 @@ public class DeviceView extends Activity implements Runnable{
 						
 						String layer = this.bLayer;
 						
-						 Log.d(TAG, "nodeNumber");
-						 Log.d(TAG, sensorDeviceList.get(nodePosition).getName());
+						Log.d(TAG, sensorDeviceList.get(nodePosition).getName());
+						
 						Intent intent = new Intent();
 						intent.setClass(DeviceView.this, DeviceControl.class);
 						intent.putExtra("Layer", layer);

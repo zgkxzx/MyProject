@@ -29,6 +29,7 @@ public class Settings extends Activity {
 	private EditText ivSettingsLayer;
 	private ImageButton btn_clear;
 	private ImageButton btn_config_file;
+	private ImageButton btn_reset;
 	private String layer = "1";
 	
 	private MyApplication mApplication = null;
@@ -125,7 +126,29 @@ public class Settings extends Activity {
 		    }
 			
 		}); 
-	    
+	    btn_reset = (ImageButton)findViewById(R.id.btn_sys_reset);         
+	    btn_reset.setOnTouchListener(new View.OnTouchListener(){            
+		    public boolean onTouch(View v, MotionEvent event) {
+		    	
+		    	  
+		            if(event.getAction() == MotionEvent.ACTION_DOWN){       
+		  
+		               ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.btn_reset_dark));
+		               
+		               
+		               Toast.makeText(Settings.this, "系统已复位", Toast.LENGTH_SHORT).show(); 
+		             
+		              
+		            }else if(event.getAction() == MotionEvent.ACTION_UP){       
+		               
+		                ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.btn_reset));
+		                
+		                
+		            }          
+		            return false;       
+		    }
+			
+		}); 
 	    
 	   
 	   

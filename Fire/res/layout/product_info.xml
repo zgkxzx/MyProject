@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_bg"
+    android:background="@drawable/bg_blue"
     android:orientation="vertical" >
 
 
@@ -22,7 +22,7 @@
         android:id="@+id/info_title"
         android:layout_width="fill_parent"
         android:layout_height="50px"
-        android:background="@drawable/dk_btn_01_normal"
+        android:background="@drawable/bg_title_blue"
         android:gravity="center"
         android:text="产品介绍"
         android:textColor="@color/white"
@@ -32,7 +32,6 @@
         android:id="@+id/info_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_normal"
         android:text="@+string/info_content"
         android:textColor="@color/black"
         android:textSize="18px" />  
@@ -41,17 +40,18 @@
         android:id="@+id/tech_title"
         android:layout_width="fill_parent"
         android:layout_height="50px"
-        android:background="@drawable/dk_btn_01_normal"
+        android:background="@drawable/bg_title_blue"
         android:gravity="center"
         android:text="技术指标"
         android:textColor="@color/white"
         android:textSize="24px" />
 
+       
+      <!--    android:background="@drawable/background_normal"-->
     <TextView
         android:id="@+id/tech_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_normal"
         android:text="@+string/tech_content"
         android:textColor="@color/black"
         android:textSize="18px" />
@@ -60,7 +60,7 @@
         android:id="@+id/good_title"
         android:layout_width="fill_parent"
         android:layout_height="50px"
-        android:background="@drawable/dk_btn_01_normal"
+        android:background="@drawable/bg_title_blue"
         android:gravity="center"
         android:text="产品优势"
         android:textColor="@color/white"
@@ -70,7 +70,6 @@
         android:id="@+id/good_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_normal"
         android:text="@+string/good_content"
         android:textColor="@color/black"
         android:textSize="18px" />
@@ -79,7 +78,7 @@
         android:id="@+id/iso_title"
         android:layout_width="fill_parent"
         android:layout_height="50px"
-        android:background="@drawable/dk_btn_01_normal"
+        android:background="@drawable/bg_title_blue"
         android:gravity="center"
         android:text="执行标准"
         android:textColor="@color/white"
@@ -88,8 +87,7 @@
      <TextView
         android:id="@+id/iso_content"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_normal"
+        android:layout_height="wrap_content" 
         android:textColor="@color/black"
         android:text="@+string/iso_content"
         android:textSize="18px" />
@@ -97,7 +95,7 @@
         android:id="@+id/company_title"
         android:layout_width="fill_parent"
         android:layout_height="50px"
-        android:background="@drawable/dk_btn_01_normal"
+        android:background="@drawable/bg_title_blue"
         android:gravity="center"
         android:text="关于我们"
         android:textColor="@color/white"
@@ -107,7 +105,6 @@
         android:id="@+id/company_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_normal"
         android:textColor="@color/black"
         android:text="@+string/company_content"
         android:textSize="18px" />

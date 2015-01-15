@@ -123,7 +123,7 @@ public class MyActivity extends Activity {
 				{
 					case 0:
 			
-						Toast.makeText(MyActivity.this,"进入信息查询", 1000).show();
+						//Toast.makeText(MyActivity.this,"进入信息查询", 1000).show();
 						
 						startActivity(new Intent(MyActivity.this,LayerListView.class));
 						//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out); 
@@ -135,7 +135,7 @@ public class MyActivity extends Activity {
 					case 1:
 						
 						
-						Toast.makeText(MyActivity.this,"进入系统设置菜单", 1000).show();
+						//Toast.makeText(MyActivity.this,"进入系统设置菜单", 1000).show();
 						startActivity(new Intent(MyActivity.this,Settings.class));
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 						break;
@@ -163,7 +163,7 @@ public class MyActivity extends Activity {
 						
 						break;
 					case 4:
-						Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
+						//Toast.makeText(MyActivity.this,"关注产品信息", 1000).show();
 						 
 						startActivity(new Intent(MyActivity.this,ProductInfo.class));
 						overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);

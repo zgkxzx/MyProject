@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_height="wrap_content" 
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:background="@drawable/blue_bg"
+    >
+    <!-- android:background="#000048" -->
+
+     <ListView android:id="@id/android:list"
+        android:layout_above="@+id/relativelayout_operation"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+     
+     <RelativeLayout
+        android:id="@+id/relativelayout_operation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+       
+        <Button 
+			android:id="@+id/btn_save_record" 
+            android:text="保存" 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content" 
+			android:textSize="7pt"
+            android:paddingTop="1dip"
+            android:paddingBottom="1dip"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="30dip" />
+        
+    
+        <Button 
+            android:id="@+id/btn_print_record" 
+            android:text="打印" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:textSize="7pt" 
+            android:paddingTop="1dip"
+            android:paddingBottom="1dip"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+            android:layout_marginLeft="150dip" /> 
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/bg_mydialog"
+              >
+        <!--  android:background="@drawable/txl_popup_qipao_bg_single_normal"-->        
+     <!-- android:gravity="center_horizontal|center_vertical" -->
+     
+     <TableRow 
+		android:id="@+id/TableRow01" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		android:gravity="center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/layer_info_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="30px"
+			android:textSize="20px" 
+			android:textColor="#ffffff"
+			android:text="楼层信息" />
+		
+		<TextView 
+			android:id="@+id/layer_info_content" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp" 
+			android:textSize="20px" 
+			android:text="1 楼" />
+	</TableRow>   
+	<TableRow 
+		android:id="@+id/TableRow02" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		
+		android:gravity="center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/node_name_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="30px"
+			android:textStyle="bold" 
+			android:textSize="20px" 
+			android:textColor="#ffffff"
+			android:text="节点名称" />
+		
+		<TextView 
+			android:id="@+id/node_name_content" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="20dp"
+			android:textStyle="bold" 
+			android:textSize="20px" 
+			android:text="1-101" />
+	</TableRow>    
+	<TableRow 
+		android:id="@+id/TableRow03" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		
+		android:gravity="center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/power_mode_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="30px"
+			android:textSize="20px"
+			android:textColor="#ffffff" 
+			android:text="供电模式" />
+		
+		<TextView 
+			android:id="@+id/power_mode_content" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginLeft="20dp"
+			android:textSize="20px" 
+			android:text="备电" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow04" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		android:gravity="center_vertical"
+		android:dividerPadding="2px"
+		>
+		
+		<TextView 
+			android:id="@+id/node_power_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:textStyle="bold" 
+			android:textSize="20px" 
+			android:layout_marginLeft="30px"
+			android:textColor="#ffffff"
+			android:text="节点电量" />
+		
+		
+		<ImageView android:id="@+id/node_power_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="5dp"
+               android:src="@drawable/power_icon_2"
+               />
+		<TextView 
+			android:id="@+id/node_power_content" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textStyle="bold" 
+			android:textSize="16px" 
+			android:textColor="#ffffff"
+			android:text="10%" />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow06" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		android:gravity="center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/node_id_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="30px" 
+			android:textStyle="bold" 
+			android:textSize="20px" 
+			android:textColor="#ffffff"
+			android:text="探头编号" />
+		<ImageView android:id="@+id/node1_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+                android:layout_marginLeft="20dp"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_1"
+               />
+		<ImageView android:id="@+id/node2_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_2"
+               />
+		<ImageView android:id="@+id/node3_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_3"
+               />
+		<ImageView android:id="@+id/node4_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_4"
+               />
+		<ImageView android:id="@+id/node5_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_5"
+               />
+		<ImageView android:id="@+id/node6_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_6"
+               />
+		<ImageView android:id="@+id/node7_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_7"
+               />
+		<ImageView android:id="@+id/node8_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_8"
+               />
+		<ImageView android:id="@+id/node9_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_9"
+               />
+		<ImageView android:id="@+id/node10_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_10"
+               />
+		<ImageView android:id="@+id/node11_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_11"
+               />
+		<ImageView android:id="@+id/node12_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_12"
+               />
+		<ImageView android:id="@+id/node13_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_13"
+               />
+		<ImageView android:id="@+id/node14_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_14"
+               />
+		<ImageView android:id="@+id/node15_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_15"
+               />
+		<ImageView android:id="@+id/node16_id_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="11dp"
+               android:src="@drawable/node_16"
+               />
+		
+	</TableRow> 
+	<TableRow 
+		android:id="@+id/TableRow05" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		android:gravity="center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/node_status_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:textStyle="bold" 
+			android:textSize="20px"
+			android:layout_marginLeft="30px" 
+			android:textColor="#ffffff"
+			android:text="探头状态" />
+		
+		<ImageView android:id="@+id/node1_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+                android:layout_marginLeft="20dp"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node2_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_unlink"
+               />
+		<ImageView android:id="@+id/node3_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node4_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_warning"
+               />
+		<ImageView android:id="@+id/node5_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_unlink"
+               />
+		<ImageView android:id="@+id/node6_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node7_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node8_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node9_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node10_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node11_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node12_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node13_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node14_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node15_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node16_status_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+	</TableRow>
+	<TableRow 
+		android:id="@+id/TableRow062" 
+		android:layout_width="fill_parent" 
+		android:layout_height="40px"
+		android:layout_marginBottom="30px"
+		android:gravity="center_vertical"
+		>
+		
+		<TextView 
+			android:id="@+id/node_type_title" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="30px" 
+			android:textStyle="bold" 
+			android:textSize="20px" 
+			android:textColor="#ffffff"
+			android:text="探头类型" />
+		<ImageView android:id="@+id/node1_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+                android:layout_marginLeft="20dp"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node2_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node3_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node4_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node5_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node6_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node7_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node8_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node9_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node10_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node11_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node12_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node13_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node14_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node15_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+		<ImageView android:id="@+id/node16_type_icon"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_marginRight="10dp"
+               android:src="@drawable/node_normal"
+               />
+	</TableRow>
+        
+
+    <!--horizontal  -->
+    <!-- 
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:padding="5px" 
+        >
+    -->
+ 
+</LinearLayout>
