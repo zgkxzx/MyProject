@@ -143,8 +143,6 @@ public class DataProcessServer extends Service {
 						}	
 					
 					}
-					
-					
 				}
 				});
 		}
@@ -183,8 +181,7 @@ public class DataProcessServer extends Service {
 			Log.d(TAG, e.toString());
 		}
 		super.onCreate();
-		
-		
+				
 		handler = new Handler() {
 			// 当消息发送过来的时候会执行下面这个方法
 			public void handleMessage(android.os.Message msg) {
@@ -328,7 +325,6 @@ public class DataProcessServer extends Service {
 					    	//mApplication.setLogRevFlag(false);
 					    	//Log.d(TAG, "------------Add Log Name---------："+name);
 					    	
-					    	
 					    	 //发送信息到主机
 					    	  mApplication.setSendCommandFlag(false);
 							    	  			    	  
@@ -354,15 +350,8 @@ public class DataProcessServer extends Service {
 											}
 										
 										
-									}
-									
-					    		  
-					    		   
-					    		  
-					    		  
+									}		  
 					    	  }
-							   
-								
 								mApplication.setSendCommandFlag(true);
 					    	
 						}
