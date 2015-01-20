@@ -32,8 +32,7 @@ public class Settings extends Activity {
 	private String layer = "1";
 	
 	private MyApplication mApplication = null;
-	
-		
+			
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

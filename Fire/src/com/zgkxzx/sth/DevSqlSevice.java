@@ -23,7 +23,7 @@ public class DevSqlSevice {
 		sDateFormat = new SimpleDateFormat("yyyy-MM-dd#hh:mm:ss");
 		dbOpenHelper = new DBOpenHelper(context);
 	}
-	//
+	//日志相关操作
 	public void saveLog(SensorDevice dev){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -61,27 +61,10 @@ public class DevSqlSevice {
 		cursor.moveToFirst();
 		
 		long count = cursor.getLong(0);
-		db.close();
+		//db.close();
 		return count;
 	}
-	//保存节点信息到数据库
-	public void save(SensorDevice dev){
-		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		//values.put("id", dev.getId());
-		values.put("layer", dev.getLayer());
-		values.put("name", dev.getName());
-		values.put("PowerMode", dev.getPowerMode());
-		values.put("power", dev.getPower());
-		values.put("sensorsStatus", dev.getSensorsStatus());
-		//values.put("sensorsType", dev.getSensorsType());
-		values.put("sensorsType", "3212132312312121");
-		
-		values.put("devicesStatus", dev.getDevicesStatus());
-		
-		db.insert("subMachine", null, values); 
-		db.close();
-	}
+	
 	//保存具体详细节点信息对应查询表到数据库
 	public void saveDatailNodeConfig(NodeConfig nc){
 		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
@@ -112,6 +95,7 @@ public class DevSqlSevice {
 		db.close();
 		return new NodeConfig(nodeName,addressName);
 	}
+	//清除地址配置信息的数据库操作
 	public void clearConfig()
 	{
 		
@@ -123,7 +107,7 @@ public class DevSqlSevice {
 		db.execSQL(sql);
 		db.close();
 	}
-	///////////////////////////////////////////////////////
+	//清除子机的数据库操作
 	public void clearTab()
 	{
 		
@@ -135,6 +119,7 @@ public class DevSqlSevice {
 		db.execSQL(sql);
 		db.close();
 	}
+	//清除日志的数据库操作
 	public void clearLogHistory()
 	{
 		
@@ -145,6 +130,104 @@ public class DevSqlSevice {
 		
 		db.execSQL(sql);
 		db.close();
+	}
+	/////////////////////////////////////////////////////////////////////////////////
+	//从数据库中得到所有元素，并以list的形式返回
+	public List<LayerTel> getLayerTelList(int offset, int maxResult){
+		List<LayerTel> layerlist = new ArrayList<LayerTel>();
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+		long l = getLayerTelCount();
+		if(l==0)
+		{
+			db.close();
+			return null;
+		}
+			
+		Cursor cursor = db.rawQuery("select * from layerTel limit ?,?", 
+				new String[]{String.valueOf(offset), String.valueOf(l)});
+		while(cursor.moveToNext()){
+			String layer = cursor.getString(cursor.getColumnIndex("layerid"));
+			String name = cursor.getString(cursor.getColumnIndex("layerName"));
+			String telNum = cursor.getString(cursor.getColumnIndex("telNum"));
+		
+			layerlist.add(new LayerTel(layer,name,telNum));
+		}
+		db.close();
+		return layerlist;
+	}
+	//保存楼层电话到数据库
+	public void saveLayerTel(LayerTel lt){
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		
+		values.put("layerid", lt.getLayerNo());
+		values.put("layerName", lt.getLayerName());
+		values.put("telNum", lt.getTel());
+		db.insert("layerTel", null, values); 
+		db.close();
+      }
+	public void updateLayerTel(LayerTel lt){
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		
+		values.put("layerid", lt.getLayerNo());
+		values.put("layerName", lt.getLayerName());
+		values.put("telNum", lt.getTel());
+
+		db.update("layerTel", values, "layerid=?", new String[]{lt.getLayerNo()});
+		db.close();
+	}
+	//删除楼层电话从数据库
+	public void deleteLayerTel(Integer id){
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		db.delete("layerTel", "layerid=?", new String[]{id.toString()});
+		db.close();
+	}
+	//得到某一楼的信息
+	public LayerTel findLayerTel(Integer layer){
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+		Cursor cursor = db.query("layerTel", new String[]{"telid","layerid","layerName","telNum"}, 
+				"layerid=?", new String[]{layer.toString()}, null, null, null, null);
+		if(cursor.moveToFirst()){
+			String layerId = cursor.getString(cursor.getColumnIndex("layerid"));
+			String name = cursor.getString(cursor.getColumnIndex("layerName"));
+			String telNum = cursor.getString(cursor.getColumnIndex("telNum"));
+			cursor.close();
+			db.close();
+			return new LayerTel(layerId,name,telNum);
+		}
+		db.close();
+		return null;
+	}
+	//楼层信息的数量
+	public long getLayerTelCount(){
+		long count = 0;
+		SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+		Cursor cursor = db.query("layerTel", new String[]{"count(*)"} , null, null, null, null, null);
+		cursor.moveToFirst();
+		count = cursor.getLong(0);
+		//db.close();
+		return count;
+	}
+	
+    ////子机相关的数据库操作////////////////////////////////////////////
+	//保存节点信息到数据库
+	public void save(SensorDevice dev){
+			SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			//values.put("id", dev.getId());
+			values.put("layer", dev.getLayer());
+			values.put("name", dev.getName());
+			values.put("PowerMode", dev.getPowerMode());
+			values.put("power", dev.getPower());
+			values.put("sensorsStatus", dev.getSensorsStatus());
+			//values.put("sensorsType", dev.getSensorsType());
+			values.put("sensorsType", "3212132312312121");
+			
+			values.put("devicesStatus", dev.getDevicesStatus());
+			
+			db.insert("subMachine", null, values); 
+			db.close();
 	}
 	
 	public void update(SensorDevice dev){
@@ -259,6 +342,4 @@ public class DevSqlSevice {
 	}
 
 	
-	
-
 }
