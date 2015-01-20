@@ -10,16 +10,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.View.OnClickListener;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+
 import android.widget.Toast;
 import android_serialport_api.MyApplication;
 
@@ -30,12 +28,12 @@ public class Settings extends Activity {
 	private ImageButton btn_clear;
 	private ImageButton btn_config_file;
 	private ImageButton btn_reset;
+	private ImageButton btn_call_config;
 	private String layer = "1";
 	
 	private MyApplication mApplication = null;
 	
-	
-	
+		
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +77,7 @@ public class Settings extends Activity {
 			       			{
 			       				System.out.println(ss);
 			       				String [] sData =ss.split(":");
-			       				//for(int i=1;i<=sData.length;i++)
+			       				
 			       				   dsl.saveDatailNodeConfig(new NodeConfig(sData[0]+"-"+sData[1], sData[2]));
 			       			}
 			       		    Toast.makeText(Settings.this, "数据已导入到数据库", Toast.LENGTH_SHORT).show();
@@ -91,8 +89,7 @@ public class Settings extends Activity {
 		            }else if(event.getAction() == MotionEvent.ACTION_UP){       
 		               
 		                ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.input_data));
-		                
-		                
+		                		                
 		            }          
 		            return false;       
 		    }
@@ -100,8 +97,6 @@ public class Settings extends Activity {
 		});
 	    
 		
-	  
-	    
 	    btn_clear = (ImageButton)findViewById(R.id.settings_clear);         
 	    btn_clear.setOnTouchListener(new View.OnTouchListener(){            
 		    public boolean onTouch(View v, MotionEvent event) {
@@ -109,7 +104,7 @@ public class Settings extends Activity {
 		    	  
 		            if(event.getAction() == MotionEvent.ACTION_DOWN){       
 		  
-		               ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.clear_press));
+		               ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.clear_dark));
 		               
 		               DevSqlSevice dsl = new DevSqlSevice(Settings.this);
 		               dsl.clearLogHistory();
@@ -126,7 +121,37 @@ public class Settings extends Activity {
 		    }
 			
 		}); 
-	    btn_reset = (ImageButton)findViewById(R.id.btn_sys_reset);         
+	    
+	    //电话配置按键
+	    btn_call_config = (ImageButton)findViewById(R.id.settings_callconfig);         
+	    btn_call_config.setOnTouchListener(new View.OnTouchListener(){            
+		    public boolean onTouch(View v, MotionEvent event) {
+		    	
+		    	  
+		            if(event.getAction() == MotionEvent.ACTION_DOWN){       
+		  
+		               ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.settings_call_n));
+		               
+		              
+		             
+		              
+		            }else if(event.getAction() == MotionEvent.ACTION_UP){       
+		               
+		                ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.settings_call_c));
+		                
+		                
+		            }          
+		            return false;       
+		    }
+			
+		}); 
+	    
+	    
+	    
+	    
+	    
+	    //系统复位按键
+	    btn_reset = (ImageButton)findViewById(R.id.settings_reset);         
 	    btn_reset.setOnTouchListener(new View.OnTouchListener(){            
 		    public boolean onTouch(View v, MotionEvent event) {
 		    	
@@ -150,7 +175,7 @@ public class Settings extends Activity {
 			
 		}); 
 	    
-	   
+	    
 	   
 	   	   
 	}

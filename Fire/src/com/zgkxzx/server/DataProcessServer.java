@@ -66,7 +66,8 @@ public class DataProcessServer extends Service {
 				int size;
 				try {
 					byte[] buffer = new byte[512];
-					if (mInputStream == null) return;
+					if (mInputStream == null) 
+						return;
 					size = mInputStream.read(buffer);
 					if (size > 0) {
 						onDataReceived(buffer, size);
@@ -187,7 +188,6 @@ public class DataProcessServer extends Service {
 			public void handleMessage(android.os.Message msg) {
 				super.handleMessage(msg);
 				if(msg.what == DATA_SEND_HANDLE){
-					
 					//É¨ÃèÂ¥²ã
 					byte [] sendData = ControlSend.sendCommand(Integer.toString(scanLayer), Integer.toString(25), ControlSend.NODE_MAIN_DATA);
 					
