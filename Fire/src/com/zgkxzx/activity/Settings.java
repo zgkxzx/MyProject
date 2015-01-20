@@ -131,9 +131,10 @@ public class Settings extends Activity {
 		            if(event.getAction() == MotionEvent.ACTION_DOWN){       
 		  
 		               ((ImageButton)v).setImageDrawable(getResources().getDrawable(R.drawable.settings_call_n));
-		               
-		              
-		             
+		               //进入楼层电话配置界面
+		               Intent intent = new Intent(Settings.this,TelViewActivity.class);
+		               startActivity(intent);
+		               overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 		              
 		            }else if(event.getAction() == MotionEvent.ACTION_UP){       
 		               

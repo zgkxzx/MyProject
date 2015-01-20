@@ -3,7 +3,7 @@
 	android:orientation="horizontal" 
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent"
-	android:background="@drawable/bg1"
+	android:background="@drawable/bg_blue"
 	>
   <ImageView 
 			android:id="@+id/iv_settings" 
@@ -70,11 +70,11 @@
 		    android:id="@+id/et_layer" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
-			android:layout_marginLeft="300px"
+			android:layout_marginLeft="290px"
 			android:layout_marginRight="20px"
 			android:textColor="@color/black"
-			android:textSize="20px"
-			
+			android:background="@drawable/edittext_mystyle"
+			android:textSize="25px"
 			android:numeric="integer"
 			android:gravity="center_vertical|right"
             android:orientation="horizontal"

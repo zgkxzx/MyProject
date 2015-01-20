@@ -235,7 +235,7 @@ public class DataProcessServer extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
 		//Log.d(TAG, "Service on StartCommand!");
-		mReadThread.start();
+		mReadThread.start();//出现异常
 		return super.onStartCommand(intent, flags, startId);
 	}
 	//销毁时候调用
