@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
+  >
+  	<!-- android:background="#000048" -->
+    <ImageView 
+        android:id="@+id/list_image" 
+        android:layout_height="60dip" 
+        android:layout_width="60dip" 
+        android:gravity="center_vertical"
+        android:layout_marginRight="10dip"
+        android:layout_alignParentLeft="true"
+    />
+    
+    <LinearLayout 
+        android:id="@+id/linearLayout1" 
+        android:orientation="vertical" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_toRightOf="@id/list_image"
+       >
+        
+        <TextView 
+            android:text="123" 
+            android:layout_height="wrap_content" 
+            android:layout_width="wrap_content" 
+            android:id="@+id/list_main_title" 
+            android:textSize="12pt" />
+       
+        <TextView 
+            android:text="123" 
+            android:textColor="@color/green"
+            android:layout_height="wrap_content" 
+            android:layout_width="wrap_content" 
+            android:id="@+id/list_second_title" 
+            android:textSize="8pt" />
+        <TextView 
+            android:text="123" 
+            android:textColor="@color/darkblue"
+            android:layout_height="wrap_content" 
+            android:layout_width="wrap_content" 
+            android:id="@+id/list_third_title" 
+            android:textSize="6pt" />
+       
+	  
+    </LinearLayout>
+</RelativeLayout>

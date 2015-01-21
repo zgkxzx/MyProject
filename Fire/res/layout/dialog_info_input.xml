@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/MyLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_mydialog"
+        android:orientation="vertical"
+       >
+       	<TextView 
+		        android:text="楼层名称"
+		        android:textSize="25px"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		   />
+		  <EditText 
+		         android:layout_width="match_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="1"
+                 android:singleLine="true" 
+                 android:id="@+id/et_layer_name"
+            />
+			    <TextView 
+			        android:text="电话号码"
+			        android:textSize="25px"
+			        android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        />
+			    <EditText
+			        android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                	android:id="@+id/et_call_number"
+			        />
+</LinearLayout>
+  
+<!--   android:gravity="center_horizontal|center_vertical" -->
