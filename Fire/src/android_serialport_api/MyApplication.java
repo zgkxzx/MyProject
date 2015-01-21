@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 
 import android.app.Application;
+import android.util.Log;
 
 
 public class MyApplication extends Application {
 
+	private static final String TAG = "MyApplication";
 	private SerialPort mSerialPort = null;
 	
     private  boolean sendCommandFlag = true;//发送命令标志
@@ -55,7 +57,7 @@ public class MyApplication extends Application {
 	public SerialPort getSerialPort() throws SecurityException, IOException, InvalidParameterException {
 		if (mSerialPort == null) {
 			mSerialPort = new SerialPort(new File("/dev/ttySAC1"), 9600, 0);
-			System.out.println("MyApplication : 串口已经打开!");
+			Log.d(TAG," 串口/dev/ttySAC1 已经打开!");
 		}
 		return mSerialPort;
 	}

@@ -89,7 +89,6 @@ public class DataProcessServer extends Service {
 			runEncodeThread(new Runnable() {
 				public void run() {
 					
-					
 					receiveValue += new String(buffer, 0, size);
 					
 					//Log.d(TAG, "getAll:"+receiveValue);

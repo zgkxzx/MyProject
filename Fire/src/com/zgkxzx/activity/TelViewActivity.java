@@ -67,12 +67,10 @@ public class TelViewActivity  extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				
-				
 				infoModifyDialog(position+1);
 				if(dialog != null)
 					dialog.show();
-				Toast.makeText(TelViewActivity.this, "Selected:"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+				//Toast.makeText(TelViewActivity.this, "Selected:"+String.valueOf(position), Toast.LENGTH_SHORT).show();
 				
 			}
 		

@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import android.widget.Toast;
 import android_serialport_api.MyApplication;
@@ -29,7 +31,9 @@ public class Settings extends Activity {
 	private ImageButton btn_config_file;
 	private ImageButton btn_reset;
 	private ImageButton btn_call_config;
+	private ImageView btn_mode;
 	private String layer = "1";
+	private SharedPreferences sharedSettings;
 	
 	private MyApplication mApplication = null;
 			
@@ -49,6 +53,40 @@ public class Settings extends Activity {
 	    mApplication = (MyApplication)this.getApplication();
 	    
 	    ivSettingsLayer = (EditText)this.findViewById(R.id.et_layer);
+	    
+	    
+	    
+	    
+	    btn_mode = (ImageView)findViewById(R.id.iv_mode_settings);
+	    btn_mode.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				boolean modeFlag = sharedSettings.getBoolean("workMode",false);
+		    	
+		    	if(modeFlag)
+		    	{
+		    		//打开操作
+		    		 ((ImageView)v).setImageDrawable(getResources().getDrawable(R.drawable.switch_off_normal));
+		    		  modeFlag = false;
+		    	}else
+		    	{
+		    		//关闭操作
+		    		((ImageView)v).setImageDrawable(getResources().getDrawable(R.drawable.switch_on_normal));
+		    		 modeFlag = true;
+		    	}
+		    			    	
+		    	SharedPreferences.Editor editor = sharedSettings.edit();
+		    	editor.putBoolean("workMode",modeFlag);
+		    	editor.commit();
+			}
+	    	
+	    	
+	    });
+	    
+	    
+	    
 	    
 	    btn_config_file = (ImageButton)findViewById(R.id.fileconfig);         
 	    btn_config_file.setOnTouchListener(new View.OnTouchListener(){            
@@ -185,7 +223,7 @@ public class Settings extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
+		sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
 		layer = sharedSettings.getString("layer","1");
 		ivSettingsLayer.setText(layer);
 		
@@ -201,8 +239,6 @@ public class Settings extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		
-		
-		SharedPreferences sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
     	SharedPreferences.Editor editor = sharedSettings.edit();
     	
     	layer = ivSettingsLayer.getText().toString();
