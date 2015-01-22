@@ -41,7 +41,7 @@ public class DataProcessServer extends Service {
 	
 	private Handler handler = null;
 	private MyApplication mApplication;
-	private SerialPort mSerialPort;
+	private SerialPort mDataSerialPort;
 	private OutputStream mOutputStream;
 	private InputStream mInputStream;
 	private ReadThread mReadThread;
@@ -161,9 +161,9 @@ public class DataProcessServer extends Service {
 		Log.d(TAG, "Service on create!");
 		mApplication = (MyApplication) getApplication();
 		try {
-			mSerialPort = mApplication.getSerialPort();
-			mOutputStream = mSerialPort.getOutputStream();
-			mInputStream = mSerialPort.getInputStream();
+			mDataSerialPort = mApplication.getDataSerialPort();
+			mOutputStream = mDataSerialPort.getOutputStream();
+			mInputStream = mDataSerialPort.getInputStream();
 
 			/* Create a receiving thread */
 			mReadThread = new ReadThread();
@@ -244,8 +244,8 @@ public class DataProcessServer extends Service {
 		//Log.d(TAG, "Service on Destroy!");
 		if (mReadThread != null)
 			mReadThread.interrupt();
-		mApplication.closeSerialPort();
-		mSerialPort = null;
+		mApplication.closeDataSerialPort();
+		mDataSerialPort = null;
 	
 		super.onDestroy();
 	}
@@ -308,7 +308,7 @@ public class DataProcessServer extends Service {
 					if(devSql.getLogCount()==0)
 						logTempList.clear();
 					
-					if(sensorsStatus.contains("1"))
+					if(sensorsStatus.contains("1")||sensorsStatus.contains("2"))//故障与报警的均保存到数据库
 					{
 						if((!logTempList.contains(name)))
 						{

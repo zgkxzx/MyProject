@@ -159,14 +159,14 @@ public class TelViewActivity  extends ListActivity {
 		int getLayer = mApplication.getScanLayer();
 		int sqlLayer = (int)qss.getLayerTelCount();
 		
-		if((qss.getLayerTelList(0, 2)==null))//如果数据库为空
-		{
-				qss.saveLayerTel(new LayerTel(String.valueOf(1),"xxx","00000"));
-		}
+//		if((qss.getLayerTelList(0, 2)==null))//如果数据库为空
+//		{
+//				qss.saveLayerTel(new LayerTel(String.valueOf(1),"xxx","no data"));
+//		}
 		if(sqlLayer < getLayer)
 		{
 			for(int i=sqlLayer+1;i<=getLayer;i++)
-				qss.saveLayerTel(new LayerTel(String.valueOf(i),"xxx","00000"));
+				qss.saveLayerTel(new LayerTel(String.valueOf(i),"xxx","no data"));
 		}
 		else//如果数据库有数据
 		{

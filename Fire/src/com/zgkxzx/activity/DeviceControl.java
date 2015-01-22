@@ -41,7 +41,7 @@ public class DeviceControl extends Activity implements OnClickListener {
 	private final String TAG = "DeviceControl";
 	
 	private MyApplication mApplication;
-	private SerialPort mSerialPort;
+	private SerialPort mDataSerialPort;
 	private OutputStream mOutputStream;
 	
 	private Button ivDevicesControl[] = new Button[7];
@@ -97,8 +97,8 @@ public class DeviceControl extends Activity implements OnClickListener {
 	    
 	    mApplication = (MyApplication) getApplication();
 		try {
-			mSerialPort = mApplication.getSerialPort();
-			mOutputStream = mSerialPort.getOutputStream();
+			mDataSerialPort = mApplication.getDataSerialPort();
+			mOutputStream = mDataSerialPort.getOutputStream();
 		
 		} catch (SecurityException e) {
 			Log.d(TAG, e.toString());

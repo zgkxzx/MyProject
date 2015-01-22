@@ -13,9 +13,11 @@ import android.util.Log;
 public class MyApplication extends Application {
 
 	private static final String TAG = "MyApplication";
-	private SerialPort mSerialPort = null;
 	
-    private  boolean sendCommandFlag = true;//发送命令标志
+	
+	private SerialPort mDataSerialPort = null;
+	
+	private  boolean sendCommandFlag = true;//发送命令标志
     private  boolean dataServiceFlag = true;//数据发送标志
     private  boolean logReceiveFlag = true; //接收故障报警日志标志
     private  int scanLayer=1;
@@ -54,18 +56,18 @@ public class MyApplication extends Application {
 		this.scanLayer = scanLayer;
 	}
 
-	public SerialPort getSerialPort() throws SecurityException, IOException, InvalidParameterException {
-		if (mSerialPort == null) {
-			mSerialPort = new SerialPort(new File("/dev/ttySAC1"), 9600, 0);
+	public SerialPort getDataSerialPort() throws SecurityException, IOException, InvalidParameterException {
+		if (mDataSerialPort == null) {
+			mDataSerialPort = new SerialPort(new File("/dev/ttySAC1"), 9600, 0);
 			Log.d(TAG," 串口/dev/ttySAC1 已经打开!");
 		}
-		return mSerialPort;
+		return mDataSerialPort;
 	}
 
-	public void closeSerialPort() {
-		if (mSerialPort != null) {
-			mSerialPort.close();
-			mSerialPort = null;
+	public void closeDataSerialPort() {
+		if (mDataSerialPort != null) {
+			mDataSerialPort.close();
+			mDataSerialPort = null;
 		}
 	}
 }

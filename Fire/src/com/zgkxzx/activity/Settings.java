@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -52,11 +53,21 @@ public class Settings extends Activity {
 	    
 	    mApplication = (MyApplication)this.getApplication();
 	    
+	    //楼层设置
 	    ivSettingsLayer = (EditText)this.findViewById(R.id.et_layer);
+	    ivSettingsLayer.setOnFocusChangeListener(new OnFocusChangeListener(){
+
+			@Override
+			public void onFocusChange(View arg0, boolean arg1) {
+				// TODO Auto-generated method stub
+				
+				
+			}
+	
+	    });
 	    
-	    
-	    
-	    
+	
+	    //工作模式
 	    btn_mode = (ImageView)findViewById(R.id.iv_mode_settings);
 	    btn_mode.setOnClickListener(new OnClickListener(){
 
@@ -84,10 +95,8 @@ public class Settings extends Activity {
 	    	
 	    	
 	    });
-	    
-	    
-	    
-	    
+	
+	    //文件配置
 	    btn_config_file = (ImageButton)findViewById(R.id.fileconfig);         
 	    btn_config_file.setOnTouchListener(new View.OnTouchListener(){            
 		    public boolean onTouch(View v, MotionEvent event) {
@@ -133,7 +142,7 @@ public class Settings extends Activity {
 			
 		});
 	    
-		
+		//清除记录
 	    btn_clear = (ImageButton)findViewById(R.id.settings_clear);         
 	    btn_clear.setOnTouchListener(new View.OnTouchListener(){            
 		    public boolean onTouch(View v, MotionEvent event) {
@@ -239,7 +248,7 @@ public class Settings extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		
-    	SharedPreferences.Editor editor = sharedSettings.edit();
+		SharedPreferences.Editor editor = sharedSettings.edit();
     	
     	layer = ivSettingsLayer.getText().toString();
     	
@@ -248,6 +257,7 @@ public class Settings extends Activity {
     	editor.commit();
     	
     	mApplication.setScanLayer(Integer.parseInt(layer));
+    	    	
 	}
 
 
