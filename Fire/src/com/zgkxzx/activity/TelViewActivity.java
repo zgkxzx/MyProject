@@ -46,6 +46,8 @@ public class TelViewActivity  extends ListActivity {
 	private Dialog dialog=null;
 	private DevSqlSevice qss;
 	private MyApplication mApplication;
+	
+	private String bundleContent=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,11 @@ public class TelViewActivity  extends ListActivity {
 		
 		qss = new DevSqlSevice(this);
 		
+		Bundle extras = getIntent().getExtras();
+		bundleContent = extras.getString("phoneMessage");
+		
+		
+		
 		this.setTitle("Â¥²ãµç»°");
 		
 		
@@ -66,11 +73,18 @@ public class TelViewActivity  extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				if(bundleContent.equals("set"))
+				{
+					infoModifyDialog(position+1);
+					if(dialog != null)
+						dialog.show();					
+				}else if(bundleContent.equals("dial"))
+				{
+					Toast.makeText(TelViewActivity.this, "Haved dialing :"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+				}else
+					Toast.makeText(TelViewActivity.this, "error!", Toast.LENGTH_SHORT).show();
 				
-				infoModifyDialog(position+1);
-				if(dialog != null)
-					dialog.show();
-				//Toast.makeText(TelViewActivity.this, "Selected:"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+				
 				
 			}
 		

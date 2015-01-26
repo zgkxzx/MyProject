@@ -57,7 +57,7 @@ public class MyActivity extends Activity {
 			//"联动控制",
 			"系统配置",
 			"故障与报警",
-			"扩展功能",
+			"消防电话",
 			"产品信息"			
 	};
 	//主菜单图标资源
@@ -66,15 +66,14 @@ public class MyActivity extends Activity {
 			//R.drawable.menu_control,
 			R.drawable.menu_settings,
 			R.drawable.menu_fax,
-			R.drawable.menu_add,
+			R.drawable.menu_phone,
 			R.drawable.menu_info
 			
 	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		
+				
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE); //隐藏
 		setContentView(R.layout.activity_my);
 				 
@@ -151,14 +150,17 @@ public class MyActivity extends Activity {
 						
 						break;
 					case 3:
-						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
-												
-						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
-						builder.setTitle("添加功能");
-						builder.setMessage("功能尚未开通，保留");
-						builder.show();
+//						Toast.makeText(MyActivity.this,"添加功能", 1000).show();
+//												
+//						AlertDialog.Builder builder = new AlertDialog.Builder(MyActivity.this);
+//						builder.setTitle("添加功能");
+//						builder.setMessage("功能尚未开通，保留");
+//						builder.show();
 						
-						
+						Intent intentPhone = new Intent();
+						intentPhone.setClass(MyActivity.this, TelViewActivity.class);
+						intentPhone.putExtra("phoneMessage", "dial");
+						startActivity(intentPhone);
 						
 						
 						break;
