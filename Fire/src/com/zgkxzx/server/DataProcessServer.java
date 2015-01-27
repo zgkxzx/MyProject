@@ -277,8 +277,7 @@ public class DataProcessServer extends Service {
 				char[] temp1 = new char[16] ;
 				getString.getChars(0, 16, temp1, 0);
 			    sensorsStatus = String.valueOf(temp1);
-				
-				
+			
 				//Log.d(TAG, "sensorsStatus："+sensorsStatus);
 				
 				powerMode =  String.valueOf(getString.charAt(16));
@@ -404,8 +403,7 @@ public class DataProcessServer extends Service {
 	        notification.defaults = Notification.DEFAULT_LIGHTS; 
 	        notification.ledARGB = Color.BLUE; 
 	        notification.ledOnMS = 5000; 
-	        
-	        
+
 
 	        // 设置通知的事件消息 
 	        CharSequence contentTitle = "报警信息来自："; // 通知栏标题 

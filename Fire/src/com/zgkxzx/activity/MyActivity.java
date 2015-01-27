@@ -27,6 +27,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -196,6 +197,16 @@ public class MyActivity extends Activity {
 		
 		super.onDestroy();
 	}
+	 
+	//ÆÁ±Î·µ»Ø¼üµÄ´úÂë: 
+    public boolean onKeyDown(int keyCode,KeyEvent event)    
+    {    
+        switch(keyCode)    
+        {    
+            case KeyEvent.KEYCODE_BACK:return true;    
+        }    
+        return super.onKeyDown(keyCode, event);    
+    }
 	
 
 	

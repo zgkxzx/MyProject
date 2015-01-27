@@ -2,8 +2,14 @@ package com.zgkxzx.activity;
 
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.zgkxzx.sth.DevSqlSevice;
 import com.zgkxzx.sth.LayerTel;
@@ -32,6 +38,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 import android_serialport_api.MyApplication;
+import android_serialport_api.SerialPort;
 
 
 
@@ -45,7 +52,11 @@ public class TelViewActivity  extends ListActivity {
 	private EditText etCallNumber = null; 
 	private Dialog dialog=null;
 	private DevSqlSevice qss;
+	
 	private MyApplication mApplication;
+	private SerialPort mDataSerialPort;
+	private OutputStream mOutputStream;
+	private InputStream mInputStream;
 	
 	private String bundleContent=null;
 
@@ -62,12 +73,27 @@ public class TelViewActivity  extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 		bundleContent = extras.getString("phoneMessage");
 		
+		mApplication = (MyApplication) getApplication();
 		
+		try {
+			mDataSerialPort = mApplication.getCellSerialPort();
+		} catch (InvalidParameterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mOutputStream = mDataSerialPort.getOutputStream();
+		mInputStream = mDataSerialPort.getInputStream();
+		
+		 
 		
 		this.setTitle("楼层电话");
-		
-		
-		
+			
 		this.getListView().setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -80,7 +106,24 @@ public class TelViewActivity  extends ListActivity {
 						dialog.show();					
 				}else if(bundleContent.equals("dial"))
 				{
-					Toast.makeText(TelViewActivity.this, "Haved dialing :"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+					//Toast.makeText(TelViewActivity.this, "Haved dialing :"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+					
+					try {
+						String TelNo = null;
+	                    TelNo = qss.findLayerTel(position+1).getTel();
+	                    if(TelNo.equals("no data"))
+	                    	Toast.makeText(TelViewActivity.this, "error!", Toast.LENGTH_SHORT).show();
+	                    else
+	                    {
+	                    	mOutputStream.write(new String("ATD"+TelNo+";\r\n").getBytes());
+	                    	Toast.makeText(TelViewActivity.this, "Calling "+TelNo, Toast.LENGTH_LONG).show();
+	                    }
+						
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else
 					Toast.makeText(TelViewActivity.this, "error!", Toast.LENGTH_SHORT).show();
 				
@@ -122,9 +165,19 @@ public class TelViewActivity  extends ListActivity {
 					String layerId = String.valueOf(layer);
 					String layerName = etLayerName.getText().toString();
 					String layerTel = etCallNumber.getText().toString();
-								
-					qss.updateLayerTel(new LayerTel(layerId,layerName,layerTel));
-					updateView();
+					
+					Pattern p = Pattern.compile("[0-9]{11}");
+					Matcher m = p.matcher(layerTel);
+					if(m.matches())		
+					{
+						qss.updateLayerTel(new LayerTel(layerId,layerName,layerTel));
+						updateView();
+						
+					}else
+					{
+						Toast.makeText(TelViewActivity.this, "输入有误，请输入11位手机号码", Toast.LENGTH_SHORT).show();
+					}
+					
 				}
 			})
 			.setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -169,7 +222,7 @@ public class TelViewActivity  extends ListActivity {
 
 	public void updateView()
 	{
-		mApplication = (MyApplication) getApplication();
+		
 		int getLayer = mApplication.getScanLayer();
 		int sqlLayer = (int)qss.getLayerTelCount();
 		

@@ -60,8 +60,7 @@ public class Settings extends Activity {
 			@Override
 			public void onFocusChange(View arg0, boolean arg1) {
 				// TODO Auto-generated method stub
-				
-				
+
 			}
 	
 	    });
@@ -116,7 +115,6 @@ public class Settings extends Activity {
 			       		try 
 			       		{
 			       			s = nodeConfig.getConfigFile("zgkxzx.txt");
-			       		
 			       			String [] temp = s.split("\r\n");
 			       			
 			       			for(String ss:temp)
@@ -194,10 +192,7 @@ public class Settings extends Activity {
 		    }
 			
 		}); 
-	    
-	    
-	    
-	    
+	    	    
 	    
 	    //系统复位按键
 	    btn_reset = (ImageButton)findViewById(R.id.settings_reset);         
@@ -222,11 +217,7 @@ public class Settings extends Activity {
 		            return false;       
 		    }
 			
-		}); 
-	    
-	    
-	   
-	   	   
+		});    
 	}
 	
 		
@@ -236,9 +227,7 @@ public class Settings extends Activity {
 		super.onStart();
 		sharedSettings = super.getSharedPreferences("zgkxzx_settings", Activity.MODE_PRIVATE);
 		layer = sharedSettings.getString("layer","1");
-		ivSettingsLayer.setText(layer);
-		
-    	
+		ivSettingsLayer.setText(layer);   	
 	}
 
 

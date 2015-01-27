@@ -16,6 +16,7 @@ public class MyApplication extends Application {
 	
 	
 	private SerialPort mDataSerialPort = null;
+	private SerialPort mCellSerialPort = null;
 	
 	private  boolean sendCommandFlag = true;//发送命令标志
     private  boolean dataServiceFlag = true;//数据发送标志
@@ -70,4 +71,21 @@ public class MyApplication extends Application {
 			mDataSerialPort = null;
 		}
 	}
+	
+	public SerialPort getCellSerialPort() throws SecurityException, IOException, InvalidParameterException {
+		if (mCellSerialPort == null) {
+			mCellSerialPort = new SerialPort(new File("/dev/ttySAC2"), 115200, 0);
+			Log.d(TAG," 串口/dev/ttySAC2 已经打开!");
+		}
+		return mCellSerialPort;
+	}
+
+	public void closeCellSerialPort() {
+		if (mCellSerialPort != null) {
+			mCellSerialPort.close();
+			mCellSerialPort = null;
+		}
+	}
+	
+	
 }
