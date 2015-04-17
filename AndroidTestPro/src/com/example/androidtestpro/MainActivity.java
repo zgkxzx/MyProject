@@ -18,12 +18,11 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
+		
+		Toast.makeText(this, "ListViewDemo", Toast.LENGTH_LONG).show();
 		startActivity(new Intent(MainActivity.this,ListViewDemo.class));
 	}
 
-	//Intent intent = new Intent(MainActivity.this, ListViewDemo.class);
-	//this.
-	
 	
 	
 }

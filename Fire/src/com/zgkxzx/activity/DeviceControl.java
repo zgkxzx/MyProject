@@ -149,9 +149,6 @@ public class DeviceControl extends Activity implements OnClickListener {
 	}
 
 
-
-
-
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

@@ -381,8 +381,7 @@ public class DataProcessServer extends Service {
 					   // Log.d(TAG, "updata name£º"+name);
 					    
 					}
-					
-					
+			
 				}
 		}
 				
